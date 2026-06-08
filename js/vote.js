@@ -25,7 +25,7 @@
   /* ---- Init: load saved votes from server ---- */
   async function loadMyVotes() {
     try {
-      const resp = await fetch('/api/my-votes.php', { cache: 'no-store' });
+      const resp = await fetch('./api/my-votes.php', { cache: 'no-store' });
       if (!resp.ok) return;
       const data = await resp.json();
       if (data.votes && Array.isArray(data.votes)) {
@@ -172,7 +172,7 @@
     const csrf  = csrfInput ? csrfInput.value : '';
 
     try {
-      const resp = await fetch('/api/vote.php', {
+      const resp = await fetch('./api/vote.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ votes, csrf }),
