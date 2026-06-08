@@ -26,6 +26,13 @@ function auth_error(string $msg): never {
     exit;
 }
 
+/* ---- Referer check: must come from the presave service, not a direct URL paste ---- */
+$presave_origin = parse_url(PRESAVE_URL, PHP_URL_SCHEME) . '://' . parse_url(PRESAVE_URL, PHP_URL_HOST);
+$referer        = $_SERVER['HTTP_REFERER'] ?? '';
+if (!str_starts_with($referer, $presave_origin)) {
+    auth_error('Acceso no autorizado. Por favor, inicia sesión desde el sitio.');
+}
+
 /* ---- Extract and validate email ---- */
 $email = trim($_GET['email'] ?? '');
 
