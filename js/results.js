@@ -37,7 +37,7 @@
       console.warn('Results fetch error:', err);
       if (chartLoading) {
         chartLoading.style.display = 'none';
-        if (barChart) barChart.innerHTML = '<p style="color:var(--muted);text-align:center;padding:1rem">Could not load results. Retrying…</p>';
+        if (barChart) barChart.innerHTML = '<p style="color:var(--muted);text-align:center;padding:1rem">No se pudieron cargar los resultados. Reintentando…</p>';
       }
     }
   }

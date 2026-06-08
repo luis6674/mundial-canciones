@@ -160,12 +160,12 @@
   async function saveVotes() {
     if (!saveBtn) return;
     if (RANKS.some(r => picks[r] === null)) {
-      setStatus('Please select all 3 picks first.', 'error');
+      setStatus('Selecciona tus 3 canciones favoritas primero.', 'error');
       return;
     }
 
     saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving…';
+    saveBtn.textContent = 'Guardando…';
     setStatus('', '');
 
     const votes = RANKS.map(r => ({ song_id: picks[r], rank: r }));
@@ -179,15 +179,15 @@
       });
       const data = await resp.json();
       if (data.success) {
-        setStatus('✓ Votes saved!', 'success');
+        setStatus('✓ ¡Votos guardados!', 'success');
       } else {
-        setStatus(data.error || 'Could not save votes.', 'error');
+        setStatus(data.error || 'No se pudieron guardar los votos.', 'error');
       }
     } catch (err) {
-      setStatus('Network error. Please try again.', 'error');
+      setStatus('Error de red. Por favor, intenta de nuevo.', 'error');
     } finally {
       saveBtn.disabled = false;
-      saveBtn.textContent = 'Save Votes';
+      saveBtn.textContent = 'Guardar votos';
     }
   }
 

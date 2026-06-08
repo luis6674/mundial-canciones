@@ -27,13 +27,13 @@ function json_error(string $msg, int $code = 400): never {
 // --- Auth ---
 $user = $_SESSION['user'] ?? null;
 if (!$user || empty($user['id'])) {
-    json_error('Not authenticated.', 401);
+    json_error('No autenticado.', 401);
 }
 
 // --- Voting window ---
 $now = time();
 if ($now < VOTING_OPEN || $now > VOTING_CLOSE) {
-    json_error('Voting is not currently open.');
+    json_error('La votación no está abierta en este momento.');
 }
 
 // --- Parse body ---
@@ -58,7 +58,7 @@ if (!$csrf_from_session || !hash_equals($csrf_from_session, (string)$csrf_from_b
 // --- Validate votes array ---
 $votes_input = $body['votes'] ?? null;
 if (!is_array($votes_input) || count($votes_input) !== 3) {
-    json_error('You must submit exactly 3 votes.');
+    json_error('Debes enviar exactamente 3 votos.');
 }
 
 $POINTS_MAP = [1 => 5, 2 => 3, 3 => 1];
@@ -131,5 +131,5 @@ try {
 
 } catch (\Throwable $e) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'error' => 'Server error. Please try again.']);
+    echo json_encode(['success' => false, 'error' => 'Error del servidor. Por favor, intenta de nuevo.']);
 }
