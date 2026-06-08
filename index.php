@@ -94,15 +94,15 @@ $close_ts = VOTING_CLOSE;
       <?php foreach ($songs as $song): ?>
         <div class="song-card" data-song-id="<?= (int)$song['id'] ?>">
           <div class="song-cover">
-            <?php if (!empty($song['spotify_track_id'])): ?>
+            <?php if (!empty($song['cover_url'])): ?>
               <img
-                src="https://i.scdn.co/image/<?= htmlspecialchars($song['spotify_track_id']) ?>"
+                src="<?= htmlspecialchars($song['cover_url']) ?>"
                 alt="<?= htmlspecialchars($song['title']) ?> cover"
                 class="cover-img"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
               >
             <?php endif; ?>
-            <div class="cover-placeholder" style="<?= !empty($song['spotify_track_id']) ? 'display:none' : '' ?>">
+            <div class="cover-placeholder" style="<?= !empty($song['cover_url']) ? 'display:none' : '' ?>">
               <span>&#127925;</span>
             </div>
             <div class="song-number"><?= (int)$song['display_order'] ?></div>
