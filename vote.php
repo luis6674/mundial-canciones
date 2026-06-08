@@ -50,58 +50,58 @@ foreach ($songs as $s) {
     $songs_by_id[(int)$s['id']] = $s;
 }
 
-render_header('Cast Your Votes');
+render_header('Vota tus favoritas');
 ?>
 
 <div class="section-inner vote-page">
 
   <div class="vote-header">
-    <h1 class="vote-title">&#127932; Cast Your <span class="accent">Votes</span></h1>
+    <h1 class="vote-title">&#127932; Elige tus <span class="accent">favoritas</span></h1>
     <?php if ($voting_open): ?>
-      <p class="vote-sub">Pick your top 3 songs. You can change your votes anytime before voting closes on <?= date('F j, Y', VOTING_CLOSE) ?>.</p>
+      <p class="vote-sub">Elige tus 3 canciones favoritas. Puedes cambiar tu voto cuando quieras antes del <?= date('j/n/Y', VOTING_CLOSE) ?>.</p>
     <?php elseif ($voting_closed): ?>
-      <p class="vote-sub">Voting has closed. These are your final picks.</p>
+      <p class="vote-sub">La votación ha cerrado. Estas fueron tus elecciones finales.</p>
     <?php else: ?>
-      <p class="vote-sub">Voting opens on <?= date('F j, Y', VOTING_OPEN) ?>.</p>
+      <p class="vote-sub">La votación abre el <?= date('j/n/Y', VOTING_OPEN) ?>.</p>
     <?php endif; ?>
   </div>
 
   <?php if (!$logged_in): ?>
     <!-- Not logged in -->
     <div class="login-prompt">
-      <h2>Login to Vote</h2>
-      <p>You need to log in with Spotify to cast your votes for the King of Songs 2026.</p>
+      <h2>Inicia sesión para votar</h2>
+      <p>Necesitas entrar con Spotify para votar en el Mundial de Canciones 2026.</p>
       <a href="/login-spotify.php" class="btn btn-spotify btn-lg">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.311c-.217.356-.666.468-1.022.252-2.797-1.709-6.319-2.095-10.465-1.148-.4.091-.8-.158-.891-.558-.092-.4.158-.8.558-.891 4.538-1.037 8.43-.591 11.568 1.323.357.217.469.666.252 1.022zm1.471-3.27c-.272.44-.851.578-1.291.306-3.201-1.967-8.082-2.537-11.87-1.389-.492.148-1.013-.133-1.162-.625-.148-.492.133-1.013.625-1.162 4.327-1.314 9.703-.677 13.386 1.579.44.272.578.851.306 1.291zm.128-3.403c-3.841-2.28-10.178-2.49-13.845-1.377-.589.18-1.211-.153-1.391-.742-.18-.59.153-1.211.742-1.391 4.21-1.279 11.204-1.031 15.626 1.593.53.315.706 1.001.39 1.531-.314.53-1 .706-1.53.39l.008-.004z"/></svg>
-        Login with Spotify
+        Entrar con Spotify
       </a>
     </div>
 
   <?php elseif (!$voting_open && !$voting_closed): ?>
     <!-- Before voting -->
     <div class="login-prompt">
-      <h2>Voting Hasn&#39;t Started Yet</h2>
-      <p>Come back on <strong><?= date('F j, Y', VOTING_OPEN) ?></strong> to cast your votes!</p>
-      <a href="/" class="btn btn-secondary">&#8592; Back to Home</a>
+      <h2>La votación aún no ha empezado</h2>
+      <p>¡Vuelve el <strong><?= date('j/n/Y', VOTING_OPEN) ?></strong> para votar!</p>
+      <a href="/" class="btn btn-secondary">&#8592; Volver al inicio</a>
     </div>
 
   <?php else: ?>
 
     <?php if ($voting_closed): ?>
-      <div class="readonly-notice">&#9632; Voting is closed. Results are final.</div>
+      <div class="readonly-notice">&#9632; La votación ha cerrado. Los resultados son definitivos.</div>
     <?php endif; ?>
 
     <!-- Slot strip — 1st / 2nd / 3rd picks summary -->
     <?php if ($voting_open): ?>
     <div class="slots-strip" id="slots-strip">
-      <?php foreach ([1 => ['🥇','gold','5pts'], 2 => ['🥈','silver','3pts'], 3 => ['🥉','bronze','1pt']] as $rank => [$medal, $label, $pts]): ?>
+      <?php foreach ([1 => ['🥇','oro','5pts'], 2 => ['🥈','plata','3pts'], 3 => ['🥉','bronce','1pt']] as $rank => [$medal, $label, $pts]): ?>
         <div class="slot" id="slot-<?= $rank ?>">
           <span class="slot-medal"><?= $medal ?></span>
           <div class="slot-label"><?= $label ?> pick &bull; <?= $pts ?></div>
           <div class="slot-song-title" style="display:none"></div>
           <div class="slot-song-artist" style="display:none"></div>
-          <div class="slot-empty-hint">Click a song below</div>
-          <button class="slot-clear" style="display:none">Remove</button>
+          <div class="slot-empty-hint">Haz clic en una canción</div>
+          <button class="slot-clear" style="display:none">Quitar</button>
         </div>
       <?php endforeach; ?>
     </div>
@@ -109,7 +109,7 @@ render_header('Cast Your Votes');
     <!-- Sticky save bar -->
     <div class="save-bar" id="save-bar">
       <div class="save-bar-inner hidden" id="save-bar-inner">
-        <button class="btn btn-primary" id="save-btn">Save Votes</button>
+        <button class="btn btn-primary" id="save-btn">Guardar votos</button>
         <span id="save-status"></span>
         <input type="hidden" id="csrf-token" value="<?= htmlspecialchars($csrf_token) ?>">
       </div>
@@ -133,7 +133,7 @@ render_header('Cast Your Votes');
           data-song-id="<?= $sid ?>"
           data-title="<?= htmlspecialchars($song['title']) ?>"
           data-artist="<?= htmlspecialchars($song['artist']) ?>"
-          <?php if ($voting_open): ?>role="button" tabindex="0" aria-label="Select <?= htmlspecialchars($song['title']) ?>"<?php endif; ?>
+          <?php if ($voting_open): ?>role="button" tabindex="0" aria-label="Seleccionar <?= htmlspecialchars($song['title']) ?>"<?php endif; ?>
         >
           <!-- Rank badge (shown when picked) -->
           <div class="<?= $badge_cls ?>"><?= $badge_num ?></div>
@@ -167,10 +167,10 @@ render_header('Cast Your Votes');
             <button
               class="preview-btn"
               data-track="<?= htmlspecialchars($song['spotify_track_id']) ?>"
-              aria-label="Preview <?= htmlspecialchars($song['title']) ?>"
+              aria-label="Escuchar <?= htmlspecialchars($song['title']) ?>"
               onclick="event.stopPropagation(); openPreview(this.dataset.track)"
             >
-              &#9654; Preview
+              &#9654; Escuchar
             </button>
           </div>
           <?php endif; ?>
@@ -185,7 +185,7 @@ render_header('Cast Your Votes');
 <div id="preview-modal" class="modal" role="dialog" aria-modal="true" aria-label="Song Preview" hidden>
   <div class="modal-backdrop" onclick="closePreview()"></div>
   <div class="modal-content">
-    <button class="modal-close" onclick="closePreview()" aria-label="Close preview">&times;</button>
+    <button class="modal-close" onclick="closePreview()" aria-label="Cerrar">&times;</button>
     <iframe id="preview-iframe"
       src=""
       width="100%"

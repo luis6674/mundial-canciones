@@ -21,10 +21,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
 /* ---- Helper: show an error page ---- */
 function auth_error(string $msg): never {
-    render_header('Login Error');
+    render_header('Error de acceso');
     echo '<div class="section-inner" style="padding:3rem 1.25rem">';
     echo '<div class="alert alert-error">' . htmlspecialchars($msg) . '</div>';
-    echo '<p><a href="/" class="btn btn-secondary">Go Home</a></p>';
+    echo '<p><a href="/" class="btn btn-secondary">Volver al inicio</a></p>';
     echo '</div>';
     render_footer();
     exit;
@@ -36,18 +36,18 @@ $state_session  = $_SESSION['spotify_oauth_state'] ?? '';
 unset($_SESSION['spotify_oauth_state']);
 
 if (!$state_session || !hash_equals($state_session, $state_param)) {
-    auth_error('Invalid OAuth state. Please try logging in again.');
+    auth_error('Estado OAuth inválido. Por favor, intenta entrar de nuevo.');
 }
 
 /* ---- Check for error from Spotify ---- */
 if (isset($_GET['error'])) {
     $err = htmlspecialchars($_GET['error']);
-    auth_error("Spotify returned an error: $err. Please try again.");
+    auth_error("Spotify devolvió un error: $err. Por favor, intenta de nuevo.");
 }
 
 $code = $_GET['code'] ?? '';
 if ($code === '') {
-    auth_error('No authorization code received from Spotify.');
+    auth_error('No se recibió código de autorización de Spotify.');
 }
 
 /* ---- Exchange code for token ---- */
@@ -61,7 +61,7 @@ $token_response = spotify_post('https://accounts.spotify.com/api/token', [
 ]);
 
 if (!$token_response || empty($token_response['access_token'])) {
-    auth_error('Could not obtain access token from Spotify. Please try again.');
+    auth_error('No se pudo obtener el token de acceso de Spotify. Por favor, intenta de nuevo.');
 }
 
 $access_token = $token_response['access_token'];
@@ -70,7 +70,7 @@ $access_token = $token_response['access_token'];
 $profile = spotify_get('https://api.spotify.com/v1/me', $access_token);
 
 if (!$profile || empty($profile['id'])) {
-    auth_error('Could not fetch your Spotify profile. Please try again.');
+    auth_error('No se pudo obtener tu perfil de Spotify. Por favor, intenta de nuevo.');
 }
 
 $provider_user_id = $profile['id'];
@@ -102,7 +102,7 @@ try {
     $user_row = $fetch->fetch();
 
     if (!$user_row) {
-        auth_error('Could not retrieve user record. Please try again.');
+        auth_error('No se pudo recuperar el registro de usuario. Por favor, intenta de nuevo.');
     }
 
     // Store in session
@@ -117,7 +117,7 @@ try {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
 } catch (\Throwable $e) {
-    auth_error('Database error during login. Please try again.');
+    auth_error('Error de base de datos al iniciar sesión. Por favor, intenta de nuevo.');
 }
 
 /* ---- Redirect ---- */
