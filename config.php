@@ -5,10 +5,8 @@ define('DB_NAME', 'mundial_canciones');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
-// Spotify OAuth
-define('SPOTIFY_CLIENT_ID', 'YOUR_SPOTIFY_CLIENT_ID');
-define('SPOTIFY_CLIENT_SECRET', 'YOUR_SPOTIFY_CLIENT_SECRET');
-define('SPOTIFY_REDIRECT_URI', 'https://yourdomain.com/callback-spotify.php');
+// External auth service (Sony Music presave)
+define('PRESAVE_URL', 'https://presaves.sonymusicfans.com/?campaign_id=YOUR_CAMPAIGN_ID');
 
 // Voting window (Unix timestamps)
 define('VOTING_OPEN',  strtotime('2026-07-01 00:00:00'));
