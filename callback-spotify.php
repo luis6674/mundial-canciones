@@ -29,7 +29,9 @@ function auth_error(string $msg): never {
 /* ---- Referer check: must originate from our own site, not a direct URL paste ---- */
 $referer = $_SERVER['HTTP_REFERER'] ?? '';
 if (!str_starts_with(rtrim(APP_URL, '/'), $referer)) {
-    auth_error('Acceso no autorizado. Por favor, inicia sesión desde el sitio.');
+    if (!str_starts_with('https://challenge.spotify.com/', $referer) && !str_starts_with('https://accounts.spotify.com/', $referer)) {
+        auth_error('Acceso no autorizado. Por favor, inicia sesión desde el sitio.');
+    }
 }
 
 /*----- Check that the state if "thank-you ----*/
