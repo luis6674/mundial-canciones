@@ -28,8 +28,13 @@ function auth_error(string $msg): never {
 
 /* ---- Referer check: must originate from our own site, not a direct URL paste ---- */
 $referer = $_SERVER['HTTP_REFERER'] ?? '';
-if (!str_starts_with($referer, rtrim(APP_URL, '/'))) {
+if (!str_starts_with(rtrim(APP_URL, '/'), $referer)) {
     auth_error('Acceso no autorizado. Por favor, inicia sesión desde el sitio.');
+}
+
+/*----- Check that the state if "thank-you ----*/
+if (trim($_GET['state']) != 'thank-you') {
+    auth_error('No se pudo autentical al usuario. Por favor, inténtalo de nuevo.');
 }
 
 /* ---- Extract and validate email ---- */
