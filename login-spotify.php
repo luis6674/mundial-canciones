@@ -1,7 +1,7 @@
 <?php
 /**
  * login-spotify.php
- * Builds the Spotify OAuth authorization URL and redirects the user.
+ * Redirects the user to the external presave/auth service.
  */
 
 declare(strict_types=1);
@@ -18,18 +18,5 @@ if (!empty($_SESSION['user'])) {
     exit;
 }
 
-// Generate and store a state token to prevent CSRF on the callback
-$state = bin2hex(random_bytes(16));
-$_SESSION['spotify_oauth_state'] = $state;
-
-$params = http_build_query([
-    'client_id'     => SPOTIFY_CLIENT_ID,
-    'response_type' => 'code',
-    'redirect_uri'  => SPOTIFY_REDIRECT_URI,
-    'scope'         => 'user-read-private user-read-email',
-    'state'         => $state,
-    'show_dialog'   => 'false',
-]);
-
-header('Location: https://accounts.spotify.com/authorize?' . $params);
+header('Location: ' . PRESAVE_URL);
 exit;

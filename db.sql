@@ -8,16 +8,14 @@ CREATE DATABASE IF NOT EXISTS mundial_canciones
 USE mundial_canciones;
 
 -- --------------------------------------------------------
--- Users (Spotify / Apple Music OAuth)
+-- Users (identified by email from presave auth service)
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS users (
-  id               INT AUTO_INCREMENT PRIMARY KEY,
-  provider         ENUM('spotify','apple') NOT NULL,
-  provider_user_id VARCHAR(255) NOT NULL,
-  display_name     VARCHAR(255),
-  avatar_url       VARCHAR(500),
-  created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY unique_provider_user (provider, provider_user_id)
+  id           INT AUTO_INCREMENT PRIMARY KEY,
+  email        VARCHAR(255) NOT NULL,
+  display_name VARCHAR(255),
+  created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY unique_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
