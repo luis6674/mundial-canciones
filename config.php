@@ -16,4 +16,4 @@ define('VOTING_CLOSE', strtotime('2026-07-21 23:59:59'));
 
 // App
 define('APP_URL',  'https://yourdomain.com');
-define('APP_NAME', 'King of Songs 2026');
+define('APP_NAME', 'Mundial de Canciones');

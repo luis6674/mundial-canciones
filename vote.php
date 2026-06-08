@@ -224,7 +224,7 @@ document.querySelectorAll('.song-card.selectable').forEach(function(card) {
 </script>
 
 <?php if ($voting_open): ?>
-<script src="/js/vote.js"></script>
+<script src="js/vote.js"></script>
 <?php endif; ?>
 
 <?php render_footer(); ?>

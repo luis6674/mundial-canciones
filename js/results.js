@@ -8,7 +8,7 @@
   'use strict';
 
   const POLL_INTERVAL = 8000; // ms
-  const API_URL       = '/api/results.php';
+  const API_URL       = './api/results.php';
 
   // These globals are set inline by index.php
   // VOTING_OPEN  (bool)

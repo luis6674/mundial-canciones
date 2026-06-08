@@ -3,7 +3,7 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/includes/header.php';
 
-render_header('King of Songs World Cup 2026');
+render_header('Mundial de Canciones');
 
 $now          = time();
 $voting_open  = ($now >= VOTING_OPEN && $now <= VOTING_CLOSE);
@@ -29,7 +29,7 @@ $close_ts = VOTING_CLOSE;
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">&#9917; World Cup 2026 Edition</div>
-    <h1 class="hero-title">King of <span class="accent">Songs</span></h1>
+    <h1 class="hero-title">Mundial de <span class="accent">Canciones</span></h1>
     <p class="hero-subtitle">16 legendary tracks. 3 picks. One champion.<br>Cast your votes and crown the greatest song of our era.</p>
 
     <?php if ($before_voting): ?>
@@ -48,9 +48,9 @@ $close_ts = VOTING_CLOSE;
     <?php elseif ($voting_open): ?>
       <div class="hero-cta">
         <?php if ($logged_in): ?>
-          <a href="/vote.php" class="btn btn-primary btn-lg">&#127932; Cast My Votes</a>
+          <a href="vote.php" class="btn btn-primary btn-lg">&#127932; Cast My Votes</a>
         <?php else: ?>
-          <a href="/login-spotify.php" class="btn btn-spotify btn-lg">
+          <a href="login-spotify.php" class="btn btn-spotify btn-lg">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.311c-.217.356-.666.468-1.022.252-2.797-1.709-6.319-2.095-10.465-1.148-.4.091-.8-.158-.891-.558-.092-.4.158-.8.558-.891 4.538-1.037 8.43-.591 11.568 1.323.357.217.469.666.252 1.022zm1.471-3.27c-.272.44-.851.578-1.291.306-3.201-1.967-8.082-2.537-11.87-1.389-.492.148-1.013-.133-1.162-.625-.148-.492.133-1.013.625-1.162 4.327-1.314 9.703-.677 13.386 1.579.44.272.578.851.306 1.291zm.128-3.403c-3.841-2.28-10.178-2.49-13.845-1.377-.589.18-1.211-.153-1.391-.742-.18-.59.153-1.211.742-1.391 4.21-1.279 11.204-1.031 15.626 1.593.53.315.706 1.001.39 1.531-.314.53-1 .706-1.53.39l.008-.004z"/></svg>
             Login with Spotify to Vote
           </a>
@@ -146,7 +146,7 @@ $close_ts = VOTING_CLOSE;
   const VOTING_CLOSED = <?= $voting_closed ? 'true' : 'false' ?>;
   const OPEN_TS       = <?= $open_ts ?>;
 </script>
-<script src="/js/results.js"></script>
+<script src="js/results.js"></script>
 <script>
 // Countdown
 (function() {

@@ -2,6 +2,7 @@
 // Shared header — call render_header($title) from each page
 function render_header(string $title = ''): void {
     $app_name  = APP_NAME;
+    $app_url = APP_URL;
     $full_title = $title ? htmlspecialchars($title) . ' | ' . htmlspecialchars($app_name) : htmlspecialchars($app_name);
     $now = time();
     $voting_open   = ($now >= VOTING_OPEN && $now <= VOTING_CLOSE);
@@ -19,7 +20,7 @@ function render_header(string $title = ''): void {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= $full_title ?></title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -27,7 +28,7 @@ function render_header(string $title = ''): void {
 <body>
 <header class="site-header">
   <div class="header-inner">
-    <a href="/" class="logo">
+    <a href="<?= htmlspecialchars($app_url) ?>" class="logo">
       <span class="trophy">&#127942;</span>
       <span class="logo-text"><?= htmlspecialchars($app_name) ?></span>
     </a>
@@ -42,14 +43,14 @@ function render_header(string $title = ''): void {
 
       <?php if ($logged_in): ?>
         <?php if ($voting_open): ?>
-          <a href="/vote.php" class="nav-link">My Votes</a>
+          <a href="vote.php" class="nav-link">My Votes</a>
         <?php endif; ?>
         <div class="user-chip">
           <?php if (!empty($user['avatar_url'])): ?>
             <img src="<?= htmlspecialchars($user['avatar_url']) ?>" alt="" class="avatar">
           <?php endif; ?>
           <span><?= htmlspecialchars($user['display_name'] ?? 'User') ?></span>
-          <a href="/logout.php" class="logout-link">Log out</a>
+          <a href="logout.php" class="logout-link">Log out</a>
         </div>
       <?php else: ?>
         <a href="/login-spotify.php" class="btn btn-spotify">
