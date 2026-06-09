@@ -340,6 +340,13 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; letter-spacing: 0.
 .podium-item.p2 .podium-block { height: 70px; }
 .podium-item.p3 .podium-block { height: 50px; }
 
+@media (max-width: 480px) {
+  .podium-wrap { flex-direction: column; align-items: center; }
+  .podium-item.p1 { order: 1; }
+  .podium-item.p2 { order: 2; }
+  .podium-item.p3 { order: 3; }
+}
+
 /* ---------- Song Grid ---------- */
 .songs-section { padding: 3rem 0; }
 .songs-grid {

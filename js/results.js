@@ -128,7 +128,6 @@
           ${coverSrc}
           <div class="podium-title">${escHtml(item.title)}</div>
           <div class="podium-artist">${escHtml(item.artist)}</div>
-          <div class="podium-pts">${item.points} pts</div>
           <div class="podium-block"></div>
         </div>`;
     }).join('');

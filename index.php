@@ -59,7 +59,7 @@ $close_ts = VOTING_CLOSE;
       </div>
     <?php else: ?>
       <div class="hero-cta">
-        <p class="closed-notice">&#127942; La votación ha cerrado. ¡Mira la clasificación final!</p>
+        <p class="closed-notice">&#127942; La votación ha terminado. ¡Mira la clasificación final!</p>
       </div>
     <?php endif; ?>
   </div>
