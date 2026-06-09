@@ -60,7 +60,7 @@ render_header('Vota tus favoritas');
     <?php if ($voting_open): ?>
       <p class="vote-sub">Elige tus 3 canciones favoritas. Puedes cambiar tu voto cuando quieras antes del <?= date('j/n/Y', VOTING_CLOSE) ?>.</p>
     <?php elseif ($voting_closed): ?>
-      <p class="vote-sub">La votación ha cerrado. Estas fueron tus elecciones finales.</p>
+      <p class="vote-sub">La votación ha terminado. Estas fueron tus elecciones finales.</p>
     <?php else: ?>
       <p class="vote-sub">La votación abre el <?= date('j/n/Y', VOTING_OPEN) ?>.</p>
     <?php endif; ?>
@@ -88,7 +88,7 @@ render_header('Vota tus favoritas');
   <?php else: ?>
 
     <?php if ($voting_closed): ?>
-      <div class="readonly-notice">&#9632; La votación ha cerrado. Los resultados son definitivos.</div>
+      <div class="readonly-notice">&#9632; La votación ha terminado. Los resultados son definitivos.</div>
     <?php endif; ?>
 
     <!-- Slot strip — 1st / 2nd / 3rd picks summary -->
