@@ -90,8 +90,7 @@
       }
 
       const ptsEl = row.querySelector('.bar-pts');
-      const medal = idx < 3 ? `<span class="bar-medal">${medals[idx]}</span>` : '';
-      ptsEl.innerHTML = song.points + medal;
+      ptsEl.innerHTML = idx < 3 ? `<span class="bar-medal">${medals[idx]}</span>` : '';
 
       // Move to correct position (keep DOM order in sync with sorted data)
       if (barChart.children[idx] !== row) {
