@@ -8,9 +8,7 @@ function render_header(string $title = ''): void {
     $voting_open   = ($now >= VOTING_OPEN && $now <= VOTING_CLOSE);
     $voting_closed = ($now > VOTING_CLOSE);
 
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+    require_once __DIR__ . '/session.php';
 
     // Auto-login returning users via remember cookie
     if (empty($_SESSION['user']) && !empty($_COOKIE['rmb_tok'])) {
