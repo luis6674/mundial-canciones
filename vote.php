@@ -111,7 +111,7 @@ render_header('Vota tus favoritas');
         <input type="hidden" id="csrf-token" value="<?= htmlspecialchars($csrf_token) ?>">
       </div>
       <div class="giveaway-note hidden" id="giveaway-note">
-        &#127944; ¿Quieres ganar una camiseta de la selección española de fútbol? Participa en el sorteo rellenando el formulario <a href="sorteo.php">aquí</a>.
+        &#9917; ¿Quieres ganar una camiseta de la selección española de fútbol? Participa en el sorteo rellenando el formulario <a href="sorteo.php">aquí</a>.
       </div>
     </div>
     <?php endif; ?>
