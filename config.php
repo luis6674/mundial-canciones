@@ -5,8 +5,10 @@ define('DB_NAME', 'mundial_canciones');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
-// External auth service (Sony Music presave)
-define('PRESAVE_URL', 'https://presaves.sonymusicfans.com/?campaign_id=YOUR_CAMPAIGN_ID');
+// External auth (Sony Music presave)
+define('PRESAVE_BASE_URL',    'https://presaves.sonymusicfans.com/?campaign_id=702950&triggered_sends=&retargeting_consent=0&source_channel=Spotify');
+define('PRESAVE_LIST_REQUIRED', 'a0S1p00000UlNguEAF');  // mandatory newsletter
+define('PRESAVE_LIST_OPTIONAL', 'a0S61000000ZYfcEAG');  // optional newsletter
 
 // Voting window (Unix timestamps)
 define('VOTING_OPEN',  strtotime('2026-07-01 00:00:00'));

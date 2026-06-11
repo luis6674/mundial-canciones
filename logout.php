@@ -6,9 +6,20 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/db.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+}
+
+// Clear remember cookie and DB token
+if (!empty($_COOKIE['rmb_tok'])) {
+    try {
+        $db = get_db();
+        $db->prepare('UPDATE users SET remember_token = NULL WHERE remember_token = ?')
+           ->execute([$_COOKIE['rmb_tok']]);
+    } catch (\Throwable $e) { /* ignore */ }
+    setcookie('rmb_tok', '', time() - 3600, '/', '', true, true);
 }
 
 // Clear all session data

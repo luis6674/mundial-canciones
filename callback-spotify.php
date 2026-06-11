@@ -80,6 +80,18 @@ try {
 
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
+    // Set a 30-day remember cookie for auto-login on return visits
+    $token = bin2hex(random_bytes(32));
+    $db->prepare('UPDATE users SET remember_token = ? WHERE id = ?')
+       ->execute([$token, (int)$user_row['id']]);
+    setcookie('rmb_tok', $token, [
+        'expires'  => time() + 60 * 60 * 24 * 30,
+        'path'     => '/',
+        'secure'   => true,
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
+
 } catch (\Throwable $e) {
     auth_error('Error de base de datos al iniciar sesión. Por favor, intenta de nuevo.');
 }

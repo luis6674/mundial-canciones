@@ -565,6 +565,34 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; letter-spacing: 0.
 .login-prompt h2 { font-size: 2rem; margin-bottom: 0.75rem; }
 .login-prompt p  { color: var(--muted); margin-bottom: 1.5rem; }
 
+/* Login form: checkboxes + Spotify button */
+.login-form { text-align: left; }
+.login-checkboxes { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.25rem; }
+.checkbox-label {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  font-size: 0.82rem;
+  color: var(--muted);
+  cursor: pointer;
+  line-height: 1.45;
+}
+.checkbox-label input[type="checkbox"] {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  accent-color: var(--green);
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+.checkbox-label a { color: var(--gold); text-underline-offset: 2px; }
+.login-form-error {
+  color: var(--red);
+  font-size: 0.82rem;
+  margin-bottom: 0.75rem;
+}
+.login-form .btn { width: 100%; justify-content: center; }
+
 /* ---------- Spinner ---------- */
 .loading-spinner {
   width: 36px; height: 36px;
