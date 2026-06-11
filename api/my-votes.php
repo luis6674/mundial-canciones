@@ -13,7 +13,7 @@ require_once __DIR__ . '/../db.php';
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, no-cache, must-revalidate');
 
-require_once __DIR__ . '/../../includes/session.php';
+require_once __DIR__ . '/../includes/session.php';
 
 $user = $_SESSION['user'] ?? null;
 if (!$user || empty($user['id'])) {

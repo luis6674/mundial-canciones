@@ -10,7 +10,7 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/includes/header.php';
 
-require_once __DIR__ . '/../includes/session.php';
+require_once __DIR__ . '/includes/session.php';
 
 $user      = $_SESSION['user'] ?? null;
 $logged_in = (bool)$user;
