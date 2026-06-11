@@ -60,47 +60,59 @@ render_header('Sorteo — Gana una camiseta');
           <input type="hidden" name="form"   value="755955">
 
           <div class="form-group">
+            <label class="form-label" for="field_email_address">Email</label>
             <input type="email" name="field_email_address" id="field_email_address"
               class="form-control"
               value="<?= htmlspecialchars($user_email) ?>"
               readonly
-              placeholder="Email">
+              aria-describedby="email-hint">
+            <span id="email-hint" class="form-hint">Tu email de Spotify, no editable</span>
           </div>
 
           <div class="form-row">
             <div class="form-group">
+              <label class="form-label" for="field_first_name">Nombre *</label>
               <input type="text" name="field_first_name" id="field_first_name"
-                class="form-control" maxlength="30" placeholder="Nombre *" required>
-              <div class="field-error">Introduce tu nombre</div>
+                class="form-control" maxlength="30" required
+                aria-describedby="err-first_name">
+              <div class="field-error" id="err-first_name">Introduce tu nombre</div>
             </div>
             <div class="form-group">
+              <label class="form-label" for="field_last_name">Apellidos *</label>
               <input type="text" name="field_last_name" id="field_last_name"
-                class="form-control" maxlength="60" placeholder="Apellidos *" required>
-              <div class="field-error">Introduce tus apellidos</div>
+                class="form-control" maxlength="60" required
+                aria-describedby="err-last_name">
+              <div class="field-error" id="err-last_name">Introduce tus apellidos</div>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
+              <label class="form-label" for="field_city">Ciudad *</label>
               <input type="text" name="field_city" id="field_city"
-                class="form-control" maxlength="60" placeholder="Ciudad *" required>
-              <div class="field-error">Introduce tu ciudad</div>
+                class="form-control" maxlength="60" required
+                aria-describedby="err-city">
+              <div class="field-error" id="err-city">Introduce tu ciudad</div>
             </div>
             <div class="form-group">
-              <select name="field_gender" id="field_gender" class="form-control" required>
-                <option value="" disabled selected>Sexo *</option>
+              <label class="form-label" for="field_gender">Sexo *</label>
+              <select name="field_gender" id="field_gender" class="form-control" required
+                aria-describedby="err-gender">
+                <option value="" disabled selected>Selecciona</option>
                 <option value="Male">Hombre</option>
                 <option value="Female">Mujer</option>
                 <option value="Non-binary/Other">No binario / Otro</option>
                 <option value="Prefer not to answer">Prefiero no responder</option>
               </select>
-              <div class="field-error">Selecciona tu sexo</div>
+              <div class="field-error" id="err-gender">Selecciona tu sexo</div>
             </div>
           </div>
 
           <div class="form-group">
-            <select name="field_country_region" id="field_country_region" class="form-control" required>
-              <option value="" disabled selected>País *</option>
+            <label class="form-label" for="field_country_region">País *</label>
+            <select name="field_country_region" id="field_country_region" class="form-control" required
+              aria-describedby="err-country">
+              <option value="" disabled selected>Selecciona</option>
               <option value="AF">Afghanistan</option>
               <option value="AL">Albania</option>
               <option value="DZ">Algeria</option>
@@ -352,7 +364,7 @@ render_header('Sorteo — Gana una camiseta');
               <option value="ZW">Zimbabwe</option>
               <option value="AX">Åland Islands</option>
             </select>
-            <div class="field-error">Selecciona tu país</div>
+            <div class="field-error" id="err-country">Selecciona tu país</div>
           </div>
 
           <div class="form-group">
@@ -364,7 +376,8 @@ render_header('Sorteo — Gana una camiseta');
           </div>
 
           <div class="form-group">
-            <label class="form-label">Géneros preferidos * <span class="form-hint">(elige uno o más)</span></label>
+            <fieldset class="genre-fieldset">
+            <legend class="form-label">Géneros preferidos * <span class="form-hint">(elige uno o más)</span></legend>
             <div class="genre-chips" id="genre-chips">
               <?php foreach ([
                 'NUEVO POP'                            => 'Nuevo Pop',
@@ -383,6 +396,7 @@ render_header('Sorteo — Gana una camiseta');
               <?php endforeach; ?>
             </div>
             <div class="field-error" id="genre-error">Selecciona al menos un género</div>
+            </fieldset>
           </div>
 
           <p class="form-footnote">* Campo requerido</p>

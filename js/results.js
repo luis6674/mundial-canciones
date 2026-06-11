@@ -62,8 +62,8 @@
             <span class="bar-song-title"></span>
             <small class="bar-song-artist"></small>
           </div>
-          <div class="bar-track" aria-label="score bar">
-            <div class="bar-fill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="bar-track">
+            <div class="bar-fill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label=""></div>
           </div>
           <div class="bar-pts"></div>`;
         barChart.appendChild(row);
@@ -78,6 +78,7 @@
 
       const fill = row.querySelector('.bar-fill');
       const pct  = parseFloat(song.score_pct) || 0;
+      fill.setAttribute('aria-label', song.title + ': ' + Math.round(pct) + '%');
       // Use rAF so CSS transition plays after insertion
       if (isNew) {
         requestAnimationFrame(() => requestAnimationFrame(() => {

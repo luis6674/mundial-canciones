@@ -120,10 +120,11 @@ $close_ts = VOTING_CLOSE;
 </section>
 
 <!-- Spotify Preview Modal -->
-<div id="preview-modal" class="modal" role="dialog" aria-modal="true" aria-label="Vista previa" hidden>
+<div id="preview-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="preview-modal-title" hidden>
   <div class="modal-backdrop"></div>
   <div class="modal-content">
-    <button class="modal-close" id="preview-close" aria-label="Cerrar">&times;</button>
+    <h2 id="preview-modal-title" class="sr-only">Vista previa de la canción</h2>
+    <button class="modal-close" id="preview-close" aria-label="Cerrar vista previa">&times;</button>
     <iframe id="preview-iframe"
       src=""
       width="100%"
@@ -131,7 +132,7 @@ $close_ts = VOTING_CLOSE;
       frameborder="0"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy"
-      title="Spotify Preview">
+      title="Vista previa de Spotify">
     </iframe>
   </div>
 </div>
@@ -172,13 +173,16 @@ $close_ts = VOTING_CLOSE;
   const iframe  = document.getElementById('preview-iframe');
   const closeBtn = document.getElementById('preview-close');
   const backdrop = modal ? modal.querySelector('.modal-backdrop') : null;
+  let opener = null;
 
   document.querySelectorAll('.preview-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      opener = btn;
       const track = btn.dataset.track;
       iframe.src = `https://open.spotify.com/embed/track/${track}?utm_source=generator&theme=0`;
       modal.hidden = false;
       document.body.classList.add('modal-open');
+      if (closeBtn) closeBtn.focus();
     });
   });
 
@@ -186,6 +190,7 @@ $close_ts = VOTING_CLOSE;
     modal.hidden = true;
     iframe.src = '';
     document.body.classList.remove('modal-open');
+    if (opener) { opener.focus(); opener = null; }
   }
 
   if (closeBtn)  closeBtn.addEventListener('click', closeModal);
