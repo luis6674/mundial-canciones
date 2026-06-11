@@ -110,6 +110,8 @@
       saveBar.classList.remove('hidden');
     } else {
       saveBar.classList.add('hidden');
+      const note = document.getElementById('giveaway-note');
+      if (note) note.classList.add('hidden');
     }
   }
 
