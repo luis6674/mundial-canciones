@@ -180,6 +180,8 @@
       const data = await resp.json();
       if (data.success) {
         setStatus('✓ ¡Votos guardados!', 'success');
+        const note = document.getElementById('giveaway-note');
+        if (note) note.classList.remove('hidden');
       } else {
         setStatus(data.error || 'No se pudieron guardar los votos.', 'error');
       }
