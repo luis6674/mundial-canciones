@@ -89,14 +89,14 @@ render_header('Vota tus favoritas');
     <!-- Slot strip — 1st / 2nd / 3rd picks summary -->
     <?php if ($voting_open): ?>
     <div class="slots-strip" id="slots-strip">
-      <?php foreach ([1 => ['🥇','oro','5pts'], 2 => ['🥈','plata','3pts'], 3 => ['🥉','bronce','1pt']] as $rank => [$medal, $label, $pts]): ?>
+      <?php foreach ([1 => ['🥇','oro','5pts','primer'], 2 => ['🥈','plata','3pts','segundo'], 3 => ['🥉','bronce','1pt','tercer']] as $rank => [$medal, $label, $pts, $ord]): ?>
         <div class="slot" id="slot-<?= $rank ?>">
-          <span class="slot-medal"><?= $medal ?></span>
+          <span class="slot-medal" aria-hidden="true"><?= $medal ?></span>
           <div class="slot-label"><?= $label ?> pick &bull; <?= $pts ?></div>
           <div class="slot-song-title" style="display:none"></div>
           <div class="slot-song-artist" style="display:none"></div>
           <div class="slot-empty-hint">Haz clic en una canción</div>
-          <button class="slot-clear" style="display:none">Quitar</button>
+          <button class="slot-clear" style="display:none" aria-label="Quitar <?= $ord ?> voto">Quitar</button>
         </div>
       <?php endforeach; ?>
     </div>
@@ -180,10 +180,11 @@ render_header('Vota tus favoritas');
 </div><!-- /.vote-page -->
 
 <!-- Spotify Preview Modal -->
-<div id="preview-modal" class="modal" role="dialog" aria-modal="true" aria-label="Song Preview" hidden>
+<div id="preview-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="preview-modal-title" hidden>
   <div class="modal-backdrop" onclick="closePreview()"></div>
   <div class="modal-content">
-    <button class="modal-close" onclick="closePreview()" aria-label="Cerrar">&times;</button>
+    <h2 id="preview-modal-title" class="sr-only">Vista previa de la canción</h2>
+    <button class="modal-close" onclick="closePreview()" aria-label="Cerrar vista previa">&times;</button>
     <iframe id="preview-iframe"
       src=""
       width="100%"
@@ -191,18 +192,22 @@ render_header('Vota tus favoritas');
       frameborder="0"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy"
-      title="Spotify Preview">
+      title="Vista previa de Spotify">
     </iframe>
   </div>
 </div>
 
 <script>
+var _previewOpener = null;
 function openPreview(trackId) {
   var modal  = document.getElementById('preview-modal');
   var iframe = document.getElementById('preview-iframe');
+  _previewOpener = document.activeElement;
   iframe.src = 'https://open.spotify.com/embed/track/' + trackId + '?utm_source=generator&theme=0';
   modal.hidden = false;
   document.body.classList.add('modal-open');
+  var closeBtn = modal.querySelector('.modal-close');
+  if (closeBtn) closeBtn.focus();
 }
 function closePreview() {
   var modal  = document.getElementById('preview-modal');
@@ -210,6 +215,7 @@ function closePreview() {
   modal.hidden = true;
   iframe.src = '';
   document.body.classList.remove('modal-open');
+  if (_previewOpener) { _previewOpener.focus(); _previewOpener = null; }
 }
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePreview(); });
 

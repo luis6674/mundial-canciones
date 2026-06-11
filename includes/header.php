@@ -43,6 +43,7 @@ function render_header(string $title = ''): void {
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+<a class="skip-link" href="#main-content">Saltar al contenido principal</a>
 <header class="site-header">
   <div class="header-inner">
     <a href="<?= htmlspecialchars($app_url) ?>" class="logo">
@@ -78,7 +79,7 @@ function render_header(string $title = ''): void {
     </nav>
   </div>
 </header>
-<main class="site-main">
+<main class="site-main" id="main-content">
 <?php
 }
 
