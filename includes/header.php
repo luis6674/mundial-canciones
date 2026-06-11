@@ -11,6 +11,25 @@ function render_header(string $title = ''): void {
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
+
+    // Auto-login returning users via remember cookie
+    if (empty($_SESSION['user']) && !empty($_COOKIE['rmb_tok'])) {
+        try {
+            $db  = get_db();
+            $row = $db->prepare('SELECT id, display_name FROM users WHERE remember_token = ?');
+            $row->execute([$_COOKIE['rmb_tok']]);
+            $row = $row->fetch();
+            if ($row) {
+                $_SESSION['user'] = ['id' => (int)$row['id'], 'display_name' => $row['display_name'], 'avatar_url' => null];
+                if (empty($_SESSION['csrf_token'])) {
+                    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+                }
+            } else {
+                setcookie('rmb_tok', '', time() - 3600, '/', '', true, true);
+            }
+        } catch (\Throwable $e) { /* silently skip */ }
+    }
+
     $user       = $_SESSION['user'] ?? null;
     $logged_in  = (bool)$user;
     ?>
@@ -53,7 +72,7 @@ function render_header(string $title = ''): void {
           <a href="logout.php" class="logout-link">Salir</a>
         </div>
       <?php else: ?>
-        <a href="<?= htmlspecialchars(PRESAVE_URL) ?>" class="btn btn-spotify">
+        <a href="vote.php" class="btn btn-spotify">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.311c-.217.356-.666.468-1.022.252-2.797-1.709-6.319-2.095-10.465-1.148-.4.091-.8-.158-.891-.558-.092-.4.158-.8.558-.891 4.538-1.037 8.43-.591 11.568 1.323.357.217.469.666.252 1.022zm1.471-3.27c-.272.44-.851.578-1.291.306-3.201-1.967-8.082-2.537-11.87-1.389-.492.148-1.013-.133-1.162-.625-.148-.492.133-1.013.625-1.162 4.327-1.314 9.703-.677 13.386 1.579.44.272.578.851.306 1.291zm.128-3.403c-3.841-2.28-10.178-2.49-13.845-1.377-.589.18-1.211-.153-1.391-.742-.18-.59.153-1.211.742-1.391 4.21-1.279 11.204-1.031 15.626 1.593.53.315.706 1.001.39 1.531-.314.53-1 .706-1.53.39l.008-.004z"/></svg>
           Entrar con Spotify
         </a>
