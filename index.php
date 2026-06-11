@@ -30,7 +30,7 @@ $close_ts = VOTING_CLOSE;
   <div class="hero-content">
     <div class="hero-eyebrow">&#9917; Edición Mundial 2026</div>
     <h1 class="hero-title">Mundial de <span class="accent">Canciones</span></h1>
-    <p class="hero-subtitle">16 canciones finalistas. 3 favoritas. Un campeón.<br>Vota y corona la mejor canción del mundial 2026.</p>
+    <p class="hero-subtitle">16 canciones finalistas. 3 favoritas. Una campeona.<br>Vota y corona la mejor canción del mundial 2026.</p>
 
     <?php if ($before_voting): ?>
       <div class="countdown-wrap">

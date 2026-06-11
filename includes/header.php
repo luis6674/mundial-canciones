@@ -89,8 +89,10 @@ function render_footer(): void {
 </main>
 <footer class="site-footer">
   <div class="footer-inner">
-    <p>&copy; <?= date('Y') ?>, Sony Music Entertainment España, S.L. Reservados todos los derechos</p>
+    <p class="footer-links">&copy; <?= date('Y') ?>, <a href="https://www.sonymusic.es/" target="_blank" rel="noopener">Sony Music Entertainment España, S.L.</a></p>
     <p class="footer-links">
+      <a href="https://www.sonymusic.es/reservados-todos-los-derechos/" target="_blank" rel="noopener">Reservados todos los derechos</a>
+      <span class="footer-sep">|</span>
       <a href="https://www.sonymusic.es/politica-de-privacidad-y-cookies/" target="_blank" rel="noopener">Política de privacidad y cookies</a>
       <span class="footer-sep">|</span>
       <a href="https://www.sonymusic.es/condiciones-generales/" target="_blank" rel="noopener">Condiciones generales</a>
