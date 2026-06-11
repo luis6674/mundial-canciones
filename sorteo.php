@@ -38,7 +38,7 @@ render_header('Sorteo — Gana una camiseta');
 <div class="section-inner sorteo-page">
   <div class="sorteo-wrap">
 
-    <h1 class="sorteo-title">&#128085; Gana una camiseta de <span class="accent">la Roja</span></h1>
+    <h1 class="sorteo-title">Gana una camiseta de <span class="accent">la Roja</span></h1>
 
     <?php if (!$logged_in): ?>
       <div class="login-prompt">
@@ -54,7 +54,7 @@ render_header('Sorteo — Gana una camiseta');
 
     <?php else: ?>
 
-      <p class="sorteo-sub">Rellena el formulario para entrar en el sorteo. Una vez realizado el sorteo, si resultas ganador nos pondremos en contacto contigo.</p>
+      <p class="sorteo-sub">Rellena el formulario para entrar en el sorteo.</p>
 
       <div id="sorteo-form-wrap">
         <form id="sorteo-form" novalidate>
@@ -398,7 +398,7 @@ render_header('Sorteo — Gana una camiseta');
 
       <div id="sorteo-thanks" hidden>
         <div class="sorteo-success">
-          <div class="sorteo-success-icon">&#127881;</div>
+          <div class="sorteo-success-icon">&#129395;</div>
           <h2>¡Gracias por participar!</h2>
           <p>Una vez se realice el sorteo, si resultas ganador nos pondremos en contacto contigo. ¡Suerte!</p>
           <a href="/" class="btn btn-secondary">Volver al inicio</a>

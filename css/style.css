@@ -570,8 +570,8 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; letter-spacing: 0.
 .login-prompt p  { color: var(--muted); margin-bottom: 1.5rem; }
 
 /* Login form: checkboxes + Spotify button */
-.login-form { text-align: left; }
-.login-checkboxes { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.25rem; }
+.login-form { text-align: center; }
+.login-checkboxes { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.25rem; text-align: left; }
 .checkbox-label {
   display: flex;
   gap: 0.65rem;
@@ -594,8 +594,9 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; letter-spacing: 0.
   color: var(--red);
   font-size: 0.82rem;
   margin-bottom: 0.75rem;
+  text-align: left;
 }
-.login-form .btn { width: 100%; justify-content: center; }
+.login-form .btn { width: 240px; justify-content: center; }
 
 /* ---------- Spinner ---------- */
 .loading-spinner {
@@ -677,8 +678,8 @@ body.modal-open { overflow: hidden; }
 /* ---------- Sorteo page ---------- */
 .sorteo-page { padding: 3rem 1.25rem; }
 .sorteo-wrap { max-width: 560px; margin: 0 auto; }
-.sorteo-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; margin-bottom: 0.5rem; }
-.sorteo-sub   { color: var(--muted); margin-bottom: 2rem; line-height: 1.6; }
+.sorteo-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; margin-bottom: 0.5rem; text-align: center; }
+.sorteo-sub   { color: var(--muted); margin-bottom: 2rem; line-height: 1.6; text-align: center; }
 
 /* Form base */
 .form-group   { margin-bottom: 1rem; }
@@ -689,6 +690,7 @@ body.modal-open { overflow: hidden; }
 .form-group-submit { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
 #sorteo-status { font-size: 0.88rem; }
 #sorteo-status.error { color: var(--red); }
+#sorteo-submit { margin: 0 auto; }
 
 .form-control {
   width: 100%;
