@@ -103,7 +103,7 @@ $close_ts = VOTING_CLOSE;
             <div class="song-number"><?= (int)$song['display_order'] ?></div>
           </div>
           <div class="song-info">
-            <div class="song-title" title="<?= htmlspecialchars($song['title']) ?>"><?= htmlspecialchars($song['title']) ?></div>
+            <div class="song-title"><?= htmlspecialchars($song['title']) ?></div>
             <div class="song-artist"><?= htmlspecialchars($song['artist']) ?></div>
           </div>
           <?php if (!empty($song['spotify_track_id'])): ?>

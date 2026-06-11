@@ -155,7 +155,7 @@ render_header('Vota tus favoritas');
 
           <!-- Info -->
           <div class="song-info">
-            <div class="song-title" title="<?= htmlspecialchars($song['title']) ?>"><?= htmlspecialchars($song['title']) ?></div>
+            <div class="song-title"><?= htmlspecialchars($song['title']) ?></div>
             <div class="song-artist"><?= htmlspecialchars($song['artist']) ?></div>
           </div>
 

@@ -115,7 +115,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; letter-spacing: 0.
 }
 .btn-spotify {
   background: var(--spotify);
-  color: #fff;
+  color: #0a0a1a;
 }
 .btn-lg { padding: 0.85rem 2rem; font-size: 1.05rem; }
 .btn-danger { background: var(--red); color: #fff; }
