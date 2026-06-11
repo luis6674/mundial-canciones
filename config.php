@@ -17,3 +17,9 @@ define('VOTING_CLOSE', strtotime('2026-07-21 23:59:59'));
 // App
 define('APP_URL',  'https://yourdomain.com');
 define('APP_NAME', 'Mundial de Canciones');
+
+// Session storage
+// Leave SESSION_MEMCACHED_HOST empty to use default file-based sessions (local dev).
+// Set to the Memcached host for multi-instance production environments.
+define('SESSION_MEMCACHED_HOST', '');
+define('SESSION_MEMCACHED_PORT', 11211);

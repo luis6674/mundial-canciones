@@ -14,9 +14,7 @@ require_once __DIR__ . '/../db.php';
 header('Content-Type: application/json; charset=utf-8');
 
 // Session
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once __DIR__ . '/../../includes/session.php';
 
 function json_error(string $msg, int $code = 400): never {
     http_response_code($code);
