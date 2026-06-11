@@ -663,6 +663,7 @@ body.modal-open { overflow: hidden; }
 
 /* ---------- Giveaway note (vote page) ---------- */
 .giveaway-note {
+  pointer-events: auto;
   margin-top: 0.9rem;
   padding: 0.75rem 1rem;
   background: color-mix(in srgb, var(--gold) 12%, transparent);
