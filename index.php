@@ -14,7 +14,7 @@ $before_voting = ($now < VOTING_OPEN);
 $db    = get_db();
 $songs = $db->query('SELECT * FROM songs ORDER BY display_order ASC')->fetchAll();
 
-require_once __DIR__ . '/../includes/session.php';
+require_once __DIR__ . '/includes/session.php';
 $user      = $_SESSION['user'] ?? null;
 $logged_in = (bool)$user;
 
