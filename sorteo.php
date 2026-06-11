@@ -38,7 +38,7 @@ render_header('Sorteo — Gana una camiseta');
 <div class="section-inner sorteo-page">
   <div class="sorteo-wrap">
 
-    <h1 class="sorteo-title">&#127944; Gana una camiseta de <span class="accent">la Roja</span></h1>
+    <h1 class="sorteo-title">&#128085; Gana una camiseta de <span class="accent">la Roja</span></h1>
 
     <?php if (!$logged_in): ?>
       <div class="login-prompt">
