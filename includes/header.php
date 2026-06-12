@@ -64,7 +64,7 @@ function render_header(string $title = ''): void {
   <meta property="og:description" content="16 canciones finalistas. 3 favoritas. Una campeona. Vota la mejor canción del mundial 2026 y participa en el sorteo de una camiseta de la selección española de fútbol." />
   <meta property="og:image" content="https://www.hitsmundialseleccionespanola.com/images/portada_redes.jpg" />
   <meta property="og:image:width" content="800" />
-  <meta property="og:image:height" content="534" />
+  <meta property="og:image:height" content="481" />
   <meta property="og:locale" content="es_ES" />
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
