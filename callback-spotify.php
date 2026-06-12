@@ -24,9 +24,10 @@ function auth_error(string $msg): never {
     exit;
 }
 
-/* ---- Referer check: must originate from our own site or Spotify's auth pages ---- */
+/* ---- Referer check: must originate from our own domain or Spotify's auth pages ---- */
 $referer = $_SERVER['HTTP_REFERER'] ?? '';
-if (!str_starts_with($referer, rtrim(APP_URL, '/'))) {
+$app_origin = parse_url(APP_URL, PHP_URL_SCHEME) . '://' . parse_url(APP_URL, PHP_URL_HOST);
+if (!str_starts_with($referer, $app_origin)) {
     if (!str_starts_with($referer, 'https://challenge.spotify.com/') && !str_starts_with($referer, 'https://accounts.spotify.com/')) {
         auth_error('Acceso no autorizado. Por favor, inicia sesión desde el sitio.');
     }
