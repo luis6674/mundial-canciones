@@ -48,13 +48,39 @@ function render_header(string $title = ''): void {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta name="keywords" content="Mudial, canciones, finalistas, campeona, 2026, artistas, shakira, fútbol, football, FIFA, España, Spain, Selección, camiseta, la roja, sorteo, música, Sony, music">
+  <meta name="description" content="16 canciones finalistas. 3 favoritas. Una campeona. Vota la mejor canción del mundial 2026 y participa en el sorteo de una camiseta de la selección española de fútbol.">
   <title><?= $full_title ?></title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@SonyMusicSpain">
+  <meta name="twitter:title" content="Mundial de Canciones">
+  <meta name="twitter:description" content="16 canciones finalistas. 3 favoritas. Una campeona. Vota la mejor canción del mundial 2026 y participa en el sorteo de una camiseta de la selección española de fútbol." />
+  <meta name="twitter:creator" content="@SonyMusicSpain">
+  <meta name="twitter:image" content="https://www.hitsmundialseleccionespanola.com/images/portada_redes.jpg">
+  <meta name="twitter:domain" content="https://www.hitsmundialseleccionespanola.com/">
+  <meta property="og:title" content="Mundial de Canciones" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.hitsmundialseleccionespanola.com/images/portada_redes.jpg" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="534" />
+  <meta property="og:url" content="https://www.hitsmundialseleccionespanola.com/" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:description" content="16 canciones finalistas. 3 favoritas. Una campeona. Vota la mejor canción del mundial 2026 y participa en el sorteo de una camiseta de la selección española de fútbol." />
 </head>
 <body>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N4ZXST" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N4ZXST');
+</script>
+<!-- End Google Tag Manager -->
+
 <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
 <header class="site-header">
   <div class="header-inner">
