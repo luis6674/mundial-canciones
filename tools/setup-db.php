@@ -15,7 +15,8 @@ declare(strict_types=1);
 
 // Detect CLI vs browser for output formatting
 $cli = (PHP_SAPI === 'cli');
-function out(string $msg, bool $ok = true) use ($cli): void {
+function out(string $msg, bool $ok = true): void {
+    $cli = (PHP_SAPI === 'cli');
     if ($cli) {
         echo ($ok ? '✓' : '✗') . ' ' . $msg . PHP_EOL;
     } else {
