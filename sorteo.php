@@ -471,9 +471,17 @@ render_header('Sorteo — Gana una camiseta');
 
     var data = new FormData(form);
 
+    // Build URLSearchParams (application/x-www-form-urlencoded) excluding
+    // the js_url meta-field which is not a real submission field
+    var params = new URLSearchParams();
+    data.forEach(function(value, key) {
+      if (key !== 'js_url') params.append(key, value);
+    });
+
     fetch('https://subs.sonymusicfans.com/submit', {
       method: 'POST',
-      body: data,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString(),
       credentials: 'omit',
     })
     .then(function (resp) {
