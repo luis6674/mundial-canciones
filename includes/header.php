@@ -15,9 +15,21 @@ function render_header(string $title = ''): void {
         try {
             $db  = get_db();
             $row = $db->prepare('SELECT id, display_name FROM users WHERE remember_token = ?');
-            $row->execute([$_COOKIE['rmb_tok']]);
+            $row->execute([hash('sha256', $_COOKIE['rmb_tok'])]);
             $row = $row->fetch();
             if ($row) {
+                // Regenerate session and rotate the remember token on each auto-login
+                session_regenerate_id(true);
+                $newToken = bin2hex(random_bytes(32));
+                $db->prepare('UPDATE users SET remember_token = ? WHERE id = ?')
+                   ->execute([hash('sha256', $newToken), (int)$row['id']]);
+                setcookie('rmb_tok', $newToken, [
+                    'expires'  => time() + 60 * 60 * 24 * 30,
+                    'path'     => '/',
+                    'secure'   => true,
+                    'httponly' => true,
+                    'samesite' => 'Lax',
+                ]);
                 $_SESSION['user'] = ['id' => (int)$row['id'], 'display_name' => $row['display_name'], 'avatar_url' => null];
                 if (empty($_SESSION['csrf_token'])) {
                     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -68,7 +80,7 @@ function render_header(string $title = ''): void {
             <img src="<?= htmlspecialchars($user['avatar_url']) ?>" alt="" class="avatar">
           <?php endif; ?>
           <span><?= htmlspecialchars($user['display_name'] ?? 'Usuario') ?></span>
-          <a href="logout.php" class="logout-link">Salir</a>
+          <a href="logout.php?csrf=<?= urlencode($_SESSION['csrf_token'] ?? '') ?>" class="logout-link">Salir</a>
         </div>
       <?php else: ?>
         <a href="vote.php" class="btn btn-spotify">

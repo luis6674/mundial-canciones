@@ -24,17 +24,17 @@ function auth_error(string $msg): never {
     exit;
 }
 
-/* ---- Referer check: must originate from our own site, not a direct URL paste ---- */
+/* ---- Referer check: must originate from our own site or Spotify's auth pages ---- */
 $referer = $_SERVER['HTTP_REFERER'] ?? '';
-if (!str_starts_with(rtrim(APP_URL, '/'), $referer)) {
-    if (!str_starts_with('https://challenge.spotify.com/', $referer) && !str_starts_with('https://accounts.spotify.com/', $referer)) {
+if (!str_starts_with($referer, rtrim(APP_URL, '/'))) {
+    if (!str_starts_with($referer, 'https://challenge.spotify.com/') && !str_starts_with($referer, 'https://accounts.spotify.com/')) {
         auth_error('Acceso no autorizado. Por favor, inicia sesión desde el sitio.');
     }
 }
 
-/*----- Check that the state if "thank-you ----*/
-if (trim($_GET['state']) != 'thank-you') {
-    auth_error('No se pudo autentical al usuario. Por favor, inténtalo de nuevo.');
+/* ---- Check that the state is "thank-you" ---- */
+if (($_GET['state'] ?? '') !== 'thank-you') {
+    auth_error('No se pudo autenticar al usuario. Por favor, inténtalo de nuevo.');
 }
 
 /* ---- Extract and validate email ---- */
@@ -70,6 +70,9 @@ try {
         auth_error('No se pudo recuperar el registro de usuario. Por favor, intenta de nuevo.');
     }
 
+    // Regenerate session ID on login to prevent session fixation
+    session_regenerate_id(true);
+
     $_SESSION['user'] = [
         'id'           => (int)$user_row['id'],
         'display_name' => $user_row['display_name'],
@@ -78,10 +81,10 @@ try {
 
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
-    // Set a 30-day remember cookie for auto-login on return visits
+    // Set a 30-day remember cookie; store only a SHA-256 hash in the DB
     $token = bin2hex(random_bytes(32));
     $db->prepare('UPDATE users SET remember_token = ? WHERE id = ?')
-       ->execute([$token, (int)$user_row['id']]);
+       ->execute([hash('sha256', $token), (int)$user_row['id']]);
     setcookie('rmb_tok', $token, [
         'expires'  => time() + 60 * 60 * 24 * 30,
         'path'     => '/',

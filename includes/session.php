@@ -10,5 +10,10 @@ if (session_status() === PHP_SESSION_NONE) {
         ini_set('session.save_handler', 'memcached');
         ini_set('session.save_path', SESSION_MEMCACHED_HOST . ':' . SESSION_MEMCACHED_PORT);
     }
-    session_start();
+    session_start([
+        'cookie_httponly' => true,
+        'cookie_secure'   => true,
+        'cookie_samesite' => 'Lax',
+        'use_strict_mode' => true,
+    ]);
 }

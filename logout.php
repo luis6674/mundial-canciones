@@ -10,12 +10,19 @@ require_once __DIR__ . '/db.php';
 
 require_once __DIR__ . '/includes/session.php';
 
+// CSRF check: require a valid token to prevent cross-site logout
+$token = $_GET['csrf'] ?? $_POST['csrf'] ?? '';
+if (!isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $token)) {
+    header('Location: ' . rtrim(APP_URL, '/') . '/');
+    exit;
+}
+
 // Clear remember cookie and DB token
 if (!empty($_COOKIE['rmb_tok'])) {
     try {
         $db = get_db();
         $db->prepare('UPDATE users SET remember_token = NULL WHERE remember_token = ?')
-           ->execute([$_COOKIE['rmb_tok']]);
+           ->execute([hash('sha256', $_COOKIE['rmb_tok'])]);
     } catch (\Throwable $e) { /* ignore */ }
     setcookie('rmb_tok', '', time() - 3600, '/', '', true, true);
 }
