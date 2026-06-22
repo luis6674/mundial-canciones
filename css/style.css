@@ -363,11 +363,14 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 
 /* Number badge (top-left of cover) */
 .song-number-badge {
-  position: absolute; top: 0.4rem; left: 0.4rem;
-  font-family: 'Bebas Neue', sans-serif; letter-spacing: 0;
-  background: rgba(0,0,0,0.72); color: #fff;
-  font-size: 0.88rem; width: 26px; height: 26px; border-radius: 50%;
+  position: absolute; top: 0; left: 0;
+  font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.03em;
+  background: var(--green); color: #fbe7cb;
+  font-size: 1rem; min-width: 28px; height: 28px;
+  padding: 0 0.35rem;
+  border-radius: 0 0 10px 0;
   display: flex; align-items: center; justify-content: center;
+  z-index: 1;
 }
 
 /* Song info */
