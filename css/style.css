@@ -343,7 +343,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 
 /* ---------- Song Cards (shared base) ---------- */
 .song-card {
-  background: var(--bg3); border: 1px solid rgba(255,255,255,0.10);
+  background: var(--bg3); border: 1px solid var(--gold);
   border-radius: var(--radius); overflow: hidden; position: relative;
   transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
@@ -365,8 +365,8 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 .song-number-badge {
   position: absolute; top: 0; left: 0;
   font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.03em;
-  background: var(--green); color: #fbe7cb;
-  font-size: 1rem; min-width: 28px; height: 28px;
+  background: #791318; color: #fbe7cb;
+  font-size: 1.15rem; min-width: 34px; height: 34px;
   padding: 0 0.35rem;
   border-radius: 0 0 10px 0;
   display: flex; align-items: center; justify-content: center;
