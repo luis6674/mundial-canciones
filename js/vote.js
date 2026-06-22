@@ -46,7 +46,7 @@
 
       if (circle) {
         if (rank !== undefined) {
-          circle.innerHTML = `<img src="images/${rank}_puesto.png" alt="${rank}º puesto" class="selection-badge-img">`;
+          circle.innerHTML = `${rank}`;
           circle.classList.add('active');
         } else {
           circle.innerHTML = '';

@@ -134,7 +134,7 @@ render_header('Vota tus favoritas');
                   <div class="selection-circle" aria-hidden="true"></div>
                 <?php elseif ($is_selected): ?>
                   <div class="selection-circle selected-static" aria-hidden="true">
-                    <img src="images/<?= (int)$picked_rank ?>_puesto.png" alt="<?= (int)$picked_rank ?>º puesto" class="selection-badge-img">
+                    <?= (int)$picked_rank ?>
                   </div>
                 <?php endif; ?>
               </div>
