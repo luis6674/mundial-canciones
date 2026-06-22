@@ -368,11 +368,11 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 .chart-wrap { margin-top: 1rem; min-height: 200px; position: relative; }
 .bar-chart  { display: flex; flex-direction: column; gap: 0.5rem; }
 
-.bar-row { display: grid; grid-template-columns: 28px 1fr 200px 56px; align-items: center; gap: 0.65rem; }
+.bar-row { display: grid; grid-template-columns: 28px 200px 150px 1fr 56px; align-items: center; gap: 0.65rem; }
 .bar-rank-num { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--gold); text-align: right; }
-.bar-label { font-size: 0.82rem; overflow: hidden; white-space: nowrap; display: flex; align-items: baseline; gap: 0.4rem; }
-.bar-song-title { font-weight: 600; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex-shrink: 1; min-width: 0; }
-.bar-song-artist { color: var(--gold); font-size: 0.73rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex-shrink: 2; min-width: 0; }
+.bar-label { display: contents; }
+.bar-song-title { font-size: 0.82rem; font-weight: 600; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-song-artist { font-size: 0.78rem; color: var(--gold); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bar-track { background: rgba(255,255,255,0.06); border-radius: 9999px; height: 20px; overflow: hidden; }
 .bar-fill {
   height: 100%; border-radius: 9999px;
@@ -696,7 +696,10 @@ body.modal-open { overflow: hidden; }
   .mobile-selection-strip { display: block; }
   .vote-bottom-bar { display: block; }
 
-  .bar-row { grid-template-columns: 22px 1fr 130px 48px; gap: 0.45rem; }
+  .bar-row { grid-template-columns: 22px 1fr 100px 44px; gap: 0.45rem; }
+  .bar-label { display: flex; flex-direction: column; gap: 0; }
+  .bar-song-title { font-size: 0.8rem; }
+  .bar-song-artist { font-size: 0.7rem; }
 }
 
 @media (max-width: 540px) {
@@ -730,6 +733,9 @@ body.modal-open { overflow: hidden; }
   .vote-grid .song-title { font-size: 0.92rem; }
 
   .form-row { grid-template-columns: 1fr; gap: 0; }
-  .bar-row { grid-template-columns: 18px 1fr 90px 42px; gap: 0.3rem; font-size: 0.78rem; }
+  .bar-row { grid-template-columns: 18px 1fr 80px 38px; gap: 0.3rem; }
+  .bar-song-title { font-size: 0.77rem; }
+  .bar-song-artist { font-size: 0.67rem; }
+  .bar-pts { font-size: 0.77rem; }
   .section-heading img { height: 1.4rem; }
 }
