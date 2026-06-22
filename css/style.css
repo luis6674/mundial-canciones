@@ -81,6 +81,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 .btn:active { transform: translateY(0); }
 .btn-primary  { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dk) 100%); color: #0a0a0a; }
 .btn-green    { background: var(--green); color: #fff; }
+.btn-home {background: #3b582a; color: #fbe7cb; font-size: 1.3rem; padding-bottom: 0.4rem; }
 .btn-spotify  { background: var(--spotify); color: #0a0a0a; }
 .btn-secondary { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid var(--border); }
 .btn-danger   { background: var(--red); color: #fff; }
@@ -240,10 +241,9 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 
 /* ---------- Mini Podium Widget ---------- */
 .mini-podium-widget {
-  background: rgba(18,12,3,0.90);
+  background: rgba(59,88,42,0.20);
   border: 1px solid rgba(232,184,0,0.28);
   border-radius: 14px; overflow: hidden;
-  backdrop-filter: blur(10px);
 }
 .mpw-status-bar {
   display: flex; align-items: center; gap: 0.5rem;
@@ -272,7 +272,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 .mpw-updated .dot { width: 10px; height: 10px; background: #820103; border-radius: 50%; display: inline-block; }
 .mpw-items {
   display: grid; grid-template-columns: 1fr 1.25fr 1fr;
-  gap: 0.4rem; padding: 0.6rem 0.6rem 1rem;
+  gap: 0.4rem; padding: 1.3rem 0.6rem 1rem;
   align-items: end;
 }
 .mpw-item { text-align: center; }
@@ -280,10 +280,9 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
   position: relative; width: 100%; aspect-ratio: 1; margin-bottom: 0.35rem;
 }
 .mpw-badge {
-  position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
-  height: 36px; width: auto; z-index: 2; drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+  position: absolute; top: -16px; right: 2%; height: 56px; width: auto; z-index: 2; drop-shadow(0 2px 4px rgba(0,0,0,0.6));
 }
-.mpw-p1 .mpw-badge { height: 44px; bottom: -12px; }
+.mpw-p1 .mpw-badge { height: 60px; top: -19px; }
 .mpw-cover {
   width: 100%; height: 100%; border-radius: 7px; object-fit: cover;
   border: 2px solid rgba(255,255,255,0.12); display: block;
