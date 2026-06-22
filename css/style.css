@@ -83,6 +83,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 .btn-green    { background: var(--green); color: #fff; }
 .btn-home {background: #3b582a; color: #fbe7cb; font-size: 1.3rem; padding-bottom: 0.4rem; }
 .btn-spotify  { background: var(--spotify); color: #0a0a0a; }
+.btn-sm-header { padding: 0.3rem 1rem; font-size: 0.88rem; }
 .btn-secondary { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid var(--border); }
 .btn-danger   { background: var(--red); color: #fff; }
 .btn-lg       { padding: 0.85rem 2.5rem; font-size: 1.15rem; }
