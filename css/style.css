@@ -368,7 +368,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 .chart-wrap { margin-top: 1rem; min-height: 200px; position: relative; }
 .bar-chart  { display: flex; flex-direction: column; gap: 0.5rem; }
 
-.bar-row { display: grid; grid-template-columns: 28px 190px 1fr 58px; align-items: center; gap: 0.65rem; }
+.bar-row { display: grid; grid-template-columns: 28px 190px 1fr 72px; align-items: center; gap: 0.65rem; }
 .bar-rank-num { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--gold); text-align: right; }
 .bar-label { font-size: 0.82rem; overflow: hidden; white-space: nowrap; }
 .bar-song-title { font-weight: 600; color: #fff; display: block; text-overflow: ellipsis; overflow: hidden; }
@@ -382,8 +382,10 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 .bar-row.rank-1 .bar-fill { background: linear-gradient(90deg, #C89500 0%, var(--gold-lt) 100%); }
 .bar-row.rank-2 .bar-fill { background: linear-gradient(90deg, #8A8A8A 0%, #C8C8C8 100%); }
 .bar-row.rank-3 .bar-fill { background: linear-gradient(90deg, #8A4A10 0%, #CD7F32 100%); }
-.bar-pts { font-size: 0.85rem; font-weight: 700; color: #fff; text-align: right; font-variant-numeric: tabular-nums; }
-.bar-medal { font-size: 1rem; margin-left: 0.2rem; }
+.bar-pts { display: flex; flex-direction: column; align-items: flex-end; gap: 0.05rem; text-align: right; font-variant-numeric: tabular-nums; }
+.bar-medal { font-size: 1rem; }
+.bar-vote-pct { font-size: 0.85rem; font-weight: 700; color: #fff; line-height: 1.1; }
+.bar-points { font-size: 0.7rem; color: var(--muted); line-height: 1.1; }
 
 /* Final podium (post-close) */
 .podium-wrap { display: flex; justify-content: center; align-items: flex-end; gap: 1rem; padding: 2rem 0; flex-wrap: wrap; }
@@ -697,7 +699,7 @@ body.modal-open { overflow: hidden; }
   .mobile-selection-strip { display: block; }
   .vote-bottom-bar { display: block; }
 
-  .bar-row { grid-template-columns: 22px 130px 1fr 46px; gap: 0.45rem; }
+  .bar-row { grid-template-columns: 22px 130px 1fr 58px; gap: 0.45rem; }
 }
 
 @media (max-width: 540px) {
@@ -731,6 +733,6 @@ body.modal-open { overflow: hidden; }
   .vote-grid .song-title { font-size: 0.92rem; }
 
   .form-row { grid-template-columns: 1fr; gap: 0; }
-  .bar-row { grid-template-columns: 18px 100px 1fr 38px; gap: 0.3rem; font-size: 0.78rem; }
+  .bar-row { grid-template-columns: 18px 100px 1fr 48px; gap: 0.3rem; font-size: 0.78rem; }
   .section-heading img { height: 1.4rem; }
 }
