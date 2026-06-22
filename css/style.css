@@ -374,7 +374,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 }
 
 /* Song info */
-.song-info { padding: 0.6rem 0.7rem 0.3rem; }
+.song-info { padding: 0.6rem 0.7rem 0.3rem; text-align: center; }
 .song-title {
   font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.04em;
   color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
