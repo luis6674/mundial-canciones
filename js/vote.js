@@ -1,26 +1,20 @@
 /**
- * vote.js — Voting UI for King of Songs 2026
- * Handles pick 1/2/3, deselection, save via POST /api/vote.php
- * and loading current votes from GET /api/my-votes.php
+ * vote.js — Voting UI for Mundial de Canciones 2026
  */
 
 (function () {
   'use strict';
 
   const RANKS = [1, 2, 3];
-  const RANK_LABELS  = { 1: '1st',  2: '2nd',  3: '3rd' };
-  const RANK_MEDALS  = { 1: '🥇', 2: '🥈', 3: '🥉' };
-  const RANK_CLASSES = { 1: 'picked-1', 2: 'picked-2', 3: 'picked-3' };
-  const BADGE_CLASSES= { 1: 'badge-1',  2: 'badge-2',  3: 'badge-3' };
 
   // picks[rank] = songId | null
   const picks = { 1: null, 2: null, 3: null };
 
-  const grid      = document.getElementById('vote-grid');
-  const saveBar   = document.getElementById('save-bar-inner');
-  const saveBtn   = document.getElementById('save-btn');
-  const saveStatus= document.getElementById('save-status');
-  const csrfInput = document.getElementById('csrf-token');
+  const grid       = document.getElementById('vote-grid');
+  const saveBtn    = document.getElementById('save-btn');
+  const saveBtnMob = document.getElementById('save-btn-mobile');
+  const saveStatus = document.getElementById('save-status');
+  const csrfInput  = document.getElementById('csrf-token');
 
   /* ---- Init: load saved votes from server ---- */
   async function loadMyVotes() {
@@ -29,9 +23,7 @@
       if (!resp.ok) return;
       const data = await resp.json();
       if (data.votes && Array.isArray(data.votes)) {
-        data.votes.forEach(v => {
-          picks[v.rank] = v.song_id;
-        });
+        data.votes.forEach(v => { picks[v.rank] = v.song_id; });
         applyPicksToUI();
       }
     } catch (err) {
@@ -39,97 +31,113 @@
     }
   }
 
-  /* ---- Apply current picks state to all cards & slots ---- */
+  /* ---- Apply current picks to all cards and slots ---- */
   function applyPicksToUI() {
     if (!grid) return;
 
     // Reset all cards
     grid.querySelectorAll('.song-card').forEach(card => {
-      RANKS.forEach(r => card.classList.remove(RANK_CLASSES[r]));
-      const badge = card.querySelector('.rank-badge');
-      if (badge) { badge.className = 'rank-badge hidden'; badge.textContent = ''; }
-    });
+      const sid    = parseInt(card.dataset.songId, 10);
+      const rank   = RANKS.find(r => picks[r] === sid);
+      const circle = card.querySelector('.selection-circle');
+      const selBtn = card.querySelector('.btn-select');
 
-    // Apply current picks
-    RANKS.forEach(rank => {
-      const sid = picks[rank];
-      if (!sid) return;
-      const card = grid.querySelector(`.song-card[data-song-id="${sid}"]`);
-      if (!card) return;
-      card.classList.add(RANK_CLASSES[rank]);
-      const badge = card.querySelector('.rank-badge');
-      if (badge) {
-        badge.className = `rank-badge ${BADGE_CLASSES[rank]}`;
-        badge.textContent = rank;
+      card.classList.toggle('selected', rank !== undefined);
+
+      if (circle) {
+        if (rank !== undefined) {
+          circle.innerHTML = `<img src="images/${rank}_puesto.png" alt="${rank}º puesto" class="selection-badge-img">`;
+          circle.classList.add('active');
+        } else {
+          circle.innerHTML = '';
+          circle.classList.remove('active');
+        }
+      }
+
+      if (selBtn) {
+        if (rank !== undefined) {
+          selBtn.textContent = 'Quitar';
+          selBtn.classList.add('selected-btn');
+          selBtn.setAttribute('aria-label', 'Quitar ' + (card.dataset.title || ''));
+        } else {
+          selBtn.textContent = 'Seleccionar';
+          selBtn.classList.remove('selected-btn');
+          selBtn.setAttribute('aria-label', 'Seleccionar ' + (card.dataset.title || ''));
+        }
       }
     });
 
-    // Update slots
+    // Update sidebar slots and mobile strip
     RANKS.forEach(rank => {
-      updateSlot(rank);
+      updateSidebarSlot(rank);
+      updateMobileSlot(rank);
     });
 
-    // Show/hide save bar
-    updateSaveBar();
+    updateSaveButtons();
   }
 
-  /* ---- Update a single slot strip ---- */
-  function updateSlot(rank) {
-    const slot = document.getElementById('slot-' + rank);
+  /* ---- Update sidebar slot ---- */
+  function updateSidebarSlot(rank) {
+    const slot = document.getElementById('sslot-' + rank);
     if (!slot) return;
-    const sid  = picks[rank];
+    const sid       = picks[rank];
+    const card      = sid && grid ? grid.querySelector(`.song-card[data-song-id="${sid}"]`) : null;
+    const title     = card ? card.dataset.title  : '—';
+    const artist    = card ? card.dataset.artist : '';
+    const titleEl   = slot.querySelector('.sidebar-slot-title');
+    const artistEl  = slot.querySelector('.sidebar-slot-artist');
+    const emptyEl   = slot.querySelector('.sidebar-slot-empty');
+    const removeBtn = slot.querySelector('.sidebar-remove');
 
-    RANKS.forEach(r => slot.classList.remove('filled-' + r));
-
-    if (sid) {
-      slot.classList.add('filled-' + rank);
-      const card   = grid && grid.querySelector(`.song-card[data-song-id="${sid}"]`);
-      const title  = card ? card.dataset.title  : '—';
-      const artist = card ? card.dataset.artist : '';
-      slot.querySelector('.slot-song-title').textContent  = title;
-      slot.querySelector('.slot-song-artist').textContent = artist;
-      slot.querySelector('.slot-empty-hint').style.display  = 'none';
-      slot.querySelector('.slot-song-title').style.display  = '';
-      slot.querySelector('.slot-song-artist').style.display = '';
-      const clearBtn = slot.querySelector('.slot-clear');
-      if (clearBtn) clearBtn.style.display = '';
-    } else {
-      slot.querySelector('.slot-empty-hint').style.display  = '';
-      slot.querySelector('.slot-song-title').style.display  = 'none';
-      slot.querySelector('.slot-song-artist').style.display = 'none';
-      const clearBtn = slot.querySelector('.slot-clear');
-      if (clearBtn) clearBtn.style.display = 'none';
-    }
+    if (titleEl)  titleEl.textContent  = title;
+    if (artistEl) { artistEl.textContent = artist; artistEl.style.display = sid ? '' : 'none'; }
+    if (emptyEl)  emptyEl.style.display = sid ? 'none' : '';
+    if (removeBtn) removeBtn.classList.toggle('hidden', !sid);
   }
 
-  /* ---- Show/hide save bar ---- */
-  function updateSaveBar() {
-    if (!saveBar) return;
+  /* ---- Update mobile strip slot ---- */
+  function updateMobileSlot(rank) {
+    const slot = document.getElementById('mslot-' + rank);
+    if (!slot) return;
+    const sid       = picks[rank];
+    const card      = sid && grid ? grid.querySelector(`.song-card[data-song-id="${sid}"]`) : null;
+    const title     = card ? card.dataset.title  : '';
+    const artist    = card ? card.dataset.artist : '';
+    const infoEl    = slot.querySelector('.mstrip-song-info');
+    const titleEl   = slot.querySelector('.mstrip-slot-title');
+    const artistEl  = slot.querySelector('.mstrip-slot-artist');
+    const dotsEl    = slot.querySelector('.mstrip-dots');
+    const removeBtn = slot.querySelector('.mstrip-remove');
+
+    if (titleEl)  titleEl.textContent  = title;
+    if (artistEl) artistEl.textContent = artist;
+    if (infoEl)   infoEl.style.display = sid ? '' : 'none';
+    if (dotsEl)   dotsEl.style.display = sid ? 'none' : '';
+    slot.classList.toggle('empty', !sid);
+    if (removeBtn) removeBtn.classList.toggle('hidden', !sid);
+  }
+
+  /* ---- Enable/disable save buttons ---- */
+  function updateSaveButtons() {
     const allPicked = RANKS.every(r => picks[r] !== null);
-    if (allPicked) {
-      saveBar.classList.remove('hidden');
-    } else {
-      saveBar.classList.add('hidden');
+    if (saveBtn)    saveBtn.disabled    = !allPicked;
+    if (saveBtnMob) saveBtnMob.disabled = !allPicked;
+    if (!allPicked) {
       const note = document.getElementById('giveaway-note');
       if (note) note.classList.add('hidden');
     }
   }
 
-  /* ---- Card click ---- */
-  function onCardClick(card) {
-    const sid = parseInt(card.dataset.songId, 10);
-
-    // If the card is already picked at some rank, deselect it
+  /* ---- Select / deselect a song ---- */
+  function toggleSong(sid) {
     const existingRank = RANKS.find(r => picks[r] === sid);
     if (existingRank !== undefined) {
       deselect(existingRank);
       return;
     }
 
-    // Find the lowest empty rank
     const emptyRank = RANKS.find(r => picks[r] === null);
     if (emptyRank === undefined) {
-      // All 3 slots full — flash a hint
       flashHint();
       return;
     }
@@ -141,7 +149,7 @@
 
   function deselect(rank) {
     picks[rank] = null;
-    // Compact: shift higher ranks down
+    // Shift higher ranks down
     RANKS.forEach(r => {
       if (r > rank && picks[r] !== null) {
         picks[r - 1] = picks[r];
@@ -160,14 +168,14 @@
 
   /* ---- Save votes ---- */
   async function saveVotes() {
-    if (!saveBtn) return;
     if (RANKS.some(r => picks[r] === null)) {
       setStatus('Selecciona tus 3 canciones favoritas primero.', 'error');
       return;
     }
 
-    saveBtn.disabled = true;
-    saveBtn.textContent = 'Guardando…';
+    [saveBtn, saveBtnMob].forEach(btn => {
+      if (btn) { btn.disabled = true; btn.textContent = 'Guardando…'; }
+    });
     setStatus('', '');
 
     const votes = RANKS.map(r => ({ song_id: picks[r], rank: r }));
@@ -190,15 +198,17 @@
     } catch (err) {
       setStatus('Error de red. Por favor, intenta de nuevo.', 'error');
     } finally {
-      saveBtn.disabled = false;
-      saveBtn.textContent = 'Guardar votos';
+      [saveBtn, saveBtnMob].forEach(btn => {
+        if (btn) { btn.disabled = false; btn.textContent = 'Enviar voto'; }
+      });
+      updateSaveButtons();
     }
   }
 
   function setStatus(msg, type) {
     if (!saveStatus) return;
     saveStatus.textContent = msg;
-    saveStatus.className = type;
+    saveStatus.className = 'save-status' + (type ? ' ' + type : '');
   }
   function clearStatus() { setStatus('', ''); }
 
@@ -206,23 +216,49 @@
   function init() {
     if (!grid) return;
 
-    // Card clicks
+    // Card clicks (whole card toggles selection)
     grid.querySelectorAll('.song-card.selectable').forEach(card => {
-      card.addEventListener('click', () => onCardClick(card));
+      card.addEventListener('click', e => {
+        // Ignore clicks on the listen button
+        if (e.target.closest('.btn-listen')) return;
+        toggleSong(parseInt(card.dataset.songId, 10));
+      });
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleSong(parseInt(card.dataset.songId, 10));
+        }
+      });
     });
 
-    // Slot clear buttons
+    // Btn-select buttons
+    grid.querySelectorAll('.btn-select').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        toggleSong(parseInt(btn.dataset.songId, 10));
+      });
+    });
+
+    // Sidebar remove buttons
     RANKS.forEach(rank => {
-      const slot = document.getElementById('slot-' + rank);
+      const slot = document.getElementById('sslot-' + rank);
       if (!slot) return;
-      const clearBtn = slot.querySelector('.slot-clear');
-      if (clearBtn) clearBtn.addEventListener('click', e => { e.stopPropagation(); deselect(rank); });
+      const removeBtn = slot.querySelector('.sidebar-remove');
+      if (removeBtn) removeBtn.addEventListener('click', () => deselect(rank));
     });
 
-    // Save button
-    if (saveBtn) saveBtn.addEventListener('click', saveVotes);
+    // Mobile strip remove buttons
+    RANKS.forEach(rank => {
+      const slot = document.getElementById('mslot-' + rank);
+      if (!slot) return;
+      const removeBtn = slot.querySelector('.mstrip-remove');
+      if (removeBtn) removeBtn.addEventListener('click', () => deselect(rank));
+    });
 
-    // Load existing votes, then apply
+    // Save buttons
+    if (saveBtn)    saveBtn.addEventListener('click', saveVotes);
+    if (saveBtnMob) saveBtnMob.addEventListener('click', saveVotes);
+
     loadMyVotes();
   }
 

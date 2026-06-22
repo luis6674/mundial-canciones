@@ -18,7 +18,6 @@ function render_header(string $title = ''): void {
             $row->execute([hash('sha256', $_COOKIE['rmb_tok'])]);
             $row = $row->fetch();
             if ($row) {
-                // Regenerate session and rotate the remember token on each auto-login
                 session_regenerate_id(true);
                 $newToken = bin2hex(random_bytes(32));
                 $db->prepare('UPDATE users SET remember_token = ? WHERE id = ?')
@@ -83,13 +82,25 @@ function render_header(string $title = ''): void {
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4ZXST" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
 <header class="site-header">
   <div class="header-inner">
-    <a href="<?= htmlspecialchars($app_url) ?>" class="logo">
-      <span class="trophy">&#127942;</span>
-      <span class="logo-text"><?= htmlspecialchars($app_name) ?></span>
+    <a href="<?= htmlspecialchars($app_url) ?>" class="logo-link">
+      <img src="images/logo_home.png" class="logo-img" alt="Mundial de Canciones 2026">
     </a>
-    <nav class="main-nav">
+
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="<?= htmlspecialchars($app_url) ?>#inicio" class="nav-link">Inicio</a>
+      <?php if ($voting_open): ?>
+        <a href="vote.php" class="nav-link">Vota</a>
+      <?php endif; ?>
+      <a href="<?= htmlspecialchars($app_url) ?>#finalistas" class="nav-link">Finalistas</a>
+      <a href="<?= htmlspecialchars($app_url) ?>#posiciones" class="nav-link">Posiciones</a>
+      <a href="<?= htmlspecialchars($app_url) ?>#premios" class="nav-link">Premios</a>
+      <a href="<?= htmlspecialchars($app_url) ?>#como-funciona" class="nav-link">Cómo funciona</a>
+    </nav>
+
+    <div class="header-right">
       <?php if ($voting_open): ?>
         <span class="status-badge open">&#9679; Votación abierta</span>
       <?php elseif ($voting_closed): ?>
@@ -97,17 +108,15 @@ function render_header(string $title = ''): void {
       <?php else: ?>
         <span class="status-badge upcoming">&#9650; Próximamente</span>
       <?php endif; ?>
-
       <?php if ($logged_in): ?>
-        <?php if ($voting_open): ?>
-          <a href="vote.php" class="nav-link">Mis votos</a>
-        <?php endif; ?>
-        <div class="user-chip">
-          <?php if (!empty($user['avatar_url'])): ?>
-            <img src="<?= htmlspecialchars($user['avatar_url']) ?>" alt="" class="avatar">
-          <?php endif; ?>
+        <div class="user-chip" id="user-chip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="user-chip-icon" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
           <span><?= htmlspecialchars($user['display_name'] ?? 'Usuario') ?></span>
-          <a href="logout.php?csrf=<?= urlencode($_SESSION['csrf_token'] ?? '') ?>" class="logout-link">Salir</a>
+          <span class="user-chip-arrow">&#9660;</span>
+          <div class="user-dropdown" id="user-dropdown">
+            <div class="user-dropdown-name"><?= htmlspecialchars($user['display_name'] ?? 'Usuario') ?></div>
+            <a href="logout.php?csrf=<?= urlencode($_SESSION['csrf_token'] ?? '') ?>" class="logout-link">Cerrar sesión</a>
+          </div>
         </div>
       <?php else: ?>
         <a href="vote.php" class="btn btn-spotify">
@@ -115,9 +124,90 @@ function render_header(string $title = ''): void {
           Entrar con Spotify
         </a>
       <?php endif; ?>
-    </nav>
+    </div>
+
+    <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Cerrar menú">&times;</button>
+  <nav aria-label="Menú móvil">
+    <a href="<?= htmlspecialchars($app_url) ?>#inicio" class="nav-link">Inicio</a>
+    <?php if ($voting_open): ?>
+      <a href="vote.php" class="nav-link">Vota</a>
+    <?php endif; ?>
+    <a href="<?= htmlspecialchars($app_url) ?>#finalistas" class="nav-link">Finalistas</a>
+    <a href="<?= htmlspecialchars($app_url) ?>#posiciones" class="nav-link">Posiciones</a>
+    <a href="<?= htmlspecialchars($app_url) ?>#premios" class="nav-link">Premios</a>
+    <a href="<?= htmlspecialchars($app_url) ?>#como-funciona" class="nav-link">Cómo funciona</a>
+  </nav>
+  <?php if ($logged_in): ?>
+    <div class="mobile-nav-divider"></div>
+    <span style="color:rgba(255,255,255,0.55);font-size:0.85rem"><?= htmlspecialchars($user['display_name'] ?? 'Usuario') ?></span>
+    <a href="logout.php?csrf=<?= urlencode($_SESSION['csrf_token'] ?? '') ?>" class="nav-link" style="font-size:1rem">Cerrar sesión</a>
+  <?php else: ?>
+    <div class="mobile-nav-divider"></div>
+    <a href="vote.php" class="btn btn-spotify">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.311c-.217.356-.666.468-1.022.252-2.797-1.709-6.319-2.095-10.465-1.148-.4.091-.8-.158-.891-.558-.092-.4.158-.8.558-.891 4.538-1.037 8.43-.591 11.568 1.323.357.217.469.666.252 1.022zm1.471-3.27c-.272.44-.851.578-1.291.306-3.201-1.967-8.082-2.537-11.87-1.389-.492.148-1.013-.133-1.162-.625-.148-.492.133-1.013.625-1.162 4.327-1.314 9.703-.677 13.386 1.579.44.272.578.851.306 1.291zm.128-3.403c-3.841-2.28-10.178-2.49-13.845-1.377-.589.18-1.211-.153-1.391-.742-.18-.59.153-1.211.742-1.391 4.21-1.279 11.204-1.031 15.626 1.593.53.315.706 1.001.39 1.531-.314.53-1 .706-1.53.39l.008-.004z"/></svg>
+      Entrar con Spotify
+    </a>
+  <?php endif; ?>
+</div>
+
+<script>
+(function() {
+  var hamburger  = document.getElementById('hamburger-btn');
+  var mobileNav  = document.getElementById('mobile-nav');
+  var closeBtn   = document.getElementById('mobile-nav-close');
+  var userChip   = document.getElementById('user-chip');
+
+  function openMenu() {
+    mobileNav.classList.add('open');
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeMenu() {
+    mobileNav.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    hamburger.focus();
+  }
+
+  if (hamburger) hamburger.addEventListener('click', openMenu);
+  if (closeBtn)  closeBtn.addEventListener('click', closeMenu);
+  if (mobileNav) {
+    mobileNav.querySelectorAll('.nav-link').forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
+  }
+
+  // User chip toggle
+  if (userChip) {
+    userChip.addEventListener('click', function(e) {
+      e.stopPropagation();
+      userChip.classList.toggle('open');
+    });
+    document.addEventListener('click', function() {
+      userChip.classList.remove('open');
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      if (mobileNav && mobileNav.classList.contains('open')) closeMenu();
+      if (userChip) userChip.classList.remove('open');
+    }
+  });
+})();
+</script>
+
 <main class="site-main" id="main-content">
 <?php
 }

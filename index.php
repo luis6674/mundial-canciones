@@ -5,12 +5,11 @@ require_once __DIR__ . '/includes/header.php';
 
 render_header('Mundial de Canciones 2026');
 
-$now          = time();
-$voting_open  = ($now >= VOTING_OPEN && $now <= VOTING_CLOSE);
+$now           = time();
+$voting_open   = ($now >= VOTING_OPEN && $now <= VOTING_CLOSE);
 $voting_closed = ($now > VOTING_CLOSE);
 $before_voting = ($now < VOTING_OPEN);
 
-// Fetch songs for the grid display
 $db    = get_db();
 $songs = $db->query('SELECT * FROM songs ORDER BY display_order ASC')->fetchAll();
 
@@ -18,74 +17,90 @@ require_once __DIR__ . '/includes/session.php';
 $user      = $_SESSION['user'] ?? null;
 $logged_in = (bool)$user;
 
-// Voting opens countdown target
 $open_ts  = VOTING_OPEN;
 $close_ts = VOTING_CLOSE;
+
+$months_es = ['','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+$close_day_num   = (int)date('j', VOTING_CLOSE);
+$close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
 ?>
 
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">&#9917; Edición Mundial 2026</div>
-    <h1 class="hero-title">Mundial de <span class="accent">Canciones</span></h1>
-    <p class="hero-subtitle">16 canciones finalistas. 3 favoritas. Una campeona.<br>Vota la mejor canción del mundial 2026 y participa en el sorteo de una camiseta de la selección española de fútbol.</p>
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <img src="images/logo_home.png" alt="Mundial de Canciones 2026" class="hero-logo-img">
+      <p class="hero-subtitle">16 canciones finalistas. 3 favoritas. Una campeona.<br>Vota la mejor canción del mundial 2026 y participa en el sorteo de una camiseta de la selección española de fútbol.</p>
 
-    <?php if ($before_voting): ?>
-      <div class="countdown-wrap">
-        <p class="countdown-label">La votación abre en</p>
-        <div class="countdown" data-target="<?= $open_ts ?>">
-          <div class="cd-segment"><span class="cd-val" id="cd-days">--</span><span class="cd-unit">días</span></div>
-          <div class="cd-sep">:</div>
-          <div class="cd-segment"><span class="cd-val" id="cd-hours">--</span><span class="cd-unit">hrs</span></div>
-          <div class="cd-sep">:</div>
-          <div class="cd-segment"><span class="cd-val" id="cd-mins">--</span><span class="cd-unit">min</span></div>
-          <div class="cd-sep">:</div>
-          <div class="cd-segment"><span class="cd-val" id="cd-secs">--</span><span class="cd-unit">seg</span></div>
+      <?php if ($before_voting): ?>
+        <div class="countdown-wrap">
+          <p class="countdown-label">La votación abre en</p>
+          <div class="countdown" data-target="<?= $open_ts ?>">
+            <div class="cd-segment"><span class="cd-val" id="cd-days">--</span><span class="cd-unit">días</span></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-segment"><span class="cd-val" id="cd-hours">--</span><span class="cd-unit">hrs</span></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-segment"><span class="cd-val" id="cd-mins">--</span><span class="cd-unit">min</span></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-segment"><span class="cd-val" id="cd-secs">--</span><span class="cd-unit">seg</span></div>
+          </div>
+        </div>
+      <?php elseif ($voting_open): ?>
+        <div class="hero-cta">
+          <?php if ($logged_in): ?>
+            <a href="vote.php" class="btn btn-primary btn-lg">&#127932; Votar ahora</a>
+          <?php else: ?>
+            <?php require __DIR__ . '/includes/login-form.php'; ?>
+          <?php endif; ?>
+          <p class="cta-note">Votación cierra el <?= $close_day_num ?> de <?= $close_month_name ?></p>
+        </div>
+      <?php else: ?>
+        <div class="hero-cta">
+          <p class="closed-notice">&#127942; La votación ha terminado. ¡Mira la clasificación final!</p>
+        </div>
+      <?php endif; ?>
+    </div>
+
+    <!-- Mini-podium widget -->
+    <div class="mini-podium-widget" id="mini-podium">
+      <div class="mpw-header">
+        <span class="mpw-title"><?= $voting_closed ? 'Clasificación final' : 'En vivo' ?></span>
+        <span class="mpw-updated" id="mpw-updated"><span class="dot"></span>Cargando…</span>
+      </div>
+      <div class="mpw-items" id="mpw-items">
+        <div class="mpw-placeholder">
+          <div class="loading-spinner"></div>
         </div>
       </div>
-    <?php elseif ($voting_open): ?>
-      <div class="hero-cta">
-        <?php if ($logged_in): ?>
-          <a href="vote.php" class="btn btn-primary btn-lg">&#127932; Votar ahora</a>
-        <?php else: ?>
-          <?php require __DIR__ . '/includes/login-form.php'; ?>
-        <?php endif; ?>
-        <p class="cta-note">Votación cierra el <?= date('j/n/Y', VOTING_CLOSE) ?></p>
-      </div>
-    <?php else: ?>
-      <div class="hero-cta">
-        <p class="closed-notice">&#127942; La votación ha terminado. ¡Mira la clasificación final!</p>
-      </div>
-    <?php endif; ?>
-  </div>
-</section>
-
-<!-- Live Results / Podium -->
-<section class="results-section" id="results">
-  <div class="section-inner">
-    <?php if ($voting_closed): ?>
-      <h2 class="section-title">&#127942; Clasificación final</h2>
-      <div id="podium-wrap" class="podium-wrap">
-        <!-- Filled by results.js after fetching /api/results.php -->
-        <div class="loading-spinner"></div>
-      </div>
-    <?php else: ?>
-      <h2 class="section-title">&#128202; Clasificación en vivo</h2>
-      <p class="section-sub">Resultados actualizados cada 8 segundos</p>
-    <?php endif; ?>
-
-    <div id="chart-wrap" class="chart-wrap <?= $voting_closed ? 'hidden' : '' ?>">
-      <div class="loading-spinner" id="chart-loading"></div>
-      <div id="bar-chart" class="bar-chart" aria-live="polite"></div>
+      <a href="#posiciones" class="mpw-more">Ver clasificación completa ↓</a>
     </div>
   </div>
 </section>
 
-<!-- Song Grid -->
-<section class="songs-section">
+<!-- GIVEAWAY BANNER -->
+<section class="banner-section" id="premios">
+  <a href="sorteo.php" class="banner-link">
+    <picture>
+      <source srcset="images/banner_camiseta_movil.png" media="(max-width: 640px)">
+      <img src="images/banner_camiseta_desktop.png" alt="Sorteo camiseta selección española — participa aquí" class="banner-img">
+    </picture>
+  </a>
+</section>
+
+<!-- HOW IT WORKS BANNER -->
+<section class="banner-section" id="como-funciona">
+  <img src="images/banner_instrucciones.png" alt="¿Cómo participar? Instrucciones del concurso" class="banner-img">
+</section>
+
+<!-- SONG CAROUSEL -->
+<section class="songs-section" id="finalistas">
   <div class="section-inner">
-    <h2 class="section-title">&#127925; Las 16 canciones</h2>
-    <div class="songs-grid">
+    <h2 class="section-title">
+      <img src="images/adorno_titulo_izquierdo.png" alt="" class="section-title-ornament" aria-hidden="true">
+      Las 16 Finalistas
+      <img src="images/adorno_titulo_derecho.png" alt="" class="section-title-ornament" aria-hidden="true">
+    </h2>
+    <div class="songs-carousel">
       <?php foreach ($songs as $song): ?>
         <div class="song-card" data-song-id="<?= (int)$song['id'] ?>">
           <div class="song-cover">
@@ -100,21 +115,41 @@ $close_ts = VOTING_CLOSE;
             <div class="cover-placeholder" style="<?= !empty($song['cover_url']) ? 'display:none' : '' ?>">
               <span>&#127925;</span>
             </div>
-            <div class="song-number"><?= (int)$song['display_order'] ?></div>
+            <div class="song-number-badge"><?= (int)$song['display_order'] ?></div>
           </div>
           <div class="song-info">
             <div class="song-title"><?= htmlspecialchars($song['title']) ?></div>
             <div class="song-artist"><?= htmlspecialchars($song['artist']) ?></div>
           </div>
           <?php if (!empty($song['spotify_track_id'])): ?>
-            <div class="song-preview">
-              <button class="preview-btn" data-track="<?= htmlspecialchars($song['spotify_track_id']) ?>" aria-label="Escuchar <?= htmlspecialchars($song['title']) ?>">
+            <div class="song-actions">
+              <button class="btn-listen preview-btn" data-track="<?= htmlspecialchars($song['spotify_track_id']) ?>" aria-label="Escuchar <?= htmlspecialchars($song['title']) ?>">
                 &#9654; Escuchar
               </button>
             </div>
           <?php endif; ?>
         </div>
       <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS / CHART -->
+<section class="results-section" id="posiciones">
+  <div class="section-inner">
+    <?php if ($voting_closed): ?>
+      <h2 class="section-title">&#127942; Clasificación final</h2>
+      <div id="podium-wrap" class="podium-wrap">
+        <div class="loading-spinner"></div>
+      </div>
+    <?php else: ?>
+      <h2 class="section-title">&#128202; Clasificación en vivo</h2>
+      <p class="section-sub">Resultados actualizados cada 8 segundos</p>
+    <?php endif; ?>
+
+    <div id="chart-wrap" class="chart-wrap <?= $voting_closed ? 'hidden' : '' ?>">
+      <div class="loading-spinner" id="chart-loading"></div>
+      <div id="bar-chart" class="bar-chart" aria-live="polite"></div>
     </div>
   </div>
 </section>
@@ -169,8 +204,8 @@ $close_ts = VOTING_CLOSE;
 
 // Song preview modal
 (function() {
-  const modal   = document.getElementById('preview-modal');
-  const iframe  = document.getElementById('preview-iframe');
+  const modal    = document.getElementById('preview-modal');
+  const iframe   = document.getElementById('preview-iframe');
   const closeBtn = document.getElementById('preview-close');
   const backdrop = modal ? modal.querySelector('.modal-backdrop') : null;
   let opener = null;
