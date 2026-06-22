@@ -80,8 +80,8 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 .btn:hover  { filter: brightness(1.12); transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
 .btn-primary  { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dk) 100%); color: #0a0a0a; }
-.btn-green    { background: var(--green); color: #fff; }
-.btn-home {background: #3b582a; color: #fbe7cb; font-size: 1.3rem; padding-bottom: 0.4rem; }
+.btn-green    { background: var(--green); color: #fbe7cb; }
+.btn-home {background: var(--green); color: #fbe7cb; font-size: 1.3rem; padding-bottom: 0.4rem; }
 .btn-spotify  { background: var(--spotify); color: #0a0a0a; }
 .btn-sm-header { padding: 0.3rem 1rem; font-size: 0.88rem; }
 .btn-secondary { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid var(--border); }
@@ -242,7 +242,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 
 /* ---------- Mini Podium Widget ---------- */
 .mini-podium-widget {
-  background: rgba(59,88,42,0.20);
+  background: rgba(43,110,53,0.20);
   border: 1px solid rgba(232,184,0,0.28);
   border-radius: 14px; overflow: hidden;
 }
@@ -311,7 +311,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 .banner-section img { height: auto; }
 
 /* ---------- Songs Carousel Section ---------- */
-.songs-section { background: #172217; padding: 3rem 0 2.5rem; }
+.songs-section { background: #2B6E35; padding: 3rem 0 2.5rem; }
 .section-title {
   display: flex; align-items: center; justify-content: center; gap: 0.75rem;
   font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem);
