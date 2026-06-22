@@ -220,7 +220,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
   position: relative; z-index: 1;
   max-width: 1200px; margin: 0 auto; width: 100%;
   padding: 4rem 1.5rem;
-  display: grid; grid-template-columns: 1fr 1fr;
+  display: grid; grid-template-columns: 2fr 3fr;
   gap: 2.5rem; align-items: center;
 }
 .hero-left { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; text-align: center; }
@@ -272,15 +272,21 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 .mpw-updated .dot { width: 10px; height: 10px; background: #820103; border-radius: 50%; display: inline-block; }
 .mpw-items {
   display: grid; grid-template-columns: 1fr 1.25fr 1fr;
-  gap: 0.4rem; padding: 0.6rem 0.6rem 0.25rem;
+  gap: 0.4rem; padding: 0.6rem 0.6rem 1rem;
   align-items: end;
 }
 .mpw-item { text-align: center; }
-.mpw-badge { height: 38px; width: auto; margin: 0 auto 0.3rem; }
-.mpw-p1 .mpw-badge { height: 46px; }
+.mpw-cover-wrap {
+  position: relative; width: 100%; aspect-ratio: 1; margin-bottom: 0.35rem;
+}
+.mpw-badge {
+  position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+  height: 36px; width: auto; z-index: 2; drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+}
+.mpw-p1 .mpw-badge { height: 44px; bottom: -12px; }
 .mpw-cover {
-  width: 100%; aspect-ratio: 1; border-radius: 7px; object-fit: cover;
-  margin-bottom: 0.35rem; border: 2px solid rgba(255,255,255,0.12);
+  width: 100%; height: 100%; border-radius: 7px; object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.12); display: block;
 }
 .mpw-p1 .mpw-cover { border-color: var(--gold); }
 .mpw-p2 .mpw-cover { border-color: #C0C0C0; }

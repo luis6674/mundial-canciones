@@ -51,16 +51,22 @@
     const order    = [top3[1], top3[0], top3[2]].map((song, i) => ({ song, pClass: pClasses[i] }))
                        .filter(o => o.song);
 
+    const rankBadges = { 'mpw-p1': 'oro_badge.png', 'mpw-p2': 'Plata_badge.png', 'mpw-p3': 'Bronce_badge.png' };
+    const rankNums   = { 'mpw-p1': 1, 'mpw-p2': 2, 'mpw-p3': 3 };
+
     mpwItems.innerHTML = order.map(({ song, pClass }) => {
       const pct   = parseFloat(song.vote_pct) || 0;
+      const rank  = rankNums[pClass];
+      const badge = rankBadges[pClass];
       const cover = song.cover_url
         ? `<img src="${escHtml(song.cover_url)}" alt="${escHtml(song.title)}" class="mpw-cover">`
         : `<div class="mpw-cover" style="display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:rgba(255,255,255,0.05)">🎵</div>`;
-      const rank = pClass === 'mpw-p1' ? 1 : pClass === 'mpw-p2' ? 2 : 3;
       return `
         <div class="mpw-item ${pClass}">
-          <img src="images/${rank}_puesto.png" alt="${rank}º puesto" class="mpw-badge">
-          ${cover}
+          <div class="mpw-cover-wrap">
+            ${cover}
+            <img src="images/${badge}" alt="${rank}º puesto" class="mpw-badge">
+          </div>
           <div class="mpw-song-title">${escHtml(song.title)}</div>
           <div class="mpw-song-artist">${escHtml(song.artist)}</div>
           <div class="mpw-pct">${Math.round(pct)}%</div>
