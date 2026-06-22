@@ -85,7 +85,7 @@
           <div class="bar-rank-num"></div>
           <div class="bar-label">
             <span class="bar-song-title"></span>
-            <small class="bar-song-artist"></small>
+            <span class="bar-song-artist"></span>
           </div>
           <div class="bar-track">
             <div class="bar-fill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label=""></div>
@@ -115,12 +115,9 @@
         fill.setAttribute('aria-valuenow', pct);
       }
 
-      const medals = ['🥇', '🥈', '🥉'];
       const votePct = parseFloat(song.vote_pct) || 0;
       const ptsEl   = row.querySelector('.bar-pts');
-      ptsEl.innerHTML = (idx < 3 ? `<span class="bar-medal">${medals[idx]}</span>` : '')
-        + `<span class="bar-vote-pct">${votePct.toFixed(1)}%</span>`
-        + `<span class="bar-points">${song.points} pts</span>`;
+      ptsEl.textContent = votePct.toFixed(1) + '%';
 
       if (barChart.children[idx] !== row) {
         barChart.insertBefore(row, barChart.children[idx] || null);
