@@ -1,23 +1,20 @@
 /**
- * results.js — Live bar chart + podium for King of Songs 2026
+ * results.js — Live bar chart + mini-podium for Mundial de Canciones 2026
  * Polls /api/results.php every 8 seconds while voting is open.
- * After close, renders a static podium.
  */
 
 (function () {
   'use strict';
 
-  const POLL_INTERVAL = 8000; // ms
+  const POLL_INTERVAL = 8000;
   const API_URL       = './api/results.php';
 
-  // These globals are set inline by index.php
-  // VOTING_OPEN  (bool)
-  // VOTING_CLOSED (bool)
-
-  const chartWrap   = document.getElementById('chart-wrap');
-  const barChart    = document.getElementById('bar-chart');
-  const chartLoading= document.getElementById('chart-loading');
-  const podiumWrap  = document.getElementById('podium-wrap');
+  const chartWrap    = document.getElementById('chart-wrap');
+  const barChart     = document.getElementById('bar-chart');
+  const chartLoading = document.getElementById('chart-loading');
+  const podiumWrap   = document.getElementById('podium-wrap');
+  const mpwItems     = document.getElementById('mpw-items');
+  const mpwUpdated   = document.getElementById('mpw-updated');
 
   let pollTimer = null;
 
@@ -28,9 +25,11 @@
       if (!resp.ok) throw new Error('HTTP ' + resp.status);
       const data = await resp.json();
       if (chartLoading) chartLoading.style.display = 'none';
-      renderChart(data.songs || []);
+      const songs = data.songs || [];
+      renderChart(songs);
+      renderMiniPodium(songs);
       if (typeof VOTING_CLOSED !== 'undefined' && VOTING_CLOSED) {
-        renderPodium(data.songs || []);
+        renderPodium(songs);
         stopPolling();
       }
     } catch (err) {
@@ -42,22 +41,54 @@
     }
   }
 
+  /* ---- Mini-podium widget (hero section) ---- */
+  function renderMiniPodium(songs) {
+    if (!mpwItems) return;
+    const top3 = songs.slice(0, 3);
+    if (top3.length === 0) return;
+
+    // Render in podium order: 2nd, 1st, 3rd (middle column is widest)
+    const pClasses = ['mpw-p2', 'mpw-p1', 'mpw-p3'];
+    const order    = [top3[1], top3[0], top3[2]].map((song, i) => ({ song, pClass: pClasses[i] }))
+                       .filter(o => o.song);
+
+    mpwItems.innerHTML = order.map(({ song, pClass }) => {
+      const pct   = parseFloat(song.score_pct) || 0;
+      const cover = song.cover_url
+        ? `<img src="${escHtml(song.cover_url)}" alt="${escHtml(song.title)}" class="mpw-cover">`
+        : `<div class="mpw-cover" style="display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:rgba(255,255,255,0.05)">🎵</div>`;
+      const rank = pClass === 'mpw-p1' ? 1 : pClass === 'mpw-p2' ? 2 : 3;
+      return `
+        <div class="mpw-item ${pClass}">
+          <img src="images/${rank}_puesto.png" alt="${rank}º puesto" class="mpw-badge">
+          ${cover}
+          <div class="mpw-song-title">${escHtml(song.title)}</div>
+          <div class="mpw-song-artist">${escHtml(song.artist)}</div>
+          <div class="mpw-pct">${Math.round(pct)}%</div>
+        </div>`;
+    }).join('');
+
+    if (mpwUpdated) {
+      const now = new Date();
+      mpwUpdated.innerHTML = `<span class="dot"></span>${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
+    }
+  }
+
   /* ---- Bar chart ---- */
   function renderChart(songs) {
     if (!barChart) return;
 
-    const medals = ['🥇', '🥈', '🥉'];
-
     songs.forEach((song, idx) => {
-      const rowId   = 'bar-row-' + song.id;
-      let row       = document.getElementById(rowId);
-      const isNew   = !row;
+      const rowId = 'bar-row-' + song.id;
+      let row     = document.getElementById(rowId);
+      const isNew = !row;
 
       if (isNew) {
         row = document.createElement('div');
         row.id = rowId;
         row.className = 'bar-row';
         row.innerHTML = `
+          <div class="bar-rank-num"></div>
           <div class="bar-label">
             <span class="bar-song-title"></span>
             <small class="bar-song-artist"></small>
@@ -69,17 +100,17 @@
         barChart.appendChild(row);
       }
 
-      // Update rank class
       row.classList.remove('rank-1', 'rank-2', 'rank-3');
       if (idx < 3) row.classList.add('rank-' + (idx + 1));
 
-      row.querySelector('.bar-song-title').textContent = song.title;
+      row.querySelector('.bar-rank-num').textContent  = idx + 1;
+      row.querySelector('.bar-song-title').textContent  = song.title;
       row.querySelector('.bar-song-artist').textContent = song.artist;
 
       const fill = row.querySelector('.bar-fill');
       const pct  = parseFloat(song.score_pct) || 0;
       fill.setAttribute('aria-label', song.title + ': ' + Math.round(pct) + '%');
-      // Use rAF so CSS transition plays after insertion
+
       if (isNew) {
         requestAnimationFrame(() => requestAnimationFrame(() => {
           fill.style.width = pct + '%';
@@ -90,16 +121,15 @@
         fill.setAttribute('aria-valuenow', pct);
       }
 
-      const ptsEl = row.querySelector('.bar-pts');
+      const medals = ['🥇', '🥈', '🥉'];
+      const ptsEl  = row.querySelector('.bar-pts');
       ptsEl.innerHTML = idx < 3 ? `<span class="bar-medal">${medals[idx]}</span>` : '';
 
-      // Move to correct position (keep DOM order in sync with sorted data)
       if (barChart.children[idx] !== row) {
         barChart.insertBefore(row, barChart.children[idx] || null);
       }
     });
 
-    // Remove rows for songs no longer in the list
     const ids = new Set(songs.map(s => 'bar-row-' + s.id));
     Array.from(barChart.children).forEach(el => {
       if (!ids.has(el.id)) el.remove();
@@ -112,11 +142,10 @@
     const top3 = songs.slice(0, 3);
     if (top3.length === 0) return;
 
-    // Podium order: 2nd, 1st, 3rd
     const order = [
-      { ...top3[1], pClass: 'p2', pNum: '🥈', height: '2nd' },
-      { ...top3[0], pClass: 'p1', pNum: '🥇', height: '1st' },
-      top3[2] ? { ...top3[2], pClass: 'p3', pNum: '🥉', height: '3rd' } : null,
+      top3[1] ? { ...top3[1], pClass: 'p2', pNum: '🥈' } : null,
+      { ...top3[0], pClass: 'p1', pNum: '🥇' },
+      top3[2] ? { ...top3[2], pClass: 'p3', pNum: '🥉' } : null,
     ].filter(Boolean);
 
     podiumWrap.innerHTML = order.map(item => {
@@ -154,7 +183,7 @@
   }
 
   /* ---- Boot ---- */
-  if (barChart || podiumWrap) {
+  if (barChart || podiumWrap || mpwItems) {
     startPolling();
   }
 })();

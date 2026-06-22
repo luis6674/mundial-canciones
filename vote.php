@@ -1,8 +1,6 @@
 <?php
 /**
  * vote.php — Voting page. Requires login.
- * Shows 16 song cards; users pick top 3 (1st/2nd/3rd).
- * After voting closes, shows read-only final picks.
  */
 
 declare(strict_types=1);
@@ -10,7 +8,6 @@ declare(strict_types=1);
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/includes/header.php';
-
 require_once __DIR__ . '/includes/session.php';
 
 $user      = $_SESSION['user'] ?? null;
@@ -20,171 +17,216 @@ $now           = time();
 $voting_open   = ($now >= VOTING_OPEN && $now <= VOTING_CLOSE);
 $voting_closed = ($now > VOTING_CLOSE);
 
-// Ensure CSRF token exists
 if ($logged_in && empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 $csrf_token = $_SESSION['csrf_token'] ?? '';
 
-// Fetch all songs
 $db    = get_db();
 $songs = $db->query('SELECT * FROM songs ORDER BY display_order ASC')->fetchAll();
 
-// If voting is closed and user is logged in, load their final picks for read-only display
-$saved_picks = []; // rank => song_id
+$saved_picks = [];
 if ($logged_in && ($voting_closed || $voting_open)) {
-    $stmt = $db->prepare(
-        'SELECT rank_position, song_id FROM votes WHERE user_id = ? ORDER BY rank_position ASC'
-    );
+    $stmt = $db->prepare('SELECT rank_position, song_id FROM votes WHERE user_id = ? ORDER BY rank_position ASC');
     $stmt->execute([(int)$user['id']]);
     foreach ($stmt->fetchAll() as $row) {
         $saved_picks[(int)$row['rank_position']] = (int)$row['song_id'];
     }
 }
 
-// Build song lookup by id
 $songs_by_id = [];
 foreach ($songs as $s) {
     $songs_by_id[(int)$s['id']] = $s;
 }
 
+$months_es = ['','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+$close_day_num    = (int)date('j', VOTING_CLOSE);
+$close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
+
 render_header('Vota tus favoritas');
 ?>
 
-<div class="section-inner vote-page">
+<div class="vote-outer">
+  <div class="vote-page-wrap">
 
-  <div class="vote-header">
-    <h1 class="vote-title">&#127932; Elige tus <span class="accent">favoritas</span></h1>
-    <?php if ($voting_open): ?>
-      <p class="vote-sub">Elige tus 3 canciones favoritas. Puedes cambiar tu voto cuando quieras antes del <?= date('j/n/Y', VOTING_CLOSE) ?>.</p>
-    <?php elseif ($voting_closed): ?>
-      <p class="vote-sub">La votación ha terminado. Estas fueron tus elecciones finales.</p>
+    <?php if (!$logged_in): ?>
+      <div class="vote-login-prompt">
+        <h1 class="vote-title">Elige tus 3 <span class="accent">Favoritas</span></h1>
+        <p class="vote-sub">Necesitas entrar con Spotify para votar en el Mundial de Canciones 2026.</p>
+        <?php require __DIR__ . '/includes/login-form.php'; ?>
+      </div>
+
+    <?php elseif (!$voting_open && !$voting_closed): ?>
+      <div class="vote-login-prompt">
+        <h1 class="vote-title">La votación aún no ha empezado</h1>
+        <p class="vote-sub">¡Vuelve el <strong><?= $close_day_num ?> de <?= $close_month_name ?></strong> para votar!</p>
+        <a href="index.php" class="btn btn-secondary">&#8592; Volver al inicio</a>
+      </div>
+
     <?php else: ?>
-      <p class="vote-sub">La votación abre el <?= date('j/n/Y', VOTING_OPEN) ?>.</p>
-    <?php endif; ?>
-  </div>
 
-  <?php if (!$logged_in): ?>
-    <!-- Not logged in -->
-    <div class="login-prompt">
-      <h2>Inicia sesión para votar</h2>
-      <p>Necesitas entrar con Spotify para votar en el Mundial de Canciones 2026.</p>
-      <?php require __DIR__ . '/includes/login-form.php'; ?>
-    </div>
-
-  <?php elseif (!$voting_open && !$voting_closed): ?>
-    <!-- Before voting -->
-    <div class="login-prompt">
-      <h2>La votación aún no ha empezado</h2>
-      <p>¡Vuelve el <strong><?= date('j/n/Y', VOTING_OPEN) ?></strong> para votar!</p>
-      <a href="/" class="btn btn-secondary">&#8592; Volver al inicio</a>
-    </div>
-
-  <?php else: ?>
-
-    <?php if ($voting_closed): ?>
-      <div class="readonly-notice">&#9632; La votación ha terminado. Los resultados son definitivos.</div>
-    <?php endif; ?>
-
-    <!-- Slot strip — 1st / 2nd / 3rd picks summary -->
-    <?php if ($voting_open): ?>
-    <div class="slots-strip" id="slots-strip">
-      <?php foreach ([1 => ['🥇','oro','5pts','primer'], 2 => ['🥈','plata','3pts','segundo'], 3 => ['🥉','bronce','1pt','tercer']] as $rank => [$medal, $label, $pts, $ord]): ?>
-        <div class="slot" id="slot-<?= $rank ?>">
-          <span class="slot-medal" aria-hidden="true"><?= $medal ?></span>
-          <div class="slot-label"><?= $label ?> pick &bull; <?= $pts ?></div>
-          <div class="slot-song-title" style="display:none"></div>
-          <div class="slot-song-artist" style="display:none"></div>
-          <div class="slot-empty-hint">Haz clic en una canción</div>
-          <button class="slot-clear" style="display:none" aria-label="Quitar <?= $ord ?> voto">Quitar</button>
-        </div>
-      <?php endforeach; ?>
-    </div>
-
-    <!-- Sticky save bar -->
-    <div class="save-bar" id="save-bar">
-      <div class="save-bar-inner hidden" id="save-bar-inner">
-        <button class="btn btn-primary" id="save-btn">Guardar votos</button>
-        <span id="save-status"></span>
-        <input type="hidden" id="csrf-token" value="<?= htmlspecialchars($csrf_token) ?>">
-      </div>
-      <div class="giveaway-note hidden" id="giveaway-note">
-        &#9917; ¿Quieres ganar una camiseta de la selección española de fútbol? Participa en el sorteo rellenando el formulario <a href="sorteo.php">aquí</a>.
-      </div>
-    </div>
-    <?php endif; ?>
-
-    <!-- Song grid -->
-    <div class="songs-grid" id="vote-grid">
-      <?php foreach ($songs as $song):
-        $sid = (int)$song['id'];
-        $picked_rank = array_search($sid, $saved_picks, true);
-        $card_class  = 'song-card';
-        if ($voting_open) $card_class .= ' selectable';
-        if ($picked_rank !== false) $card_class .= ' picked-' . $picked_rank;
-
-        $badge_num   = ($picked_rank !== false) ? $picked_rank : '';
-        $badge_cls   = ($picked_rank !== false) ? "rank-badge badge-$picked_rank" : 'rank-badge hidden';
-      ?>
-        <div
-          class="<?= $card_class ?>"
-          data-song-id="<?= $sid ?>"
-          data-title="<?= htmlspecialchars($song['title']) ?>"
-          data-artist="<?= htmlspecialchars($song['artist']) ?>"
-          <?php if ($voting_open): ?>role="button" tabindex="0" aria-label="Seleccionar <?= htmlspecialchars($song['title']) ?>"<?php endif; ?>
-        >
-          <!-- Rank badge (shown when picked) -->
-          <div class="<?= $badge_cls ?>"><?= $badge_num ?></div>
-
-          <!-- Cover art -->
-          <div class="song-cover">
-            <?php if (!empty($song['cover_url'])): ?>
-              <img
-                src="<?= htmlspecialchars($song['cover_url']) ?>"
-                alt="<?= htmlspecialchars($song['title']) ?> cover art"
-                class="cover-img"
-                loading="lazy"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-              >
-            <?php endif; ?>
-            <div class="cover-placeholder" style="<?= !empty($song['cover_url']) ? 'display:none' : '' ?>">
-              <span>&#127925;</span>
-            </div>
-            <div class="song-number"><?= (int)$song['display_order'] ?></div>
+      <!-- Page header (spans full width) -->
+      <div class="vote-main-header">
+          <h1 class="vote-page-title">Elige tus 3 <span class="accent">Favoritas</span></h1>
+          <div class="vote-page-subtitle">
+            <img src="images/adorno_titulo_izquierdo.png" alt="" aria-hidden="true">
+            Las 16 Finalistas
+            <img src="images/adorno_titulo_derecho.png" alt="" aria-hidden="true">
           </div>
-
-          <!-- Info -->
-          <div class="song-info">
-            <div class="song-title"><?= htmlspecialchars($song['title']) ?></div>
-            <div class="song-artist"><?= htmlspecialchars($song['artist']) ?></div>
-          </div>
-
-          <!-- Spotify embed preview -->
-          <?php if (!empty($song['spotify_track_id'])): ?>
-          <div class="song-preview">
-            <button
-              class="preview-btn"
-              data-track="<?= htmlspecialchars($song['spotify_track_id']) ?>"
-              aria-label="Escuchar <?= htmlspecialchars($song['title']) ?>"
-              onclick="event.stopPropagation(); openPreview(this.dataset.track)"
-            >
-              &#9654; Escuchar
-            </button>
-          </div>
+          <?php if ($voting_closed): ?>
+            <p class="vote-sub">La votación ha terminado. Estas fueron tus elecciones finales.</p>
+          <?php else: ?>
+            <p class="vote-sub">Elige tus 3 canciones favoritas. Puedes cambiar tu voto antes del <?= $close_day_num ?> de <?= $close_month_name ?>.</p>
           <?php endif; ?>
         </div>
-      <?php endforeach; ?>
-    </div>
 
-  <?php endif; ?>
-</div><!-- /.vote-page -->
+        <?php if ($voting_open): ?>
+        <!-- Mobile selection strip (3 slots, visible on mobile only) -->
+        <div class="mobile-selection-strip" id="mobile-strip">
+          <div class="mstrip-slots">
+            <?php foreach ([1, 2, 3] as $rank): ?>
+              <?php if ($rank > 1): ?><div class="mstrip-divider"></div><?php endif; ?>
+              <div class="mstrip-slot empty" id="mslot-<?= $rank ?>">
+                <img src="images/<?= $rank ?>_puesto.png" alt="<?= $rank ?>º puesto" class="mstrip-badge-img">
+                <div class="mstrip-song-info" style="display:none">
+                  <div class="mstrip-slot-title"></div>
+                  <div class="mstrip-slot-artist"></div>
+                </div>
+                <span class="mstrip-dots" aria-hidden="true">• • •</span>
+                <button class="mstrip-remove hidden" data-rank="<?= $rank ?>" aria-label="Quitar <?= $rank ?>º voto">
+                  <img src="images/papelera_icono.png" alt="" aria-hidden="true">
+                </button>
+              </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
+        <?php endif; ?>
+
+        <!-- Song grid -->
+        <div class="vote-grid" id="vote-grid">
+          <?php foreach ($songs as $song):
+            $sid         = (int)$song['id'];
+            $picked_rank = array_search($sid, $saved_picks, true);
+            $is_selected = ($picked_rank !== false);
+            $card_class  = 'song-card' . ($voting_open ? ' selectable' : '') . ($is_selected ? ' selected' : '');
+          ?>
+            <div
+              class="<?= $card_class ?>"
+              data-song-id="<?= $sid ?>"
+              data-title="<?= htmlspecialchars($song['title']) ?>"
+              data-artist="<?= htmlspecialchars($song['artist']) ?>"
+            >
+              <div class="song-cover">
+                <?php if (!empty($song['cover_url'])): ?>
+                  <img
+                    src="<?= htmlspecialchars($song['cover_url']) ?>"
+                    alt="<?= htmlspecialchars($song['title']) ?> cover art"
+                    class="cover-img"
+                    loading="lazy"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                  >
+                <?php endif; ?>
+                <div class="cover-placeholder" style="<?= !empty($song['cover_url']) ? 'display:none' : '' ?>">
+                  <span>&#127925;</span>
+                </div>
+                <div class="song-number-badge"><?= (int)$song['display_order'] ?></div>
+                <?php if ($voting_open): ?>
+                  <div class="selection-circle" aria-hidden="true"></div>
+                <?php elseif ($is_selected): ?>
+                  <div class="selection-circle selected-static" aria-hidden="true">
+                    <img src="images/<?= (int)$picked_rank ?>_puesto.png" alt="<?= (int)$picked_rank ?>º puesto" class="selection-badge-img">
+                  </div>
+                <?php endif; ?>
+              </div>
+
+              <div class="song-info">
+                <div class="song-title"><?= htmlspecialchars($song['title']) ?></div>
+                <div class="song-artist"><?= htmlspecialchars($song['artist']) ?></div>
+              </div>
+
+              <?php if ($voting_open): ?>
+              <div class="song-actions">
+                <?php if (!empty($song['spotify_track_id'])): ?>
+                  <button class="btn-listen preview-btn" data-track="<?= htmlspecialchars($song['spotify_track_id']) ?>" aria-label="Escuchar <?= htmlspecialchars($song['title']) ?>">
+                    &#9654; Escuchar
+                  </button>
+                <?php endif; ?>
+                <button class="btn-select<?= $is_selected ? ' selected-btn' : '' ?>" data-song-id="<?= $sid ?>" aria-label="<?= $is_selected ? 'Quitar' : 'Seleccionar' ?> <?= htmlspecialchars($song['title']) ?>">
+                  <?= $is_selected ? 'Quitar' : 'Seleccionar' ?>
+                </button>
+              </div>
+              <?php elseif (!empty($song['spotify_track_id'])): ?>
+              <div class="song-actions">
+                <button class="btn-listen preview-btn" data-track="<?= htmlspecialchars($song['spotify_track_id']) ?>" aria-label="Escuchar <?= htmlspecialchars($song['title']) ?>">
+                  &#9654; Escuchar
+                </button>
+              </div>
+              <?php endif; ?>
+            </div>
+          <?php endforeach; ?>
+        </div>
+
+      <?php if ($voting_open): ?>
+      <!-- SIDEBAR (desktop) -->
+      <aside class="vote-sidebar" aria-label="Tu selección">
+        <div class="sidebar-header">
+          <img src="images/adorno_corona.png" alt="" class="sidebar-crown" aria-hidden="true">
+          <span class="sidebar-label">— Tu Selección —</span>
+        </div>
+
+        <?php
+        $rank_badges = [1 => 'oro_badge.png', 2 => 'Plata_badge.png', 3 => 'Bronce_badge.png'];
+        $rank_labels = [1 => '1er puesto', 2 => '2º puesto', 3 => '3er puesto'];
+        foreach ([1, 2, 3] as $rank):
+          $has_pick  = isset($saved_picks[$rank]);
+          $pick_song = $has_pick ? ($songs_by_id[$saved_picks[$rank]] ?? null) : null;
+        ?>
+          <div class="sidebar-slot" id="sslot-<?= $rank ?>">
+            <img src="images/<?= $rank_badges[$rank] ?>" alt="<?= $rank_labels[$rank] ?>" class="sidebar-badge-img">
+            <div class="sidebar-slot-info">
+              <?php if ($has_pick && $pick_song): ?>
+                <div class="sidebar-slot-title"><?= htmlspecialchars($pick_song['title']) ?></div>
+                <div class="sidebar-slot-artist"><?= htmlspecialchars($pick_song['artist']) ?></div>
+              <?php else: ?>
+                <div class="sidebar-slot-title">—</div>
+                <div class="sidebar-slot-empty">Selecciona una canción</div>
+              <?php endif; ?>
+            </div>
+            <button class="sidebar-remove<?= $has_pick ? '' : ' hidden' ?>" data-rank="<?= $rank ?>" aria-label="Quitar <?= $rank_labels[$rank] ?>">
+              <img src="images/papelera_icono.png" alt="" aria-hidden="true">
+            </button>
+          </div>
+        <?php endforeach; ?>
+
+        <button class="sidebar-vote-btn" id="save-btn" disabled>Enviar voto</button>
+        <span id="save-status"></span>
+        <input type="hidden" id="csrf-token" value="<?= htmlspecialchars($csrf_token) ?>">
+
+        <div class="giveaway-note hidden" id="giveaway-note">
+          &#9917; ¿Quieres ganar una camiseta de la selección española? <a href="sorteo.php">Participa en el sorteo</a>.
+        </div>
+      </aside>
+
+      <!-- Mobile bottom bar -->
+      <div class="vote-bottom-bar" id="vote-bottom-bar">
+        <button class="mobile-vote-btn" id="save-btn-mobile" disabled>Enviar voto</button>
+        <div class="vote-bottom-note">
+          <img src="images/candado_icono.png" alt="" aria-hidden="true">
+          <span>Cierra el <?= $close_day_num ?> de <?= $close_month_name ?></span>
+        </div>
+      </div>
+      <?php endif; ?>
+
+    <?php endif; ?>
+  </div><!-- /.vote-page-wrap -->
+</div><!-- /.vote-outer -->
 
 <!-- Spotify Preview Modal -->
 <div id="preview-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="preview-modal-title" hidden>
-  <div class="modal-backdrop" onclick="closePreview()"></div>
+  <div class="modal-backdrop"></div>
   <div class="modal-content">
     <h2 id="preview-modal-title" class="sr-only">Vista previa de la canción</h2>
-    <button class="modal-close" onclick="closePreview()" aria-label="Cerrar vista previa">&times;</button>
+    <button class="modal-close" id="preview-close" aria-label="Cerrar vista previa">&times;</button>
     <iframe id="preview-iframe"
       src=""
       width="100%"
@@ -198,33 +240,36 @@ render_header('Vota tus favoritas');
 </div>
 
 <script>
-var _previewOpener = null;
-function openPreview(trackId) {
-  var modal  = document.getElementById('preview-modal');
-  var iframe = document.getElementById('preview-iframe');
-  _previewOpener = document.activeElement;
-  iframe.src = 'https://open.spotify.com/embed/track/' + trackId + '?utm_source=generator&theme=0';
-  modal.hidden = false;
-  document.body.classList.add('modal-open');
-  var closeBtn = modal.querySelector('.modal-close');
-  if (closeBtn) closeBtn.focus();
-}
-function closePreview() {
-  var modal  = document.getElementById('preview-modal');
-  var iframe = document.getElementById('preview-iframe');
-  modal.hidden = true;
-  iframe.src = '';
-  document.body.classList.remove('modal-open');
-  if (_previewOpener) { _previewOpener.focus(); _previewOpener = null; }
-}
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePreview(); });
+// Song preview modal
+(function() {
+  var modal    = document.getElementById('preview-modal');
+  var iframe   = document.getElementById('preview-iframe');
+  var closeBtn = document.getElementById('preview-close');
+  var backdrop = modal ? modal.querySelector('.modal-backdrop') : null;
+  var opener   = null;
 
-// Keyboard accessibility for song cards
-document.querySelectorAll('.song-card.selectable').forEach(function(card) {
-  card.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+  document.querySelectorAll('.preview-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      opener = btn;
+      iframe.src = 'https://open.spotify.com/embed/track/' + btn.dataset.track + '?utm_source=generator&theme=0';
+      modal.hidden = false;
+      document.body.classList.add('modal-open');
+      if (closeBtn) closeBtn.focus();
+    });
   });
-});
+
+  function closeModal() {
+    modal.hidden = true;
+    iframe.src = '';
+    document.body.classList.remove('modal-open');
+    if (opener) { opener.focus(); opener = null; }
+  }
+
+  if (closeBtn)  closeBtn.addEventListener('click', closeModal);
+  if (backdrop)  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+})();
 </script>
 
 <?php if ($voting_open): ?>
