@@ -102,7 +102,10 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
       Las 16 Finalistas
       <img src="images/adorno_titulo_derecho.png" alt="" class="section-title-ornament" aria-hidden="true">
     </h2>
-    <div class="songs-carousel">
+    <div class="carousel-wrap">
+      <button class="carousel-arrow carousel-arrow--prev" id="carousel-prev" aria-label="Anterior" disabled>&#8592;</button>
+      <button class="carousel-arrow carousel-arrow--next" id="carousel-next" aria-label="Siguiente">&#8594;</button>
+    <div class="songs-carousel" id="songs-carousel">
       <?php foreach ($songs as $song): ?>
         <div class="song-card" data-song-id="<?= (int)$song['id'] ?>">
           <div class="song-cover">
@@ -133,6 +136,7 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
         </div>
       <?php endforeach; ?>
     </div>
+    </div><!-- /.carousel-wrap -->
   </div>
 </section>
 
@@ -233,6 +237,33 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
   if (closeBtn)  closeBtn.addEventListener('click', closeModal);
   if (backdrop)  backdrop.addEventListener('click', closeModal);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+})();
+</script>
+
+<script>
+// Carousel arrows
+(function() {
+  var carousel = document.getElementById('songs-carousel');
+  var prev     = document.getElementById('carousel-prev');
+  var next     = document.getElementById('carousel-next');
+  if (!carousel || !prev || !next) return;
+
+  var step = 600;
+
+  function update() {
+    prev.disabled = carousel.scrollLeft <= 0;
+    next.disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 1;
+  }
+
+  prev.addEventListener('click', function() {
+    carousel.scrollBy({ left: -step, behavior: 'smooth' });
+  });
+  next.addEventListener('click', function() {
+    carousel.scrollBy({ left: step, behavior: 'smooth' });
+  });
+
+  carousel.addEventListener('scroll', update, { passive: true });
+  update();
 })();
 </script>
 
