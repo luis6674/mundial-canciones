@@ -30,7 +30,7 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
   <div class="hero-inner">
     <div class="hero-left">
       <img src="images/logo_home.png" alt="Mundial de Canciones 2026" class="hero-logo-img">
-      <p class="hero-subtitle">16 canciones finalistas. 3 favoritas. Una campeona.<br>Vota la mejor canción del mundial 2026 y participa en el sorteo de una camiseta de la selección española de fútbol.</p>
+      <p class="hero-subtitle">16 canciones finalistas. 3 favoritas.<br>Una campeona.</p>
 
       <?php if ($before_voting): ?>
         <div class="countdown-wrap">
@@ -50,9 +50,12 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
           <?php if ($logged_in): ?>
             <a href="vote.php" class="btn btn-primary btn-lg">&#127932; Votar ahora</a>
           <?php else: ?>
-            <?php require __DIR__ . '/includes/login-form.php'; ?>
+          <a href="vote.php" class="btn btn-spotify">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.311c-.217.356-.666.468-1.022.252-2.797-1.709-6.319-2.095-10.465-1.148-.4.091-.8-.158-.891-.558-.092-.4.158-.8.558-.891 4.538-1.037 8.43-.591 11.568 1.323.357.217.469.666.252 1.022zm1.471-3.27c-.272.44-.851.578-1.291.306-3.201-1.967-8.082-2.537-11.87-1.389-.492.148-1.013-.133-1.162-.625-.148-.492.133-1.013.625-1.162 4.327-1.314 9.703-.677 13.386 1.579.44.272.578.851.306 1.291zm.128-3.403c-3.841-2.28-10.178-2.49-13.845-1.377-.589.18-1.211-.153-1.391-.742-.18-.59.153-1.211.742-1.391 4.21-1.279 11.204-1.031 15.626 1.593.53.315.706 1.001.39 1.531-.314.53-1 .706-1.53.39l.008-.004z"/></svg>
+          Entrar con Spotify
+          </a>
           <?php endif; ?>
-          <p class="cta-note">Votación cierra el <?= $close_day_num ?> de <?= $close_month_name ?></p>
+          <p class="hero-cta-note">Votación cierra el <?= $close_day_num ?> de <?= $close_month_name ?></p>
         </div>
       <?php else: ?>
         <div class="hero-cta">
@@ -64,8 +67,8 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
     <!-- Mini-podium widget -->
     <div class="mini-podium-widget" id="mini-podium">
       <div class="mpw-header">
-        <span class="mpw-title"><?= $voting_closed ? 'Clasificación final' : 'En vivo' ?></span>
-        <span class="mpw-updated" id="mpw-updated"><span class="dot"></span>Cargando…</span>
+        <span class="mpw-title"><?= $voting_closed ? 'Clasificación final' : 'Clasificación en vivo' ?></span>
+        <span class="mpw-updated" id="mpw-updated">Actualizado cada 8 segundos <span class="dot"></span></span>
       </div>
       <div class="mpw-items" id="mpw-items">
         <div class="mpw-placeholder">

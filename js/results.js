@@ -14,7 +14,6 @@
   const chartLoading = document.getElementById('chart-loading');
   const podiumWrap   = document.getElementById('podium-wrap');
   const mpwItems     = document.getElementById('mpw-items');
-  const mpwUpdated   = document.getElementById('mpw-updated');
 
   let pollTimer = null;
 
@@ -67,11 +66,6 @@
           <div class="mpw-pct">${Math.round(pct)}%</div>
         </div>`;
     }).join('');
-
-    if (mpwUpdated) {
-      const now = new Date();
-      mpwUpdated.innerHTML = `<span class="dot"></span>${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
-    }
   }
 
   /* ---- Bar chart ---- */
