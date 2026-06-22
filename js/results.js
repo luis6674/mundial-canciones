@@ -52,7 +52,7 @@
                        .filter(o => o.song);
 
     mpwItems.innerHTML = order.map(({ song, pClass }) => {
-      const pct   = parseFloat(song.score_pct) || 0;
+      const pct   = parseFloat(song.vote_pct) || 0;
       const cover = song.cover_url
         ? `<img src="${escHtml(song.cover_url)}" alt="${escHtml(song.title)}" class="mpw-cover">`
         : `<div class="mpw-cover" style="display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:rgba(255,255,255,0.05)">🎵</div>`;
@@ -116,8 +116,11 @@
       }
 
       const medals = ['🥇', '🥈', '🥉'];
-      const ptsEl  = row.querySelector('.bar-pts');
-      ptsEl.innerHTML = idx < 3 ? `<span class="bar-medal">${medals[idx]}</span>` : '';
+      const votePct = parseFloat(song.vote_pct) || 0;
+      const ptsEl   = row.querySelector('.bar-pts');
+      ptsEl.innerHTML = (idx < 3 ? `<span class="bar-medal">${medals[idx]}</span>` : '')
+        + `<span class="bar-vote-pct">${votePct.toFixed(1)}%</span>`
+        + `<span class="bar-points">${song.points} pts</span>`;
 
       if (barChart.children[idx] !== row) {
         barChart.insertBefore(row, barChart.children[idx] || null);

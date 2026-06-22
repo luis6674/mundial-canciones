@@ -35,9 +35,10 @@ try {
 
     $rows = $db->query($sql)->fetchAll();
 
-    $max_pts = (int)($rows[0]['points'] ?? 0);
+    $max_pts   = (int)($rows[0]['points'] ?? 0);
+    $total_pts = array_sum(array_column($rows, 'points'));
 
-    $songs = array_map(function (array $row) use ($max_pts): array {
+    $songs = array_map(function (array $row) use ($max_pts, $total_pts): array {
         $pts = (int)$row['points'];
         return [
             'id'               => (int)$row['id'],
@@ -48,6 +49,9 @@ try {
             'points'           => $pts,
             'score_pct'        => $max_pts > 0
                                     ? round(($pts / $max_pts) * 100, 2)
+                                    : 0,
+            'vote_pct'         => $total_pts > 0
+                                    ? round(($pts / $total_pts) * 100, 1)
                                     : 0,
         ];
     }, $rows);
