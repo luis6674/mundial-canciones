@@ -144,12 +144,20 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
 <section class="results-section" id="posiciones">
   <div class="section-inner">
     <?php if ($voting_closed): ?>
-      <h2 class="section-title">&#127942; Clasificación final</h2>
+      <h2 class="section-title">
+        <img src="images/adorno_titulo_izquierdo.png" alt="" class="section-title-ornament" aria-hidden="true">
+        Clasificación final
+        <img src="images/adorno_titulo_derecho.png" alt="" class="section-title-ornament" aria-hidden="true">
+      </h2>
       <div id="podium-wrap" class="podium-wrap">
         <div class="loading-spinner"></div>
       </div>
     <?php else: ?>
-      <h2 class="section-title">&#128202; Clasificación en vivo</h2>
+      <h2 class="section-title">
+        <img src="images/adorno_titulo_izquierdo.png" alt="" class="section-title-ornament" aria-hidden="true">
+        Clasificación en vivo
+        <img src="images/adorno_titulo_derecho.png" alt="" class="section-title-ornament" aria-hidden="true">
+      </h2>
       <p class="section-sub">Resultados actualizados cada 8 segundos</p>
     <?php endif; ?>
 
