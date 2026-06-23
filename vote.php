@@ -127,6 +127,7 @@ render_header('Vota tus favoritas');
               data-song-id="<?= $sid ?>"
               data-title="<?= htmlspecialchars($song['title']) ?>"
               data-artist="<?= htmlspecialchars($song['artist']) ?>"
+              <?php if ($voting_open): ?>role="button" tabindex="0" aria-pressed="<?= $is_selected ? 'true' : 'false' ?>"<?php endif; ?>
             >
               <div class="song-cover">
                 <?php if (!empty($song['cover_url'])): ?>
@@ -273,7 +274,15 @@ render_header('Vota tus favoritas');
 
   if (closeBtn)  closeBtn.addEventListener('click', closeModal);
   if (backdrop)  backdrop.addEventListener('click', closeModal);
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'Tab' && modal && !modal.hidden) {
+      var focusable = [closeBtn, iframe].filter(Boolean);
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+      else            { if (document.activeElement === last)  { e.preventDefault(); first.focus(); } }
+    }
+  });
 })();
 </script>
 

@@ -43,6 +43,7 @@
       const selBtn = card.querySelector('.btn-select');
 
       card.classList.toggle('selected', rank !== undefined);
+      if (card.hasAttribute('aria-pressed')) card.setAttribute('aria-pressed', rank !== undefined ? 'true' : 'false');
 
       if (circle) {
         if (rank !== undefined) {
