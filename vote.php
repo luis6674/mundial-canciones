@@ -87,7 +87,8 @@ render_header('Vota tus favoritas');
             <?php foreach ([1, 2, 3] as $rank): ?>
               <?php if ($rank > 1): ?><div class="mstrip-divider"></div><?php endif; ?>
               <div class="mstrip-slot empty" id="mslot-<?= $rank ?>">
-                <img src="images/<?= $rank ?>_puesto.png" alt="<?= $rank ?>º puesto" class="mstrip-badge-img">
+                <img src="images/<?= $rank ?>_puesto.png" alt="<?= $rank ?>º puesto" class="mstrip-placeholder-img">
+                <img src="images/<?= $rank_badges[$rank] ?>" alt="<?= $rank_labels[$rank] ?>" class="mstrip-badge-img" style="display:none">
                 <div class="mstrip-song-info" style="display:none">
                   <div class="mstrip-slot-title"></div>
                   <div class="mstrip-slot-artist"></div>
@@ -182,15 +183,11 @@ render_header('Vota tus favoritas');
           $pick_song = $has_pick ? ($songs_by_id[$saved_picks[$rank]] ?? null) : null;
         ?>
           <div class="sidebar-slot" id="sslot-<?= $rank ?>">
-            <img src="images/<?= $rank_badges[$rank] ?>" alt="<?= $rank_labels[$rank] ?>" class="sidebar-badge-img">
-            <div class="sidebar-slot-info">
-              <?php if ($has_pick && $pick_song): ?>
-                <div class="sidebar-slot-title"><?= htmlspecialchars($pick_song['title']) ?></div>
-                <div class="sidebar-slot-artist"><?= htmlspecialchars($pick_song['artist']) ?></div>
-              <?php else: ?>
-                <div class="sidebar-slot-title">—</div>
-                <div class="sidebar-slot-empty">Selecciona una canción</div>
-              <?php endif; ?>
+            <img src="images/<?= $rank ?>_puesto.png" alt="<?= $rank_labels[$rank] ?>" class="sidebar-slot-placeholder<?= $has_pick ? ' hidden' : '' ?>">
+            <img src="images/<?= $rank_badges[$rank] ?>" alt="<?= $rank_labels[$rank] ?>" class="sidebar-badge-img<?= $has_pick ? '' : ' hidden' ?>">
+            <div class="sidebar-slot-info<?= $has_pick ? '' : ' hidden' ?>">
+              <div class="sidebar-slot-title"><?= ($has_pick && $pick_song) ? htmlspecialchars($pick_song['title']) : '' ?></div>
+              <div class="sidebar-slot-artist"><?= ($has_pick && $pick_song) ? htmlspecialchars($pick_song['artist']) : '' ?></div>
             </div>
             <button class="sidebar-remove<?= $has_pick ? '' : ' hidden' ?>" data-rank="<?= $rank ?>" aria-label="Quitar <?= $rank_labels[$rank] ?>">
               <img src="images/papelera_icono.png" alt="" aria-hidden="true">

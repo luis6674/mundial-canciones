@@ -80,41 +80,49 @@
   function updateSidebarSlot(rank) {
     const slot = document.getElementById('sslot-' + rank);
     if (!slot) return;
-    const sid       = picks[rank];
-    const card      = sid && grid ? grid.querySelector(`.song-card[data-song-id="${sid}"]`) : null;
-    const title     = card ? card.dataset.title  : '—';
-    const artist    = card ? card.dataset.artist : '';
-    const titleEl   = slot.querySelector('.sidebar-slot-title');
-    const artistEl  = slot.querySelector('.sidebar-slot-artist');
-    const emptyEl   = slot.querySelector('.sidebar-slot-empty');
-    const removeBtn = slot.querySelector('.sidebar-remove');
+    const sid         = picks[rank];
+    const card        = sid && grid ? grid.querySelector(`.song-card[data-song-id="${sid}"]`) : null;
+    const title       = card ? card.dataset.title  : '';
+    const artist      = card ? card.dataset.artist : '';
+    const placeholder = slot.querySelector('.sidebar-slot-placeholder');
+    const badgeImg    = slot.querySelector('.sidebar-badge-img');
+    const infoEl      = slot.querySelector('.sidebar-slot-info');
+    const titleEl     = slot.querySelector('.sidebar-slot-title');
+    const artistEl    = slot.querySelector('.sidebar-slot-artist');
+    const removeBtn   = slot.querySelector('.sidebar-remove');
 
-    if (titleEl)  titleEl.textContent  = title;
-    if (artistEl) { artistEl.textContent = artist; artistEl.style.display = sid ? '' : 'none'; }
-    if (emptyEl)  emptyEl.style.display = sid ? 'none' : '';
-    if (removeBtn) removeBtn.classList.toggle('hidden', !sid);
+    if (placeholder) placeholder.classList.toggle('hidden', !!sid);
+    if (badgeImg)    badgeImg.classList.toggle('hidden', !sid);
+    if (infoEl)      infoEl.classList.toggle('hidden', !sid);
+    if (titleEl)     titleEl.textContent  = title;
+    if (artistEl)    artistEl.textContent = artist;
+    if (removeBtn)   removeBtn.classList.toggle('hidden', !sid);
   }
 
   /* ---- Update mobile strip slot ---- */
   function updateMobileSlot(rank) {
     const slot = document.getElementById('mslot-' + rank);
     if (!slot) return;
-    const sid       = picks[rank];
-    const card      = sid && grid ? grid.querySelector(`.song-card[data-song-id="${sid}"]`) : null;
-    const title     = card ? card.dataset.title  : '';
-    const artist    = card ? card.dataset.artist : '';
-    const infoEl    = slot.querySelector('.mstrip-song-info');
-    const titleEl   = slot.querySelector('.mstrip-slot-title');
-    const artistEl  = slot.querySelector('.mstrip-slot-artist');
-    const dotsEl    = slot.querySelector('.mstrip-dots');
-    const removeBtn = slot.querySelector('.mstrip-remove');
+    const sid          = picks[rank];
+    const card         = sid && grid ? grid.querySelector(`.song-card[data-song-id="${sid}"]`) : null;
+    const title        = card ? card.dataset.title  : '';
+    const artist       = card ? card.dataset.artist : '';
+    const placeholder  = slot.querySelector('.mstrip-placeholder-img');
+    const badgeImg     = slot.querySelector('.mstrip-badge-img');
+    const infoEl       = slot.querySelector('.mstrip-song-info');
+    const titleEl      = slot.querySelector('.mstrip-slot-title');
+    const artistEl     = slot.querySelector('.mstrip-slot-artist');
+    const dotsEl       = slot.querySelector('.mstrip-dots');
+    const removeBtn    = slot.querySelector('.mstrip-remove');
 
-    if (titleEl)  titleEl.textContent  = title;
-    if (artistEl) artistEl.textContent = artist;
-    if (infoEl)   infoEl.style.display = sid ? '' : 'none';
-    if (dotsEl)   dotsEl.style.display = sid ? 'none' : '';
+    if (placeholder) placeholder.style.display = sid ? 'none' : '';
+    if (badgeImg)    badgeImg.style.display    = sid ? '' : 'none';
+    if (titleEl)     titleEl.textContent        = title;
+    if (artistEl)    artistEl.textContent       = artist;
+    if (infoEl)      infoEl.style.display       = sid ? '' : 'none';
+    if (dotsEl)      dotsEl.style.display       = sid ? 'none' : '';
     slot.classList.toggle('empty', !sid);
-    if (removeBtn) removeBtn.classList.toggle('hidden', !sid);
+    if (removeBtn)   removeBtn.classList.toggle('hidden', !sid);
   }
 
   /* ---- Enable/disable save buttons ---- */
