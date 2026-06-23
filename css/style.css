@@ -500,7 +500,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .login-form .btn-spotify { width: 100%; justify-content: center; }
 .vote-outer::before {
   content: ''; position: absolute; inset: 0;
-  background: rgba(10,6,2,0.78); pointer-events: none;
+  background: rgba(10,6,2,0.28); pointer-events: none;
 }
 .vote-outer > * { position: relative; z-index: 1; }
 
@@ -808,6 +808,7 @@ body.modal-open { overflow: hidden; }
 }
 
 @media (max-width: 540px) {
+  .page-home .header-right { margin-left: 0; }
   .hero-logo-img { height: 130px; }
   .mpw-header { flex-direction: column; }
   .mpw-badge { top: -8px; height: 36px; }
