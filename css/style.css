@@ -716,6 +716,7 @@ body.modal-open { overflow: hidden; }
 
 /* ---------- Utilities ---------- */
 .hidden { display: none !important; }
+.mobile-only { display: none; }
 .text-muted { color: var(--muted); }
 
 /* ---------- Sorteo Page ---------- */
@@ -781,6 +782,7 @@ body.modal-open { overflow: hidden; }
   .vote-grid { grid-template-columns: repeat(2, 1fr); }
   .mobile-selection-strip { display: block; }
   .vote-bottom-bar { display: block; }
+  .mobile-only { display: block; }
 
   .bar-row { grid-template-columns: 22px 1fr 100px 44px; gap: 0.45rem; }
   .bar-label { display: flex; flex-direction: column; gap: 0; }

@@ -109,6 +109,9 @@ render_header('Vota tus favoritas');
             <?php endforeach; ?>
           </div>
         </div>
+        <div class="giveaway-note hidden mobile-only" id="giveaway-note-mobile">
+          &#9917; ¿Quieres ganar una camiseta de la selección española? <a href="sorteo.php">Participa en el sorteo</a>.
+        </div>
         <?php endif; ?>
 
         <!-- Song grid -->
@@ -211,9 +214,6 @@ render_header('Vota tus favoritas');
 
       <!-- Mobile bottom bar -->
       <div class="vote-bottom-bar" id="vote-bottom-bar">
-        <div class="giveaway-note hidden" id="giveaway-note-mobile">
-          &#9917; ¿Quieres ganar una camiseta de la selección española? <a href="sorteo.php">Participa en el sorteo</a>.
-        </div>
         <button class="mobile-vote-btn" id="save-btn-mobile" disabled>Enviar voto</button>
         <div class="vote-bottom-note">
           <img src="images/candado_icono.png" alt="" aria-hidden="true">

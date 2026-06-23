@@ -204,7 +204,10 @@
         if (noteMobile) noteMobile.classList.remove('hidden');
         const strip = document.getElementById('mobile-strip');
         if (strip && window.getComputedStyle(strip).display !== 'none') {
-          strip.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const header = document.querySelector('.site-header');
+          const headerH = header ? header.offsetHeight : 0;
+          const top = strip.getBoundingClientRect().top + window.scrollY - headerH - 8;
+          window.scrollTo({ top, behavior: 'smooth' });
         }
       } else {
         setStatus(data.error || 'No se pudieron guardar los votos.', 'error');
