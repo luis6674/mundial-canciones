@@ -42,6 +42,7 @@
 }
 
 html { scroll-behavior: smooth; }
+#inicio, #premios, #como-funciona, #finalistas, #posiciones { scroll-margin-top: 80px; }
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background: var(--bg);
