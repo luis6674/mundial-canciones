@@ -137,10 +137,10 @@ function render_header(string $title = ''): void {
     <?php if ($voting_open): ?>
       <a href="vote.php" class="nav-link">Vota</a>
     <?php endif; ?>
-    <a href="<?= htmlspecialchars($app_url) ?>#finalistas" class="nav-link">Finalistas</a>
-    <a href="<?= htmlspecialchars($app_url) ?>#posiciones" class="nav-link">Posiciones</a>
     <a href="<?= htmlspecialchars($app_url) ?>#premios" class="nav-link">Premios</a>
     <a href="<?= htmlspecialchars($app_url) ?>#como-funciona" class="nav-link">Cómo funciona</a>
+    <a href="<?= htmlspecialchars($app_url) ?>#finalistas" class="nav-link">Finalistas</a>
+    <a href="<?= htmlspecialchars($app_url) ?>#posiciones" class="nav-link">Posiciones</a>
   </nav>
   <?php if ($logged_in): ?>
     <div class="mobile-nav-divider"></div>
