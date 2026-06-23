@@ -3,7 +3,7 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/includes/header.php';
 
-render_header('Mundial de Canciones 2026');
+render_header('Mundial de Canciones 2026', 'page-home');
 
 $now           = time();
 $voting_open   = ($now >= VOTING_OPEN && $now <= VOTING_CLOSE);
