@@ -725,6 +725,8 @@ body.modal-open { overflow: hidden; }
   .hero-left { align-items: center; }
   .hero-logo-img { height: 160px; }
   .hero-subtitle { max-width: 100%; }
+  
+  .banner-section { max-width: 90%; }
 
   .vote-page-wrap { grid-template-columns: 1fr; padding-bottom: 7rem; }
   .vote-sidebar { display: none; }
@@ -740,6 +742,9 @@ body.modal-open { overflow: hidden; }
 
 @media (max-width: 540px) {
   .hero-logo-img { height: 130px; }
+  .mpw-header { flex-direction: column; }
+  .mpw-badge { top: -8px; height: 36px; }
+  .mpw-p1 .mpw-badge { height: 40px; top: -10px; }
   .vote-grid { grid-template-columns: 1fr; }
 
   /* Horizontal card layout on mobile */
