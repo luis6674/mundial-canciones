@@ -294,7 +294,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 }
 .mpw-p1 .mpw-badge { height: 60px; top: -19px; }
 .mpw-cover {
-  width: 100%; height: 100%; border-radius: 7px; object-fit: cover; display: block;
+  width: 100%; height: 100%; border-radius: 7px 7px 0 0; object-fit: cover; display: block;
 }
 .mpw-p1 .mpw-cover { border-color: var(--gold); }
 .mpw-p2 .mpw-cover { border-color: #C0C0C0; }
