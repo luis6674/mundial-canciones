@@ -520,9 +520,9 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 }
 .mstrip-placeholder-img { height: 40px; width: auto; opacity: 0.65; }
 .mstrip-badge-img { height: 32px; width: auto; flex-shrink: 0; }
-.mstrip-song-info { width: 100%; min-width: 0; text-align: center; }
+.mstrip-song-info { width: 100%; min-width: 0; text-align: center; padding-bottom: 1rem; }
 .mstrip-slot-title { font-weight: 700; font-size: 0.68rem; line-height: 1.2; color: #fff; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-.mstrip-slot-artist { font-size: 0.6rem; color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mstrip-slot-artist { font-size: 0.6rem; color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 1rem; }
 .mstrip-dots { font-size: 0.6rem; color: rgba(255,255,255,0.28); letter-spacing: 3px; }
 .mstrip-remove {
   background: none; border: none; cursor: pointer; padding: 0.15rem;

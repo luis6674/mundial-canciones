@@ -68,6 +68,10 @@ render_header('Vota tus favoritas');
       </div>
 
     <?php else: ?>
+      <?php
+      $rank_badges = [1 => 'oro_badge.png', 2 => 'Plata_badge.png', 3 => 'Bronce_badge.png'];
+      $rank_labels = [1 => '1er puesto', 2 => '2º puesto', 3 => '3er puesto'];
+      ?>
 
       <!-- Page header (spans full width) -->
       <div class="vote-main-header">
@@ -179,10 +183,7 @@ render_header('Vota tus favoritas');
           <span class="sidebar-label">— Tu Selección —</span>
         </div>
 
-        <?php
-        $rank_badges = [1 => 'oro_badge.png', 2 => 'Plata_badge.png', 3 => 'Bronce_badge.png'];
-        $rank_labels = [1 => '1er puesto', 2 => '2º puesto', 3 => '3er puesto'];
-        foreach ([1, 2, 3] as $rank):
+        <?php foreach ([1, 2, 3] as $rank):
           $has_pick  = isset($saved_picks[$rank]);
           $pick_song = $has_pick ? ($songs_by_id[$saved_picks[$rank]] ?? null) : null;
         ?>
