@@ -497,7 +497,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 .vote-grid .song-card { width: 100%; cursor: pointer; }
 .vote-grid .song-card:hover { transform: translateY(-2px); border-color: rgba(232,184,0,0.4); }
 .vote-grid .song-card.selected { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(232,184,0,0.35); }
-.vote-grid .song-card.selected .song-number-badge { background: var(--green); }
+.vote-grid .song-card.selected .song-number-badge { background: var(--gold); color: #000; }
 
 /* Selection circle (top-right of cover) */
 .selection-circle {
