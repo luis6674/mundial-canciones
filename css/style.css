@@ -295,7 +295,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .mpw-p3 .mpw-cover { border-color: #CD7F32; }
 .mpw-song-title { font-family: 'Barlow Condensed', sans-serif; font-size: 0.86rem; letter-spacing: 0.03em; line-height: 1.2; color: #fff; text-transform: uppercase; }
 .mpw-p1 .mpw-song-title { font-size: 0.94rem; }
-.mpw-song-artist { font-size: 0.74rem; color: var(--gold); margin: 0.12rem 0; text-transform: uppercase; }
+.mpw-song-artist { font-size: 0.74rem; color: var(--gold); margin: 0.12rem 0; }
 .mpw-pct { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 600; color: var(--gold); }
 .mpw-p1 .mpw-pct { font-size: 1.25rem; }
 .mpw-more {
@@ -382,7 +382,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; letter-spacing: 0.04em;
   color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: uppercase;
 }
-.song-artist { font-size: 0.74rem; color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 0.1rem; text-transform: uppercase; }
+.song-artist { font-size: 0.74rem; color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 0.1rem; }
 
 /* Listen button (carousel / homepage) */
 .song-preview { padding: 0 0.7rem 0.7rem; }
@@ -403,8 +403,8 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .bar-row { display: grid; grid-template-columns: 28px 240px 200px 1fr 56px; align-items: center; gap: 0.65rem; }
 .bar-rank-num { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 600; color: var(--gold); text-align: right; }
 .bar-label { display: contents; }
-.bar-song-title { font-size: 0.82rem; font-weight: 600; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-transform: uppercase; }
-.bar-song-artist { font-size: 0.78rem; color: var(--gold); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-transform: uppercase; }
+.bar-song-title { font-size: 0.82rem; font-weight: 600; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-song-artist { font-size: 0.78rem; color: var(--gold); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bar-track { background: rgba(255,255,255,0.06); border-radius: 9999px; height: 20px; overflow: hidden; }
 .bar-fill {
   height: 100%; border-radius: 9999px;
@@ -523,8 +523,8 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .mstrip-placeholder-img { height: 40px; width: auto; opacity: 0.65; }
 .mstrip-badge-img { height: 32px; width: auto; flex-shrink: 0; }
 .mstrip-song-info { width: 100%; min-width: 0; text-align: center; padding-bottom: 1rem; }
-.mstrip-slot-title { font-weight: 700; font-size: 0.68rem; line-height: 1.2; color: #fff; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-transform: uppercase; }
-.mstrip-slot-artist { font-size: 0.6rem; color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 1rem; text-transform: uppercase; }
+.mstrip-slot-title { font-weight: 700; font-size: 0.68rem; line-height: 1.2; color: #fff; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.mstrip-slot-artist { font-size: 0.6rem; color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 1rem; }
 .mstrip-dots { font-size: 0.6rem; color: rgba(255,255,255,0.28); letter-spacing: 3px; }
 .mstrip-remove {
   background: none; border: none; cursor: pointer; padding: 0.15rem;
@@ -602,8 +602,8 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .sidebar-badge-img.hidden { display: none; }
 .sidebar-slot-info { flex: 1; min-width: 0; }
 .sidebar-slot-info.hidden { display: none; }
-.sidebar-slot-title { font-weight: 700; font-size: 0.85rem; color: #fff; line-height: 1.25; text-transform: uppercase; }
-.sidebar-slot-artist { font-size: 0.73rem; color: var(--gold); margin-top: 0.1rem; text-transform: uppercase; }
+.sidebar-slot-title { font-weight: 700; font-size: 0.85rem; color: #fff; line-height: 1.25; }
+.sidebar-slot-artist { font-size: 0.73rem; color: var(--gold); margin-top: 0.1rem; }
 .sidebar-slot-empty { color: rgba(255,255,255,0.28); font-size: 0.75rem; font-style: italic; }
 .sidebar-remove {
   background: none; border: none; cursor: pointer; padding: 0.25rem;
