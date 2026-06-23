@@ -46,7 +46,7 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
 render_header('Vota tus favoritas');
 ?>
 
-<div class="vote-outer">
+<div class="vote-outer<?= ($logged_in && ($voting_open || $voting_closed)) ? '' : ' vote-outer--centered' ?>">
   <div class="vote-page-wrap">
 
     <?php if (!$logged_in): ?>
