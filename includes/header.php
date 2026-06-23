@@ -79,7 +79,7 @@ function render_header(string $title = ''): void {
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4ZXST" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4ZXST" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
 
@@ -230,9 +230,9 @@ function render_footer(): void {
     <p class="footer-links">&copy; <?= date('Y') ?>, <a href="https://www.sonymusic.es/" target="_blank" rel="noopener">Sony Music Entertainment España, S.L.</a></p>
     <p class="footer-links">
       <a href="https://www.sonymusic.es/reservados-todos-los-derechos/" target="_blank" rel="noopener">Reservados todos los derechos</a>
-      <span class="footer-sep">|</span>
+      <span class="footer-sep" aria-hidden="true">|</span>
       <a href="https://www.sonymusic.es/politica-de-privacidad-y-cookies/" target="_blank" rel="noopener">Política de privacidad y cookies</a>
-      <span class="footer-sep">|</span>
+      <span class="footer-sep" aria-hidden="true">|</span>
       <a href="https://www.sonymusic.es/condiciones-generales/" target="_blank" rel="noopener">Condiciones generales</a>
     </p>
   </div>
