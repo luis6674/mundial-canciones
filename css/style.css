@@ -244,7 +244,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 
 /* ---------- Mini Podium Widget ---------- */
 .mini-podium-widget {
-  background: rgba(60,89,43,0.20);
+  background: linear-gradient(to right, rgba(60,89,43,0.80) 0%, rgba(60,89,43,0.20) 100%);
   border: 1px solid rgba(232,184,0,0.28);
   border-radius: 14px; overflow: hidden;
 }
