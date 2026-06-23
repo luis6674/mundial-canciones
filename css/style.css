@@ -440,8 +440,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
   position: relative;
 }
 .vote-outer--centered {
-  min-height: calc(100vh - var(--header-h, 68px));
-  display: flex; align-items: center; justify-content: center;
+  flex: 1; display: flex; align-items: center; justify-content: center;
 }
 .vote-outer--centered .vote-page-wrap {
   display: flex; align-items: center; justify-content: center;
