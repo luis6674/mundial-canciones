@@ -196,6 +196,24 @@ function render_header(string $title = ''): void {
       if (userChip) userChip.classList.remove('open');
     }
   });
+
+  // Smooth-scroll anchor links that point to an ID on the same page
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href*="#"]');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    var hash = href.indexOf('#') !== -1 ? href.slice(href.indexOf('#')) : '';
+    if (!hash || hash === '#') return;
+    // Only intercept if the base URL matches this page (or is hash-only)
+    var base = href.slice(0, href.indexOf('#'));
+    if (base && base !== window.location.pathname && base !== window.location.href.replace(window.location.hash, '')) return;
+    var target = document.querySelector(hash);
+    if (!target) return;
+    e.preventDefault();
+    if (mobileNav && mobileNav.classList.contains('open')) closeMenu();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    history.pushState(null, '', hash);
+  });
 })();
 </script>
 
