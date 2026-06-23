@@ -669,6 +669,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 }
 
 /* Login prompt */
+.vote-login-promt .vote-title { font-size: clamp(2.5rem, 4vw, 4.5rem); }
 .login-prompt { text-align: center; padding: 4rem 1rem; max-width: 460px; margin: 0 auto; }
 .login-prompt h2 { font-size: 2rem; margin-bottom: 0.75rem; }
 .login-prompt p  { color: var(--muted); margin-bottom: 1.5rem; }
