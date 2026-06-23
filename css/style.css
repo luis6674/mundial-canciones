@@ -139,7 +139,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .status-badge.upcoming { background: rgba(232,184,0,0.14);  color: var(--gold); border: 1px solid rgba(232,184,0,0.3); }
 .status-closes {
   display: flex; align-items: center; gap: 0.35rem;
-  font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; letter-spacing: 0.06em;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--muted); white-space: nowrap;
 }
 .status-closes img { height: 14px; }
@@ -236,11 +236,11 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 /* Countdown */
 .countdown-wrap { margin-top: 0.25rem; }
 .countdown-label { color: var(--muted); font-size: 0.82rem; margin-bottom: 0.5rem; }
-.countdown { display: flex; align-items: center; gap: 0.2rem; font-family: 'Barlow Condensed', sans-serif; }
+.countdown { display: flex; align-items: center; gap: 0.2rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; text-transform: uppercase; }
 .cd-segment { display: flex; flex-direction: column; align-items: center; min-width: 52px; }
 .cd-val { font-size: 2.8rem; line-height: 1; color: var(--gold); background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; padding: 0.15rem 0.45rem; min-width: 52px; text-align: center; }
 .cd-unit { font-size: 0.6rem; color: var(--muted); font-family: 'Inter', sans-serif; margin-top: 0.2rem; text-transform: uppercase; letter-spacing: 0.05em; }
-.cd-sep  { font-size: 1.8rem; color: var(--gold); align-self: flex-start; padding-top: 0.3rem; font-family: 'Barlow Condensed', sans-serif; }
+.cd-sep  { font-size: 1.8rem; color: var(--gold); align-self: flex-start; padding-top: 0.3rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; }
 
 /* ---------- Mini Podium Widget ---------- */
 .mini-podium-widget {
@@ -258,19 +258,19 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   display: flex; align-items: center; gap: 0.45rem;
   background: rgba(200,16,46,0.18); border: 1px solid rgba(200,16,46,0.45);
   border-radius: 9999px; padding: 0.22rem 0.7rem;
-  font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; letter-spacing: 0.06em; color: #ff4060;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #ff4060;
 }
 .mpw-status-open .dot { width: 7px; height: 7px; background: #ff4060; border-radius: 50%; display: inline-block; }
 .mpw-status-closes {
   display: flex; align-items: center; gap: 0.35rem; margin-left: auto;
-  font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; letter-spacing: 0.06em; color: var(--muted);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);
 }
 .mpw-status-closes img { height: 13px; }
 .mpw-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 0.5rem 0.85rem 0.3rem; margin: 20px auto 0; background-color: var(--gold); width: 96%;
 }
-.mpw-title { font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.1em; font-size: 1.1rem; color: #000; }
+.mpw-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.1em; font-size: 1.1rem; text-transform: uppercase; color: #000; }
 .mpw-updated { font-size: 0.7rem; color: #000; display: flex; align-items: center; gap: 0.35rem; }
 .mpw-updated .dot { width: 10px; height: 10px; background: #820103; border-radius: 50%; display: inline-block; }
 .mpw-items {
@@ -296,11 +296,11 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .mpw-song-title { font-family: 'Barlow Condensed', sans-serif; font-size: 0.86rem; letter-spacing: 0.03em; line-height: 1.2; color: #fff; }
 .mpw-p1 .mpw-song-title { font-size: 0.94rem; }
 .mpw-song-artist { font-size: 0.74rem; color: var(--gold); margin: 0.12rem 0; }
-.mpw-pct { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; color: var(--gold); }
+.mpw-pct { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 600; color: var(--gold); }
 .mpw-p1 .mpw-pct { font-size: 1.25rem; }
 .mpw-more {
   display: block; text-align: center; padding: 0.6rem 0.85rem;
-  font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; letter-spacing: 0.08em;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--gold); border-top: 1px solid rgba(255,255,255,0.07);
   margin-top: 0.4rem; transition: background var(--transition);
 }
@@ -367,7 +367,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 /* Number badge (top-left of cover) */
 .song-number-badge {
   position: absolute; top: 0; left: 0;
-  font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.03em;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.03em;
   background: #791318; color: #fbe7cb;
   font-size: 1.15rem; min-width: 34px; height: 34px;
   padding: 0 0.35rem;
@@ -389,7 +389,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .btn-listen {
   display: flex; align-items: center; justify-content: center; gap: 0.4rem;
   background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.16);
-  color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 0.88rem; letter-spacing: 0.06em;
+  color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 0.88rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
   padding: 0.35rem 0.75rem; border-radius: 6px; cursor: pointer;
   transition: background var(--transition); width: 100%;
 }
@@ -401,7 +401,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .bar-chart  { display: flex; flex-direction: column; gap: 0.5rem; }
 
 .bar-row { display: grid; grid-template-columns: 28px 240px 200px 1fr 56px; align-items: center; gap: 0.65rem; }
-.bar-rank-num { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; color: var(--gold); text-align: right; }
+.bar-rank-num { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 600; color: var(--gold); text-align: right; }
 .bar-label { display: contents; }
 .bar-song-title { font-size: 0.82rem; font-weight: 600; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bar-song-artist { font-size: 0.78rem; color: var(--gold); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -460,7 +460,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   text-align: left;
 }
 .login-box-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 600; text-transform: uppercase;
   font-size: 1.6rem; letter-spacing: 0.06em;
   color: #fff; text-align: center; margin-bottom: 0.5rem;
 }
@@ -568,7 +568,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .song-actions { display: flex; gap: 0.4rem; padding: 0 0.6rem 0.65rem; }
 .btn-select {
   flex: 1; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18);
-  color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 0.88rem; letter-spacing: 0.05em;
+  color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 0.88rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
   padding: 0.35rem 0.4rem; border-radius: 6px; cursor: pointer;
   transition: background var(--transition), border-color var(--transition), color var(--transition);
   white-space: nowrap;
@@ -589,7 +589,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 }
 .sidebar-crown { height: 30px; width: auto; margin-bottom: 0.2rem; }
 .sidebar-label {
-  font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.14em;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
   font-size: 0.82rem; color: var(--gold);
 }
 .sidebar-slot {
@@ -617,7 +617,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   display: flex; align-items: center; justify-content: center; gap: 0.4rem;
   width: calc(100% - 1.6rem); margin: 0.75rem 0.8rem 0;
   background: var(--green); color: #fff; border: none; cursor: pointer;
-  font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; letter-spacing: 0.1em;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
   padding: 0.85rem; border-radius: 8px;
   transition: filter var(--transition), transform var(--transition);
 }
@@ -648,7 +648,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .mobile-vote-btn {
   display: flex; align-items: center; justify-content: center; gap: 0.5rem;
   width: 100%; background: var(--green); color: #fff; border: none; cursor: pointer;
-  font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; letter-spacing: 0.1em;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
   padding: 0.95rem; border-radius: 8px; transition: filter var(--transition);
 }
 .mobile-vote-btn:hover:not(:disabled) { filter: brightness(1.12); }
@@ -723,7 +723,7 @@ body.modal-open { overflow: hidden; }
 /* ---------- Sorteo Page ---------- */
 .sorteo-page { padding: 3rem 1.25rem; }
 .sorteo-wrap { max-width: 560px; margin: 0 auto; }
-.sorteo-title { font-family: 'Barlow Condensed', sans-serif; font-size: 2.4rem; margin-bottom: 0.5rem; text-align: center; }
+.sorteo-title { font-family: 'Barlow Condensed', sans-serif; font-size: 2.4rem; font-weight: 600; font-style: italic; color: #F7E0C1; margin-bottom: 0.5rem; text-align: center; }
 .sorteo-sub   { color: var(--muted); margin-bottom: 2rem; line-height: 1.6; text-align: center; }
 
 .form-group   { margin-bottom: 1rem; }
