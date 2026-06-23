@@ -185,7 +185,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
 
 /* Mobile nav overlay */
 .mobile-nav {
-  display: none; position: fixed; inset: 0; z-index: 190;
+  display: none; position: fixed; inset: 0; z-index: 210;
   background: rgba(10,6,2,0.97);
   flex-direction: column; align-items: center; justify-content: center; gap: 1.25rem;
   padding: 3rem 1.5rem 2rem;
