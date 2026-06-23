@@ -165,10 +165,12 @@ function render_header(string $title = ''): void {
   }
   function closeMenu() {
     mobileNav.classList.remove('open');
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
+    if (hamburger) {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.focus();
+    }
     document.body.style.overflow = '';
-    hamburger.focus();
   }
 
   if (hamburger) hamburger.addEventListener('click', openMenu);
