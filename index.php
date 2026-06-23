@@ -91,7 +91,10 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
 
 <!-- HOW IT WORKS BANNER -->
 <section class="banner-section" id="como-funciona">
-  <img src="images/banner_instrucciones.png" alt="¿Cómo participar? Instrucciones del concurso" class="banner-img">
+  <picture>
+    <source srcset="images/banner_instrucciones_movil.png" media="(max-width: 640px)">
+    <img src="images/banner_instrucciones.png" alt="¿Cómo participar? Instrucciones del concurso" class="banner-img">
+  </picture>
 </section>
 
 <!-- SONG CAROUSEL -->
