@@ -200,6 +200,12 @@
         setStatus('✓ ¡Votos guardados!', 'success');
         const note = document.getElementById('giveaway-note');
         if (note) note.classList.remove('hidden');
+        const noteMobile = document.getElementById('giveaway-note-mobile');
+        if (noteMobile) noteMobile.classList.remove('hidden');
+        const strip = document.getElementById('mobile-strip');
+        if (strip && window.getComputedStyle(strip).display !== 'none') {
+          strip.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       } else {
         setStatus(data.error || 'No se pudieron guardar los votos.', 'error');
       }
