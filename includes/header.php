@@ -102,11 +102,11 @@ function render_header(string $title = ''): void {
 
     <div class="header-right">
       <?php if ($voting_open): ?>
-        <span class="status-badge open">&#9679; Votación abierta</span>
+        <span class="status-badge open" aria-label="Votación abierta"><span aria-hidden="true">&#9679;</span> Votación abierta</span>
       <?php elseif ($voting_closed): ?>
-        <span class="status-badge closed">&#9632; Votación cerrada</span>
+        <span class="status-badge closed" aria-label="Votación cerrada"><span aria-hidden="true">&#9632;</span> Votación cerrada</span>
       <?php else: ?>
-        <span class="status-badge upcoming">&#9650; Próximamente</span>
+        <span class="status-badge upcoming" aria-label="Próximamente"><span aria-hidden="true">&#9650;</span> Próximamente</span>
       <?php endif; ?>
       <?php if ($logged_in): ?>
         <div class="user-chip" id="user-chip">

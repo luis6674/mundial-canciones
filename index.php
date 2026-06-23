@@ -35,7 +35,7 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
       <?php if ($before_voting): ?>
         <div class="countdown-wrap">
           <p class="countdown-label">La votación abre en</p>
-          <div class="countdown" data-target="<?= $open_ts ?>">
+          <div class="countdown" data-target="<?= $open_ts ?>" aria-live="polite" aria-atomic="true">
             <div class="cd-segment"><span class="cd-val" id="cd-days">--</span><span class="cd-unit">días</span></div>
             <div class="cd-sep">:</div>
             <div class="cd-segment"><span class="cd-val" id="cd-hours">--</span><span class="cd-unit">hrs</span></div>
@@ -247,7 +247,15 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
 
   if (closeBtn)  closeBtn.addEventListener('click', closeModal);
   if (backdrop)  backdrop.addEventListener('click', closeModal);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'Tab' && modal && !modal.hidden) {
+      const focusable = [closeBtn, iframe].filter(Boolean);
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+      else            { if (document.activeElement === last)  { e.preventDefault(); first.focus(); } }
+    }
+  });
 })();
 </script>
 
