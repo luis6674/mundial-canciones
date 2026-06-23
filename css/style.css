@@ -720,6 +720,7 @@ body.modal-open { overflow: hidden; }
   .site-nav { display: none; }
   .hamburger { display: flex; }
   .header-right .status-badge, .header-right .status-closes { display: none; }
+  .header-right .btn-sm-header { display: none; }
 
   .hero-inner { grid-template-columns: 1fr; text-align: center; padding: 3rem 1.25rem; }
   .hero { background-image: url('../images/bkg_movil.jpg'); min-height: 0; }
