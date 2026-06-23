@@ -101,13 +101,6 @@ function render_header(string $title = ''): void {
     </nav>
 
     <div class="header-right">
-      <?php if ($voting_open): ?>
-        <span class="status-badge open" aria-label="Votación abierta"><span aria-hidden="true">&#9679;</span> Votación abierta</span>
-      <?php elseif ($voting_closed): ?>
-        <span class="status-badge closed" aria-label="Votación cerrada"><span aria-hidden="true">&#9632;</span> Votación cerrada</span>
-      <?php else: ?>
-        <span class="status-badge upcoming" aria-label="Próximamente"><span aria-hidden="true">&#9650;</span> Próximamente</span>
-      <?php endif; ?>
       <?php if ($logged_in): ?>
         <div class="user-chip" id="user-chip">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="user-chip-icon" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>

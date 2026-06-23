@@ -230,7 +230,14 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .hero-left { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; text-align: center; }
 .hero-logo-img { height: 200px; width: auto; object-fit: contain; }
 .hero-subtitle { font-size: 1.6rem; color: rgba(255,255,255,0.88); line-height: 1.55; max-width: 340px; }
-.hero-cta-note { font-size: 1rem; color: var(--muted); }
+.mpw-status-strip {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.5rem 0.85rem 0;
+}
+.mpw-closes {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.88rem; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted);
+}
 .closed-notice { font-size: 1.2rem; color: var(--gold); font-weight: 600; }
 
 /* Countdown */
