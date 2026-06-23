@@ -52,8 +52,12 @@ render_header('Vota tus favoritas');
     <?php if (!$logged_in): ?>
       <div class="vote-login-prompt">
         <h1 class="vote-title">Elige tus 3 <span class="accent">Favoritas</span></h1>
-        <p class="vote-sub">Necesitas entrar con Spotify para votar en el Mundial de Canciones 2026.</p>
-        <?php require __DIR__ . '/includes/login-form.php'; ?>
+        <p class="vote-sub">16 canciones finalistas. 3 favoritas. Una campeona.</p>
+        <div class="login-box">
+          <h2 class="login-box-title">Inicia sesión para votar</h2>
+          <p class="login-box-sub">Necesitas entrar con Spotify para votar en el Mundial de Canciones 2026.</p>
+          <?php require __DIR__ . '/includes/login-form.php'; ?>
+        </div>
       </div>
 
     <?php elseif (!$voting_open && !$voting_closed): ?>
