@@ -111,8 +111,6 @@ function render_header(string $title = '', string $body_class = ''): void {
             <a href="logout.php?csrf=<?= urlencode($_SESSION['csrf_token'] ?? '') ?>" class="logout-link">Cerrar sesión</a>
           </div>
         </div>
-      <?php elseif ($voting_open): ?>
-        <a href="vote.php" class="btn btn-spotify btn-sm-header">Entrar</a>
       <?php endif; ?>
     </div>
 
