@@ -49,7 +49,7 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
       <?php elseif ($voting_open): ?>
         <div class="hero-cta">
           <?php if ($logged_in): ?>
-            <a href="vote.php" class="btn btn-primary btn-lg">&#127932; Votar ahora</a>
+            <a href="vote.php" class="btn btn-primary btn-lg">Votar ahora</a>
           <?php else: ?>
           <a href="vote.php" class="btn btn-home">
               ENTRA Y VOTA

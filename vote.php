@@ -51,7 +51,7 @@ render_header('Vota tus favoritas');
 
     <?php if (!$logged_in): ?>
       <div class="vote-login-prompt">
-        <h1 class="vote-title">Elige tus 3 <span class="accent">Favoritas</span></h1>
+        <h1 class="vote-title">Elige tus <span class="accent">3 Favoritas</span></h1>
         <p class="vote-sub">16 canciones finalistas. 3 favoritas. Una campeona.</p>
         <div class="login-box">
           <h2 class="login-box-title">Inicia sesión para votar</h2>
@@ -75,7 +75,7 @@ render_header('Vota tus favoritas');
 
       <!-- Page header (spans full width) -->
       <div class="vote-main-header">
-          <h1 class="vote-page-title">Elige tus 3 <span class="accent">Favoritas</span></h1>
+          <h1 class="vote-page-title">Elige tus <span class="accent">3 Favoritas</span></h1>
           <div class="vote-page-subtitle">
             <img src="images/adorno_titulo_izquierdo.png" alt="" aria-hidden="true">
             Las 16 Finalistas
