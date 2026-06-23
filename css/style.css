@@ -439,6 +439,17 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
   background: url('../images/bkg_dektop.jpg') center top / cover no-repeat fixed;
   position: relative;
 }
+.vote-outer--centered {
+  min-height: calc(100vh - var(--header-h, 68px));
+  display: flex; align-items: center; justify-content: center;
+}
+.vote-outer--centered .vote-page-wrap {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; padding: 3rem 1.5rem;
+}
+.vote-login-prompt {
+  text-align: center; max-width: 480px; width: 100%;
+}
 .vote-outer::before {
   content: ''; position: absolute; inset: 0;
   background: rgba(10,6,2,0.78); pointer-events: none;
@@ -451,7 +462,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Impact', sans-serif; line-height: 1.05;
   gap: 2rem; align-items: start;
 }
 .vote-main-header { grid-column: 1 / -1; text-align: center; margin-bottom: 0.5rem; }
-.vote-page-title {
+.vote-page-title, .vote-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--gold); letter-spacing: 0.04em;
 }
