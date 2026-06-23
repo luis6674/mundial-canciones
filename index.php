@@ -27,6 +27,7 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
 
 <!-- HERO -->
 <section class="hero" id="inicio">
+  <h1 class="sr-only">Mundial de Canciones 2026</h1>
   <div class="hero-inner">
     <div class="hero-left">
       <img src="images/logo_home.png" alt="Mundial de Canciones 2026" class="hero-logo-img">
