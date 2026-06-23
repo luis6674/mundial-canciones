@@ -776,6 +776,7 @@ body.modal-open { overflow: hidden; }
   .hero-subtitle { max-width: 100%; }
   
   .banner-section { max-width: 90%; }
+  #como-funciona { display: none; }
 
   .vote-page-wrap { grid-template-columns: 1fr; padding-bottom: 7rem; }
   .vote-sidebar { display: none; }
