@@ -96,6 +96,15 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(232,184,0,0.18);
 }
+/* Homepage-only header overrides */
+.page-home .site-header {
+  position: absolute; width: 100%;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: none;
+}
+.page-home .logo-link { display: none; }
+
 .header-inner {
   max-width: 1280px; margin: 0 auto;
   padding: 0.55rem 1.5rem;
@@ -223,7 +232,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .hero-inner {
   position: relative; z-index: 1;
   max-width: 1200px; margin: 0 auto; width: 100%;
-  padding: 4rem 1.5rem;
+  padding: 5.5rem 1.5rem 4rem;
   display: grid; grid-template-columns: 2fr 3fr;
   gap: 2.5rem; align-items: center;
 }
