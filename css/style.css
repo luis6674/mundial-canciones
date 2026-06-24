@@ -88,7 +88,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .btn-sm-header { padding: 0.3rem 1rem; font-size: 1rem; }
 .btn-secondary { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid var(--border); }
 .btn-danger   { background: var(--red); color: #fff; }
-.btn-lg       { padding: 0.85rem 2.5rem; font-size: 1.3rem; }
+.btn-lg       { padding: 0.85rem 2.5rem; font-size: 1.3rem;background: #ba1d25; color: #fbe7cb; }
 
 /* ---------- Site Header ---------- */
 .site-header {
