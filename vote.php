@@ -287,7 +287,7 @@ render_header('Vota tus favoritas');
 </script>
 
 <?php if ($voting_open): ?>
-<script src="js/vote.js"></script>
+<script src="js/vote.js?v=<?= filemtime(__DIR__ . '/js/vote.js') ?>"></script>
 <?php endif; ?>
 
 <?php render_footer(); ?>
