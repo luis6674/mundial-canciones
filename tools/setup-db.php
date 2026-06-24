@@ -119,12 +119,6 @@ $songs = [
     [8,  'Volver a Disfrutar',            'ECDL',                          '3PuXuPcU0W4iHnd3C78FIr'],
     [9,  'Como Una Ola Techno Remix',     'Marsal Ventura',                '7vZWikYcjHSFW78wJZfd1N'],
     [10, 'Bizcochito',                    'Rosalía',                       '4kXxEhuatrvwrTQycA7s9B'],
-    [11, 'Yo soy español',               'La Banda Del Capitán Canalla',   '0BV5TpoxeUXxb1QwSFEvCV'],
-    [12, 'Veinticinco',                   'Dani Martín',                   '5ZmVXMkruEitcEJYYL5m0V'],
-    [13, 'Agachate',                      'Danny Romero',                  '03ATKw97s9WHuek1TKmhVq'],
-    [14, 'Rosas',                         'La Oreja de Van Gogh',          '4waqcUQWdj0yH26STWl2Rq'],
-    [15, 'Una Lady Como Tú',             'Manuel Turizo',                  '7MHN1aCFtLXjownGhvEQlF'],
-    [16, 'TOKE',                          'Chanel',                        '2H8v0g9A4anC2UmZAPKgQn'],
 ];
 
 $stmt = $pdo->prepare(

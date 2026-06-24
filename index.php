@@ -31,7 +31,6 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
   <div class="hero-inner">
     <div class="hero-left">
       <img src="images/logo_home.png" alt="Mundial de Canciones 2026" class="hero-logo-img">
-      <p class="hero-subtitle">16 canciones finalistas. 3 favoritas.<br>Una campeona.</p>
 
       <?php if ($before_voting): ?>
         <div class="countdown-wrap">
@@ -109,7 +108,7 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
   <div class="section-inner">
     <h2 class="section-title">
       <img src="images/adorno_titulo_izquierdo.png" alt="" class="section-title-ornament" aria-hidden="true">
-      Las 16 Finalistas
+      Las 10 Finalistas
       <img src="images/adorno_titulo_derecho.png" alt="" class="section-title-ornament" aria-hidden="true">
     </h2>
     <div class="carousel-wrap">

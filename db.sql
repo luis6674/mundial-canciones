@@ -61,10 +61,4 @@ INSERT INTO songs (title, artist, spotify_track_id, display_order) VALUES
   ('Como Si Fueras A Morir Mañana',      'Leiva',                   '4aAfLSx9IthpC3Pw5pNk3E',  7),
   ('Volver a Disfrutar',     'ECDL',                     '3PuXuPcU0W4iHnd3C78FIr',  8),
   ('Como Una Ola Techno Remix',              'Marsal Ventura',  '7vZWikYcjHSFW78wJZfd1N',  9),
-  ('Bizcochito',              'Rosalía',                        '4kXxEhuatrvwrTQycA7s9B', 10),
-  ('Yo soy español',           'La Banda Del Capitán Canalla',                    '0BV5TpoxeUXxb1QwSFEvCV', 11),
-  ('Veinticinco',      'Dani Martín',                       '5ZmVXMkruEitcEJYYL5m0V', 12),
-  ('Agachate',             'Danny Romero',                   '03ATKw97s9WHuek1TKmhVq', 13),
-  ('Rosas',         'La Oreja de Van Gogh',                 '4waqcUQWdj0yH26STWl2Rq', 14),
-  ('Una Lady Como Tú',               'Manuel Turizo',                              '7MHN1aCFtLXjownGhvEQlF', 15),
-  ('TOKE',        'Chanel',        '2H8v0g9A4anC2UmZAPKgQn', 16);
+  ('Bizcochito',              'Rosalía',                        '4kXxEhuatrvwrTQycA7s9B', 10);
