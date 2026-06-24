@@ -73,7 +73,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.65rem 1.4rem; border-radius: 9999px;
   font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
-  font-size: 1.2rem; letter-spacing: 0.07em; text-transform: uppercase;
+  font-size: 1.2rem; letter-spacing: 0.00em; text-transform: uppercase;
   cursor: pointer; border: none;
   transition: filter var(--transition), transform var(--transition);
   white-space: nowrap;
@@ -127,8 +127,8 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   flex: 1; justify-content: center;
 }
 .nav-link {
-  font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-  color: rgba(255,255,255,0.72); padding: 0.4rem 0.7rem; border-radius: 4px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase;
+  color: #F7E0C1; padding: 0.4rem 0.7rem; border-radius: 4px;
   transition: color var(--transition);
 }
 .nav-link:hover { color: var(--gold); }
@@ -244,8 +244,8 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   padding: 0.5rem 0.85rem 0;
 }
 .mpw-closes {
-  font-family: 'Barlow Condensed', sans-serif; font-size: 0.88rem; font-weight: 600;
-  letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 500;
+  letter-spacing: 0.00em; text-transform: uppercase; color: color: rgb(247 224 193); padding-right: 10px;
 }
 .closed-notice { font-size: 1.2rem; color: var(--gold); font-weight: 600; }
 
@@ -284,9 +284,9 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .mpw-status-closes img { height: 13px; }
 .mpw-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0.4rem 0.85rem; margin: 20px auto 0; background-color: var(--gold); width: 96%;
+  padding: 0.4rem 0.85rem; margin: 20px auto 8px; background-color: var(--gold); width: 96%;
 }
-.mpw-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.1em; font-size: 1.25rem; text-transform: uppercase; color: #000; }
+.mpw-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 1.55rem; text-transform: uppercase; color: #000; }
 .mpw-updated { font-size: 0.9rem; color: #000; display: flex; align-items: center; gap: 0.35rem; }
 .mpw-updated .dot { width: 10px; height: 10px; background: #820103; border-radius: 50%; display: inline-block; }
 .mpw-items {
@@ -294,14 +294,14 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   gap: 0.7rem; padding: 1.3rem 0.6rem 1rem;
   align-items: end;
 }
-.mpw-item { text-align: center; border: 2px solid var(--gold); border-radius: 8px; }
+.mpw-item { text-align: center; border: 1px solid var(--gold); border-radius: 8px; background-color: #000; }
 .mpw-cover-wrap {
   position: relative; width: 100%; aspect-ratio: 1; margin-bottom: 0.35rem;
 }
 .mpw-badge {
   position: absolute; top: -16px; right: 2%; height: 56px; width: auto; z-index: 2; drop-shadow(0 2px 4px rgba(0,0,0,0.6));
 }
-.mpw-p1 .mpw-badge { height: 60px; top: -19px; }
+.mpw-p1 .mpw-badge { height: 100px; top: -26px; }
 .mpw-cover {
   width: 100%; height: 100%; border-radius: 7px 7px 0 0; object-fit: cover; display: block;
 }
@@ -315,7 +315,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .mpw-p1 .mpw-pct { font-size: 1.8rem; }
 .mpw-more {
   display: block; text-align: center; padding: 0.6rem 0.85rem;
-  font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 500; letter-spacing: 0.00em; text-transform: uppercase;
   color: var(--gold); border-top: 1px solid rgba(255,255,255,0.07);
   margin-top: 0.4rem; transition: background var(--transition);
 }
@@ -328,14 +328,14 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .banner-section img { height: auto; }
 
 /* ---------- Songs Carousel Section ---------- */
-.songs-section { background: var(--green); padding: 4rem 0; }
+.songs-section { background: var(--green); padding: 5rem 0; }
 .section-title {
   display: flex; align-items: center; justify-content: center; gap: 0.75rem;
-  font-family: 'Barlow Condensed', sans-serif; font-size: clamp(1.6rem, 4vw, 2.7rem);
+  font-family: 'Barlow Condensed', sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: 600; font-style: italic; color: #F7E0C1; letter-spacing: 0.04em;
   margin-bottom: 1.5rem; text-align: center;
 }
-.section-title-ornament { height: 1.6rem; width: auto; flex-shrink: 0; }
+.section-title-ornament { height: 1.1rem; width: auto; flex-shrink: 0; }
 .carousel-wrap { position: relative; }
 .carousel-arrow {
   display: flex; align-items: center; justify-content: center;
@@ -411,7 +411,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .btn-listen:hover { background: rgba(255,255,255,0.15); }
 
 /* ---------- Results Section ---------- */
-.results-section { background: var(--bg); padding: 4rem 0; }
+.results-section { background: var(--bg); padding: 5rem 0; }
 .chart-wrap { margin-top: 1rem; min-height: 200px; position: relative; }
 .bar-chart  { display: flex; flex-direction: column; gap: 0.5rem; }
 
