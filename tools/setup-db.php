@@ -2,9 +2,8 @@
 /**
  * tools/setup-db.php — One-time database setup script.
  *
- * Creates tables and seeds the 16 songs.
- * Safe to run multiple times: uses CREATE TABLE IF NOT EXISTS and
- * INSERT IGNORE so existing data is never overwritten.
+ * Creates tables and seeds the 10 songs.
+ * WARNING: clears all existing votes and songs before re-seeding.
  *
  * Usage (CLI):   php tools/setup-db.php
  * Usage (browser): visit https://yourdomain.com/mundial-canciones/tools/setup-db.php
@@ -107,7 +106,18 @@ foreach ($tables as $name => $ddl) {
     }
 }
 
-// ── Seed songs ────────────────────────────────────────────────────────────────
+// ── Reset and seed songs ──────────────────────────────────────────────────────
+// Clears all existing votes and songs, then inserts the current song list.
+try {
+    $pdo->exec('SET FOREIGN_KEY_CHECKS=0');
+    $pdo->exec('TRUNCATE TABLE votes');
+    $pdo->exec('TRUNCATE TABLE songs');
+    $pdo->exec('SET FOREIGN_KEY_CHECKS=1');
+    out('Tables `votes` and `songs` cleared');
+} catch (\Throwable $e) {
+    out('Could not clear tables: ' . $e->getMessage(), false);
+}
+
 $songs = [
     [1,  'La Morocha',                    'Luck Ra',                       '7aPsseax6rNFyipHn9A5CR'],
     [2,  'Flamenco y Bachata',            'Daviles de Novelda',            '6ynErSDSlxqsxg0D3LJ8sK'],
@@ -122,19 +132,19 @@ $songs = [
 ];
 
 $stmt = $pdo->prepare(
-    'INSERT IGNORE INTO songs (display_order, title, artist, spotify_track_id) VALUES (?, ?, ?, ?)'
+    'INSERT INTO songs (display_order, title, artist, spotify_track_id) VALUES (?, ?, ?, ?)'
 );
 
 $inserted = 0;
 foreach ($songs as [$order, $title, $artist, $track]) {
     try {
         $stmt->execute([$order, $title, $artist, $track]);
-        if ($stmt->rowCount() > 0) $inserted++;
+        $inserted++;
     } catch (\Throwable $e) {
         out("Song '$title' failed: " . $e->getMessage(), false);
     }
 }
-out("Songs seeded: $inserted new row(s) inserted (existing rows untouched)");
+out("Songs seeded: $inserted row(s) inserted");
 
 // ── Done ──────────────────────────────────────────────────────────────────────
 if (!$cli) {
