@@ -53,6 +53,7 @@ body {
 }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
+.btn svg { display: inline; flex-shrink: 0; }
 h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight: 600; line-height: 1.05; letter-spacing: 0.02em; text-transform: uppercase; }
 .accent { color: var(--gold); }
 .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
