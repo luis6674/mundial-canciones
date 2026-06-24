@@ -201,7 +201,7 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
   const VOTING_CLOSED = <?= $voting_closed ? 'true' : 'false' ?>;
   const OPEN_TS       = <?= $open_ts ?>;
 </script>
-<script src="js/results.js"></script>
+<script src="js/results.js?v=<?= filemtime(__DIR__ . '/js/results.js') ?>"></script>
 <script>
 // Countdown
 (function() {
