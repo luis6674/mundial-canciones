@@ -207,7 +207,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .mobile-nav-divider { width: 40px; height: 1px; background: rgba(255,255,255,0.12); margin: 0.5rem 0; }
 
 /* ---------- Footer ---------- */
-.site-main { flex: 1; }
+.site-main { flex: 1; display: flex; flex-direction: column; }
 .site-footer {
   background: var(--gold); padding: 1rem 1.5rem;
   text-align: center; color: #0a0a0a;
