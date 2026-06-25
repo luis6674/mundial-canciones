@@ -851,6 +851,9 @@ body.modal-open { overflow: hidden; }
     z-index: 2;
   }
   .vote-grid .song-title { font-size: 1.1rem; }
+  .giveaway-note { margin: 0.4rem 0.8rem 0rem; }
+  .sidebar-playlist { margin-top: 0rem; }
+  .sidebar-playlist-text { font-size: 1.05rem; }
 
   .form-row { grid-template-columns: 1fr; gap: 0; }
   .bar-row { grid-template-columns: 18px 110px 1fr 38px; gap: 0.75rem; }
