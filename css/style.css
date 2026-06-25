@@ -295,7 +295,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   gap: 0.7rem; padding: 1.3rem 0.6rem 1rem;
   align-items: end;
 }
-.mpw-item { text-align: center; border: 1px solid var(--gold); border-radius: 8px; background-color: #000; }
+.mpw-item { text-align: center; border: 1px solid var(--gold); border-radius: 8px; background-color: #000; min-width: 0; overflow: hidden; }
 .mpw-cover-wrap {
   position: relative; width: 100%; aspect-ratio: 1; margin-bottom: 0.35rem;
 }
@@ -309,9 +309,9 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .mpw-p1 .mpw-cover { border-color: var(--gold); }
 .mpw-p2 .mpw-cover { border-color: #C0C0C0; }
 .mpw-p3 .mpw-cover { border-color: #CD7F32; }
-.mpw-song-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.03em; line-height: 1.2; color: #fff; text-transform: uppercase; }
+.mpw-song-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.03em; line-height: 1.2; color: #fff; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mpw-p1 .mpw-song-title { font-size: 1.15rem; }
-.mpw-song-artist { font-size: 1.05rem; color: var(--gold); margin: 0.12rem 0; }
+.mpw-song-artist { font-size: 1.05rem; color: var(--gold); margin: 0.12rem 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mpw-pct { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 600; color: var(--gold); }
 .mpw-p1 .mpw-pct { font-size: 1.8rem; }
 .mpw-more {
