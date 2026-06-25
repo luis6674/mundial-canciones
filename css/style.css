@@ -773,7 +773,7 @@ body.modal-open { overflow: hidden; }
 .genre-chip input:checked + span { background: var(--green); border-color: var(--green); color: #fff; font-weight: 600; }
 .genre-chip:hover span { border-color: var(--green); color: #fff; }
 
-.sorteo-success { text-align: center; padding: 1rem 1rem 3em; }
+.sorteo-success { text-align: center; padding: 1rem 1rem 3em; font-size: 1.1rem; }
 .sorteo-success-icon { font-size: 3.5rem; margin-bottom: 1rem; }
 .sorteo-success h2   { font-size: 2.2rem; margin-bottom: 0.75rem; }
 .sorteo-success p    { color: var(--muted); margin-bottom: 2rem; }
