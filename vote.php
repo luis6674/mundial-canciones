@@ -110,7 +110,7 @@ render_header('Vota tus favoritas');
           </div>
         </div>
         <div class="giveaway-note hidden mobile-only" id="giveaway-note-mobile">
-          &#9917; ¿Quieres ganar una camiseta de la selección española? <a href="sorteo.php">Participa en el sorteo</a>.
+          &#9917; ¿Quieres ganar una camiseta de la selección española? <a href="sorteo.php">Participa en el concurso</a>.
         </div>
         <?php endif; ?>
 
@@ -209,7 +209,7 @@ render_header('Vota tus favoritas');
         <input type="hidden" id="csrf-token" value="<?= htmlspecialchars($csrf_token) ?>">
 
         <div class="giveaway-note hidden" id="giveaway-note">
-          &#9917; ¿Quieres ganar una camiseta de la selección española? <a href="sorteo.php">Participa en el sorteo</a>.
+          &#9917; ¿Quieres ganar una camiseta de la selección española? <a href="sorteo.php">Participa en el concurso</a>.
         </div>
       </aside>
 
