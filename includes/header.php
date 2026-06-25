@@ -48,8 +48,8 @@ function render_header(string $title = '', string $body_class = ''): void {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <meta name="description" content="16 canciones finalistas. 3 favoritas. Una campeona. Vota la mejor canción del mundial 2026 y participa en el sorteo de una camiseta de la selección española de fútbol.">
-  <meta name="keywords" content="Mundial, canciones, finalistas, campeona, 2026, artistas, shakira, fútbol, football, FIFA, España, Spain, Selección, camiseta, la roja, sorteo, música, Sony, music">
+  <meta name="description" content="16 canciones finalistas. 3 favoritas. Una campeona. Vota la mejor canción del mundial 2026 y participa en el concurso de una camiseta de la selección española de fútbol.">
+  <meta name="keywords" content="Mundial, canciones, finalistas, campeona, 2026, artistas, shakira, fútbol, football, FIFA, España, Spain, Selección, camiseta, la roja, concurso, música, Sony, music">
   <title><?= $full_title ?></title>
   <link rel="stylesheet" href="css/style.css?v=<?= filemtime(__DIR__ . '/../css/style.css') ?>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,7 +60,7 @@ function render_header(string $title = '', string $body_class = ''): void {
   <meta property="og:title" content="Mundial de Canciones" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.hitsmundialseleccionespanola.com/" />
-  <meta property="og:description" content="16 canciones finalistas. 3 favoritas. Una campeona. Vota la mejor canción del mundial 2026 y participa en el sorteo de una camiseta de la selección española de fútbol." />
+  <meta property="og:description" content="16 canciones finalistas. 3 favoritas. Una campeona. Vota la mejor canción del mundial 2026 y participa en el concurso de una camiseta de la selección española de fútbol." />
   <meta property="og:image" content="https://www.hitsmundialseleccionespanola.com/images/portada_redes.jpg" />
   <meta property="og:image:width" content="800" />
   <meta property="og:image:height" content="481" />
@@ -70,7 +70,7 @@ function render_header(string $title = '', string $body_class = ''): void {
   <meta name="twitter:site" content="@SonyMusicSpain">
   <meta name="twitter:creator" content="@SonyMusicSpain">
   <meta name="twitter:title" content="Mundial de Canciones">
-  <meta name="twitter:description" content="16 canciones finalistas. 3 favoritas. Una campeona. Vota la mejor canción del mundial 2026 y participa en el sorteo de una camiseta de la selección española de fútbol.">
+  <meta name="twitter:description" content="16 canciones finalistas. 3 favoritas. Una campeona. Vota la mejor canción del mundial 2026 y participa en el concurso de una camiseta de la selección española de fútbol.">
   <meta name="twitter:image" content="https://www.hitsmundialseleccionespanola.com/images/portada_redes.jpg">
   <meta name="twitter:domain" content="www.hitsmundialseleccionespanola.com">
   <!-- Google Tag Manager -->

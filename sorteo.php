@@ -30,7 +30,7 @@ if ($logged_in) {
     $user_email = $stmt->fetchColumn() ?: '';
 }
 
-render_header('Sorteo — Gana una camiseta');
+render_header('Concurso — Gana una camiseta');
 ?>
 
 <div class="section-inner sorteo-page">
@@ -384,7 +384,7 @@ render_header('Sorteo — Gana una camiseta');
           <div class="form-group">
               <label for="custom_field[Custom_Field_2]">¿Cómo estás apoyando a la selección? *</label>
               <textarea class="form-control" rows="3" id="custom_field[Custom_Field_2]" name="custom_field[Custom_Field_2]" required aria-describedby="err-texto"></textarea>
-              <div class="field-error" id="err-texto">Selecciona tu talla</div>
+              <div class="field-error" id="err-texto">Escribe tu respuesta</div>
           </div>
 
           <p class="form-footnote">* Campo requerido</p>

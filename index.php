@@ -93,7 +93,7 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
   <a href="sorteo.php" class="banner-link">
     <picture>
       <source srcset="images/banner_camiseta_movil.png" media="(max-width: 640px)">
-      <img src="images/banner_camiseta_desktop.png" alt="Sorteo camiseta selección española — participa aquí" class="banner-img">
+      <img src="images/banner_camiseta_desktop.png" alt="Concurso camiseta selección española — participa aquí" class="banner-img">
     </picture>
   </a>
 </section>
