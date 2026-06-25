@@ -211,6 +211,13 @@ render_header('Vota tus favoritas');
         <div class="giveaway-note hidden" id="giveaway-note">
           &#9917; ¿Quieres ganar una camiseta de la selección española? <a href="sorteo.php">Participa en el concurso</a>.
         </div>
+
+        <div class="sidebar-playlist hidden" id="sidebar-playlist">
+          <p class="sidebar-playlist-text">🇪🇸 ¡Gracias por animar a la selección! Escucha la playlist:</p>
+          <a href="https://open.spotify.com/playlist/33ltVplhQSRtlIuVb0bZpE?si=RwKmQREITfqyzGGEiwzglA" target="_blank" rel="noopener">
+            <img src="images/playlist_banner.jpg" alt="Selección Española de Fútbol — Canciones para el Mundial 2026" class="playlist-banner-img">
+          </a>
+        </div>
       </aside>
 
       <!-- Mobile bottom bar -->
