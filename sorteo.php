@@ -398,10 +398,13 @@ render_header('Concurso — Gana una camiseta');
 
       <div id="sorteo-thanks" hidden>
         <div class="sorteo-success">
-          <div class="sorteo-success-icon">&#129395;</div>
+          <div class="sorteo-success-icon">🇪🇸</div>
           <h2>¡Gracias por participar!</h2>
           <p>Una vez finalice el concurso, si resultas ganador nos pondremos en contacto contigo.</p>
-          <p>Mientras tanto, disfruta de la playlist <a href="https://open.spotify.com/playlist/33ltVplhQSRtlIuVb0bZpE?si=RwKmQREITfqyzGGEiwzglA" target="_blank" style="font-weight: bold;">"Selección Española de Fútbol ⚽ Canciones para el Mundial 2026 ⚽  ¡VAMOS ESPAÑA! 🇪🇸🇪🇸"</a>.</p>
+          <p>Mientras tanto, disfruta de la playlist:</p>
+          <a href="https://open.spotify.com/playlist/33ltVplhQSRtlIuVb0bZpE?si=RwKmQREITfqyzGGEiwzglA" target="_blank" rel="noopener" class="playlist-banner-link">
+            <img src="images/playlist_banner.jpg" alt="Selección Española de Fútbol — Canciones para el Mundial 2026" class="playlist-banner-img">
+          </a>
           <a href="/" class="btn btn-secondary">Volver al inicio</a>
         </div>
       </div>
