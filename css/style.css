@@ -81,14 +81,14 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 }
 .btn:hover  { filter: brightness(1.12); transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
-.btn-primary  { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dk) 100%); color: #0a0a0a; }
+.btn-primary  { background: #ba1d25; color: #fbe7cb; }
 .btn-green    { background: var(--green); color: #fbe7cb; }
 .btn-home {background: var(--green); color: #fbe7cb; font-size: 1.5rem; }
 .btn-spotify  { background: var(--spotify); color: #0a0a0a; }
 .btn-sm-header { padding: 0.3rem 1rem; font-size: 1rem; }
 .btn-secondary { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid var(--border); }
 .btn-danger   { background: var(--red); color: #fff; }
-.btn-lg       { padding: 0.85rem 2.5rem; font-size: 1.3rem;background: #ba1d25; color: #fbe7cb; }
+.btn-lg       { padding: 0.85rem 2.5rem; font-size: 1.3rem; }
 
 /* ---------- Site Header ---------- */
 .site-header {
@@ -781,17 +781,18 @@ body.modal-open { overflow: hidden; }
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
   /* Reorder homepage sections: prize banner first, songs carousel last */
-  #premios   { order: -1; }
+  #premios   { margin: 0 auto; position: absolute; top: 10px; left: 5%; }
   #finalistas { order: 1; }
   .carousel-arrow { display: none; }
   .site-nav { display: none; }
   .hamburger { display: flex; }
+  .page-home #hamburger-btn { display: none; }
   .header-right .btn-sm-header { display: none; }
   .header-right .status-badge { display: none; }
 
   .hero-inner { grid-template-columns: 1fr; text-align: center; padding: 3rem 1.25rem; }
   .hero { background-image: url('../images/bkg_movil.jpg'); min-height: 0; }
-  .hero-left { align-items: center; }
+  .hero-left { align-items: center; margin-top: 20vw; }
   .hero-logo-img { height: 160px; }
   .hero-subtitle { max-width: 100%; }
   
@@ -809,6 +810,9 @@ body.modal-open { overflow: hidden; }
   .bar-label { display: flex; flex-direction: column; gap: 0; }
   .bar-song-title { font-size: 0.95rem; }
   .bar-song-artist { font-size: 0.85rem; }
+  
+  .results-section { padding: 1rem 0 4rem; }
+  .songs-section { padding: 3rem 0rem; }
 }
 
 @media (max-width: 540px) {
