@@ -696,7 +696,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .login-form { text-align: center; }
 .login-checkboxes { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.25rem; text-align: left; }
 .checkbox-label { display: flex; gap: 0.65rem; align-items: flex-start; font-size: 1.05rem; color: var(--muted); cursor: pointer; line-height: 1.45; }
-.checkbox-label input[type="checkbox"] { flex-shrink: 0; margin-top: 0.15rem; accent-color: var(--green); width: 1rem; height: 1rem; cursor: pointer; }
+.checkbox-label input[type="checkbox"] { flex-shrink: 0; margin-top: 0.35rem; accent-color: var(--green); width: 1rem; height: 1rem; cursor: pointer; }
 .checkbox-label a { color: var(--gold); text-underline-offset: 2px; }
 .login-form-error { color: var(--red); font-size: 1.05rem; margin-bottom: 0.75rem; text-align: left; }
 .login-form .btn { width: 240px; justify-content: center; margin: 0 auto; }
@@ -786,7 +786,7 @@ body.modal-open { overflow: hidden; }
   .carousel-arrow { display: none; }
   .site-nav { display: none; }
   .hamburger { display: flex; }
-  .page-home #hamburger-btn { display: none; }
+  .page-home .site-header { display: none; }
   .header-right .btn-sm-header { display: none; }
   .header-right .status-badge { display: none; }
 
