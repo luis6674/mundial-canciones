@@ -40,19 +40,19 @@ render_header('Sorteo — Gana una camiseta');
 
     <?php if (!$logged_in): ?>
       <div class="login-prompt">
-        <p>Necesitas iniciar sesión y votar para participar en el sorteo.</p>
+        <p>Necesitas iniciar sesión y votar para participar en el concurso.</p>
         <a href="vote.php" class="btn btn-spotify">Ir a votar</a>
       </div>
 
     <?php elseif (!$has_voted): ?>
       <div class="login-prompt">
-        <p>Debes votar primero para poder participar en el sorteo.</p>
+        <p>Debes votar primero para poder participar en el concurso.</p>
         <a href="vote.php" class="btn btn-primary">Ir a votar</a>
       </div>
 
     <?php else: ?>
 
-      <p class="sorteo-sub">Rellena el formulario para entrar en el sorteo.</p>
+      <p class="sorteo-sub">Rellena el formulario para entrar en el concurso.</p>
 
       <div id="sorteo-form-wrap">
         <form id="sorteo-form" novalidate>
@@ -93,18 +93,6 @@ render_header('Sorteo — Gana una camiseta');
                 class="form-control" maxlength="60" required
                 aria-describedby="err-city">
               <div class="field-error" id="err-city">Introduce tu ciudad</div>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="field_gender">Sexo *</label>
-              <select name="field_gender" id="field_gender" class="form-control" required
-                aria-describedby="err-gender">
-                <option value="" disabled selected>Selecciona</option>
-                <option value="Male">Hombre</option>
-                <option value="Female">Mujer</option>
-                <option value="Non-binary/Other">No binario / Otro</option>
-                <option value="Prefer not to answer">Prefiero no responder</option>
-              </select>
-              <div class="field-error" id="err-gender">Selecciona tu sexo</div>
             </div>
           </div>
 
@@ -376,33 +364,31 @@ render_header('Sorteo — Gana una camiseta');
           </div>
 
           <div class="form-group">
-            <fieldset class="genre-fieldset">
-            <legend class="form-label">Géneros preferidos * <span class="form-hint">(elige uno o más)</span></legend>
-            <div class="genre-chips" id="genre-chips">
-              <?php foreach ([
-                'NUEVO POP'                            => 'Nuevo Pop',
-                'POP ESPAÑOL'                          => 'Pop Español',
-                'POP INGLES'                           => 'Pop Inglés',
-                'LATINO / REGGAETON'                   => 'Latino / Reggaeton',
-                'URBANO / TRAP ANGLO'                  => 'Urbano / Trap Anglo',
-                'URBANO / TRAP LOCAL'                  => 'Urbano / Trap Local',
-                'INDIE/ROCK ESPAÑOL E INTERNACIONAL'   => 'Indie / Rock',
-                'ELECTRÓNICA & DANCE'                  => 'Electrónica & Dance',
-              ] as $val => $label): ?>
-                <label class="genre-chip">
-                  <input type="checkbox" name="field_genres" value="<?= htmlspecialchars($val) ?>">
-                  <span><?= htmlspecialchars($label) ?></span>
-                </label>
-              <?php endforeach; ?>
-            </div>
-            <div class="field-error" id="genre-error">Selecciona al menos un género</div>
-            </fieldset>
+              <label class="form-label" for="custom_field[Custom_Field_1]">Talla *</label>
+              <select name="custom_field[Custom_Field_1]" id="custom_field[Custom_Field_1]" class="form-control" required
+                aria-describedby="err-talla">
+                <option value="" disabled selected>Selecciona</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="2XL">2XL</option>
+                <option value="3XL">3XL</option>
+              </select>
+              <div class="field-error" id="err-talla">Selecciona tu talla</div>
+          </div>
+          
+          <div class="form-group">
+              <label for="custom_field[Custom_Field_2]">¿Cómo estás apoyando a la selección? *</label>
+              <textarea class="form-control" rows="3" id="custom_field[Custom_Field_2]" name="custom_field[Custom_Field_2]" required aria-describedby="err-texto"></textarea>
+              <div class="field-error" id="err-texto">Selecciona tu talla</div>
           </div>
 
           <p class="form-footnote">* Campo requerido</p>
 
           <div class="form-group form-group-submit">
-            <button type="submit" class="btn btn-primary btn-lg" id="sorteo-submit">Participar en el sorteo</button>
+            <button type="submit" class="btn btn-primary btn-lg" id="sorteo-submit">Participa en el concurso</button>
             <span id="sorteo-status"></span>
           </div>
         </form>
@@ -412,7 +398,7 @@ render_header('Sorteo — Gana una camiseta');
         <div class="sorteo-success">
           <div class="sorteo-success-icon">&#129395;</div>
           <h2>¡Gracias por participar!</h2>
-          <p>Una vez se realice el sorteo, si resultas ganador nos pondremos en contacto contigo.</p>
+          <p>Una vez finalice el concurso, si resultas ganador nos pondremos en contacto contigo.</p>
           <p>Mientras tanto, disfruta de la playlist <a href="https://open.spotify.com/playlist/33ltVplhQSRtlIuVb0bZpE?si=RwKmQREITfqyzGGEiwzglA" target="_blank" style="font-weight: bold;">"Selección Española de Fútbol ⚽ Canciones para el Mundial 2026 ⚽  ¡VAMOS ESPAÑA! 🇪🇸🇪🇸"</a>.</p>
           <a href="/" class="btn btn-secondary">Volver al inicio</a>
         </div>
@@ -441,22 +427,14 @@ render_header('Sorteo — Gana una camiseta');
   function validate() {
     var ok = true;
 
-    ['field_first_name', 'field_last_name', 'field_city', 'field_gender',
-     'field_country_region', 'field_dob'].forEach(function (id) {
+    ['field_first_name', 'field_last_name', 'field_city', 'field_country_region',
+    'field_dob', 'custom_field[Custom_Field_1]', 'custom_field[Custom_Field_2]'].forEach(function (id) {
       var el = document.getElementById(id);
       if (!el) return;
       var invalid = !el.value.trim();
       showFieldError(el, invalid);
       if (invalid) ok = false;
     });
-
-    var checked = form.querySelectorAll('input[name="field_genres"]:checked');
-    var genreErr = document.getElementById('genre-error');
-    var chipsWrap = document.getElementById('genre-chips');
-    var noGenre = checked.length === 0;
-    if (chipsWrap) chipsWrap.classList.toggle('has-error', noGenre);
-    if (genreErr)  genreErr.style.display = noGenre ? '' : 'none';
-    if (noGenre) ok = false;
 
     return ok;
   }
@@ -497,7 +475,7 @@ render_header('Sorteo — Gana una camiseta');
       statusEl.textContent = 'Ha ocurrido un error. Por favor, inténtalo más tarde.';
       statusEl.className = 'error';
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Participar en el sorteo';
+      submitBtn.textContent = 'Participa en el concurso';
     });
   });
 })();
