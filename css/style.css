@@ -83,7 +83,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .btn:active { transform: translateY(0); }
 .btn-primary  { background: #ba1d25; color: #fbe7cb; }
 .btn-green    { background: var(--green); color: #fbe7cb; }
-.btn-home {background: var(--green); color: #fbe7cb; font-size: 1.5rem; }
+.btn-home { background: #ba1d25; color: #fbe7cb; font-size: 1.5rem; }
 .btn-spotify  { background: var(--spotify); color: #0a0a0a; }
 .btn-sm-header { padding: 0.3rem 1rem; font-size: 1rem; }
 .btn-secondary { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid var(--border); }
