@@ -778,7 +778,7 @@ body.modal-open { overflow: hidden; }
 .playlist-banner-link { display: block; margin: 0 auto 2rem; max-width: 250px; }
 .playlist-banner-img  { width: 100%; border-radius: 8px; }
 .sidebar-playlist { margin-top: 1.25rem; text-align: center; }
-.sidebar-playlist-text { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+.sidebar-playlist-text { font-size: 0.95rem; color: var(--muted); margin-bottom: 0.5rem; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {

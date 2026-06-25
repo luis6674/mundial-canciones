@@ -203,6 +203,8 @@
         if (note) note.classList.remove('hidden');
         const playlist = document.getElementById('sidebar-playlist');
         if (playlist) playlist.classList.remove('hidden');
+        const playlistMobile = document.getElementById('sidebar-playlist-mobile');
+        if (playlistMobile) playlistMobile.classList.remove('hidden');
         const noteMobile = document.getElementById('giveaway-note-mobile');
         if (noteMobile) noteMobile.classList.remove('hidden');
         const strip = document.getElementById('mobile-strip');
