@@ -52,7 +52,7 @@ render_header('Vota tus favoritas');
     <?php if (!$logged_in): ?>
       <div class="vote-login-prompt">
         <h1 class="vote-title">Elige tus <span class="accent">3 Favoritas</span></h1>
-        <p class="vote-sub">10 canciones finalistas. 3 favoritas. Una campeona.</p>
+        <p class="vote-sub">para animar a la selección española.</p>
         <div class="login-box">
           <h2 class="login-box-title">Inicia sesión para votar</h2>
           <p class="login-box-sub">Necesitas entrar con Spotify para votar en el Mundial de Canciones 2026.</p>
@@ -78,13 +78,13 @@ render_header('Vota tus favoritas');
           <h1 class="vote-page-title">Elige tus <span class="accent">3 Favoritas</span></h1>
           <div class="vote-page-subtitle">
             <img src="images/adorno_titulo_izquierdo.png" alt="" aria-hidden="true">
-            Las 10 Finalistas
+            para animar a la selección española.
             <img src="images/adorno_titulo_derecho.png" alt="" aria-hidden="true">
           </div>
           <?php if ($voting_closed): ?>
             <p class="vote-sub">La votación ha terminado. Estas fueron tus elecciones finales.</p>
           <?php else: ?>
-            <p class="vote-sub">Elige tus 3 canciones favoritas. Puedes cambiar tu voto antes del <?= $close_day_num ?> de <?= $close_month_name ?>.</p>
+            <!--<p class="vote-sub">Elige tus 3 canciones favoritas. Puedes cambiar tu voto antes del <?= $close_day_num ?> de <?= $close_month_name ?>.</p>-->
           <?php endif; ?>
         </div>
 

@@ -144,7 +144,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   font-family: 'Barlow Condensed', sans-serif; font-size: 0.86rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
   padding: 0.28rem 0.8rem; border-radius: 9999px; white-space: nowrap;
 }
-.status-badge.open     { background: rgba(0,168,107,0.18); color: #00d880; border: 1px solid rgba(0,168,107,0.4); }
+.status-badge.open     { background: rgba(0,168,107,0.18); color: #39cc67; border: 1px solid rgba(43,149,73,0.4); }
 .status-badge.closed   { background: rgba(200,16,46,0.18);  color: #ff4060; border: 1px solid rgba(200,16,46,0.4); }
 .status-badge.upcoming { background: rgba(232,184,0,0.14);  color: var(--gold); border: 1px solid rgba(232,184,0,0.3); }
 .status-closes {
