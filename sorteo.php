@@ -94,11 +94,10 @@ render_header('Sorteo — Gana una camiseta');
                 aria-describedby="err-city">
               <div class="field-error" id="err-city">Introduce tu ciudad</div>
             </div>
-          </div>
 
-          <div class="form-group">
-            <label class="form-label" for="field_country_region">País *</label>
-            <select name="field_country_region" id="field_country_region" class="form-control" required
+            <div class="form-group">
+              <label class="form-label" for="field_country_region">País *</label>
+              <select name="field_country_region" id="field_country_region" class="form-control" required
               aria-describedby="err-country">
               <option value="" disabled selected>Selecciona</option>
               <option value="AF">Afghanistan</option>
@@ -351,19 +350,21 @@ render_header('Sorteo — Gana una camiseta');
               <option value="ZM">Zambia</option>
               <option value="ZW">Zimbabwe</option>
               <option value="AX">Åland Islands</option>
-            </select>
-            <div class="field-error" id="err-country">Selecciona tu país</div>
+              </select>
+              <div class="field-error" id="err-country">Selecciona tu país</div>
+              </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="field_dob">Fecha de nacimiento *</label>
-            <input type="date" name="field_dob" id="field_dob"
-              class="form-control" required
-              max="<?= date('Y-m-d', strtotime('-13 years')) ?>">
-            <div class="field-error">Introduce tu fecha de nacimiento</div>
-          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="field_dob">Fecha de nacimiento *</label>
+              <input type="date" name="field_dob" id="field_dob"
+                class="form-control" required
+                max="<?= date('Y-m-d', strtotime('-13 years')) ?>">
+              <div class="field-error">Introduce tu fecha de nacimiento</div>
+            </div>
 
-          <div class="form-group">
+            <div class="form-group">
               <label class="form-label" for="custom_field[Custom_Field_1]">Talla *</label>
               <select name="custom_field[Custom_Field_1]" id="custom_field[Custom_Field_1]" class="form-control" required
                 aria-describedby="err-talla">
@@ -377,6 +378,7 @@ render_header('Sorteo — Gana una camiseta');
                 <option value="3XL">3XL</option>
               </select>
               <div class="field-error" id="err-talla">Selecciona tu talla</div>
+            </div>
           </div>
           
           <div class="form-group">
