@@ -295,7 +295,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   gap: 0.7rem; padding: 1.3rem 0.6rem 1rem;
   align-items: end;
 }
-.mpw-item { text-align: center; border: 1px solid var(--gold); border-radius: 8px; background-color: #000; min-width: 0; overflow: hidden; }
+.mpw-item { text-align: center; border: 1px solid var(--gold); border-radius: 8px; background-color: #000; min-width: 0; }
 .mpw-cover-wrap {
   position: relative; width: 100%; aspect-ratio: 1; margin-bottom: 0.35rem;
 }
