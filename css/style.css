@@ -781,7 +781,7 @@ body.modal-open { overflow: hidden; }
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
   /* Reorder homepage sections: prize banner first, songs carousel last */
-  #premios   { margin: 0 auto; position: absolute; top: 10px; left: 5%; }
+  #premios   { margin: 0 auto; position: absolute; top: 10px; left: 5%; z-index: 10;}
   #finalistas { order: 1; }
   .carousel-arrow { display: none; }
   .site-nav { display: none; }
