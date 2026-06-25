@@ -261,7 +261,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 
 /* ---------- Mini Podium Widget ---------- */
 .mini-podium-widget {
-  background: linear-gradient(to right, rgba(60,89,43,0.80) 0%, rgba(60,89,43,0.20) 100%);
+  background: linear-gradient(to right, rgba(200,16,46,0.80) 0%, rgba(200,16,46,0.20) 100%);
   border: 1px solid rgba(232,184,0,0.28);
   border-radius: 14px; overflow: hidden;
 }
@@ -329,7 +329,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .banner-section img { height: auto; }
 
 /* ---------- Songs Carousel Section ---------- */
-.songs-section { background: var(--green); padding: 5rem 0; }
+.songs-section { background: var(--red); padding: 5rem 0; }
 .section-title {
   display: flex; align-items: center; justify-content: center; gap: 0.75rem;
   font-family: 'Barlow Condensed', sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem);
@@ -632,7 +632,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 .sidebar-vote-btn {
   display: flex; align-items: center; justify-content: center; gap: 0.4rem;
   width: calc(100% - 1.6rem); margin: 0.75rem 0.8rem 0;
-  background: var(--green); color: #fff; border: none; cursor: pointer;
+  background: var(--red); color: #fff; border: none; cursor: pointer;
   font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
   padding: 0.85rem; border-radius: 8px;
   transition: filter var(--transition), transform var(--transition);
@@ -663,7 +663,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 }
 .mobile-vote-btn {
   display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-  width: 100%; background: var(--green); color: #fff; border: none; cursor: pointer;
+  width: 100%; background: var(--red); color: #fff; border: none; cursor: pointer;
   font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
   padding: 0.95rem; border-radius: 8px; transition: filter var(--transition);
 }
