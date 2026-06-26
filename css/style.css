@@ -105,7 +105,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   border-bottom: none;
 }
 .page-home .logo-link { display: none; }
-.page-home { background: url('../images/bkg_dektop.jpg') center top / cover no-repeat fixed; }
+.page-home { background: url('../images/bkg_dektop.jpg') center top / cover no-repeat; }
 
 .header-inner {
   max-width: 1280px; margin: 0 auto;
@@ -795,11 +795,7 @@ body.modal-open { overflow: hidden; }
 
   .hero-inner { grid-template-columns: 1fr; text-align: center; padding: 3rem 1.25rem; }
   .hero { background-image: none; min-height: 0; }
-  .page-home { background-image: none; }
-  .page-home::before {
-    content: ''; position: fixed; inset: 0; z-index: -1;
-    background: url('../images/bkg_movil.jpg') center top / cover no-repeat;
-  }
+  .page-home { background-image: url('../images/bkg_movil.jpg'); }
   .hero-left { align-items: center; margin-top: 20vw; }
   .hero-logo-img { height: 160px; }
   .hero-subtitle { max-width: 100%; }
