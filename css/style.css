@@ -105,7 +105,6 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   border-bottom: none;
 }
 .page-home .logo-link { display: none; }
-.page-home { background: url('../images/bkg_dektop.jpg') center top / cover no-repeat; }
 
 .header-inner {
   max-width: 1280px; margin: 0 auto;
@@ -224,7 +223,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
 /* ---------- Hero Section ---------- */
 .hero {
   position: relative;
-  background: none;
+  background: url('../images/bkg_dektop.jpg') center top / cover no-repeat;
   min-height: 68vh; display: flex; align-items: center;
 }
 .hero::after {
@@ -794,8 +793,7 @@ body.modal-open { overflow: hidden; }
   .header-right .status-badge { display: none; }
 
   .hero-inner { grid-template-columns: 1fr; text-align: center; padding: 3rem 1.25rem; }
-  .hero { background-image: none; min-height: 0; }
-  .page-home { background-image: url('../images/bkg_movil.jpg'); }
+  .hero { background-image: url('../images/bkg_movil.jpg'); min-height: 0; }
   .hero-left { align-items: center; margin-top: 20vw; }
   .hero-logo-img { height: 160px; }
   .hero-subtitle { max-width: 100%; }
