@@ -52,7 +52,7 @@ render_header('Vota tus favoritas');
     <?php if (!$logged_in): ?>
       <div class="vote-login-prompt">
         <h1 class="vote-title">Elige tus <span class="accent">3 Favoritas</span></h1>
-        <p class="vote-sub">para animar a la selección española.</p>
+        <p class="vote-sub">ara animar a la Selección Española</p>
         <div class="login-box">
           <h2 class="login-box-title">Inicia sesión para votar</h2>
           <p class="login-box-sub">Necesitas entrar con Spotify para votar en el Mundial de Canciones 2026.</p>
