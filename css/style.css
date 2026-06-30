@@ -427,7 +427,9 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   background: linear-gradient(90deg, #8A0A1E 0%, #C8102E 100%);
   width: 0%; transition: width 0.7s cubic-bezier(0.4,0,0.2,1);
 }
-.bar-row.rank-1 .bar-fill { background: linear-gradient(90deg, #C8102E 0%, #FF4060 100%); }
+.bar-row.rank-1 .bar-fill { background: linear-gradient(90deg, #C89500 0%, #faab09 100%); }
+.bar-row.rank-2 .bar-fill { background: linear-gradient(90deg, #8A9099 0%, #BCC4CC 100%); }
+.bar-row.rank-3 .bar-fill { background: linear-gradient(90deg, #7A4A1E 0%, #B07040 100%); }
 .bar-pts { font-size: 1.05rem; font-weight: 700; color: #fff; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 /* Final podium (post-close) */
