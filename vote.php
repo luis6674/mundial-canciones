@@ -185,6 +185,11 @@ render_header('Vota tus favoritas');
           <?php endforeach; ?>
         </div>
 
+        <!-- Playlist banner -->
+        <a href="https://open.spotify.com/playlist/33ltVplhQSRtlIuVb0bZpE?si=RwKmQREITfqyzGGEiwzglA" target="_blank" rel="noopener" class="vote-playlist-banner">
+          <img src="images/banner_playlist.jpg" alt="Selección Española de Fútbol — Canciones para el Mundial 2026" class="vote-playlist-banner-img">
+        </a>
+
       <?php if ($voting_open): ?>
       <!-- SIDEBAR (desktop) -->
       <aside class="vote-sidebar" aria-label="Tu selección">
