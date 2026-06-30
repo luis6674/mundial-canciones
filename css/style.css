@@ -556,6 +556,9 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem;
 }
 
+.vote-playlist-banner { grid-column: 1 / -1; display: block; margin-top: 1.5rem; line-height: 0; }
+.vote-playlist-banner-img { width: 100%; border-radius: var(--radius); }
+
 /* Vote page card specifics */
 .vote-grid .song-card { width: 100%; cursor: pointer; }
 .vote-grid .song-card:hover { transform: translateY(-2px); border-color: rgba(232,184,0,0.4); }
