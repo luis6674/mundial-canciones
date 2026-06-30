@@ -758,7 +758,7 @@ body.modal-open { overflow: hidden; }
   border-radius: var(--radius); color: #fff; padding: 0.6rem 0.85rem;
   font-size: 1.1rem; font-family: inherit; transition: border-color 0.2s;
 }
-.form-control:focus   { outline: none; border-color: var(--green); }
+.form-control:focus   { outline: none; border-color: var(--gold); }
 .form-control[readonly] { opacity: 0.55; cursor: default; }
 .form-control option  { background: var(--bg3); }
 
