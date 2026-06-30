@@ -386,6 +386,18 @@ render_header('Concurso — Gana una camiseta');
               <textarea class="form-control" rows="3" id="custom_field[Custom_Field_2]" name="custom_field[Custom_Field_2]" required aria-describedby="err-texto"></textarea>
               <div class="field-error" id="err-texto">Escribe tu respuesta</div>
           </div>
+          
+          <input type="checkbox" name="triggered_sends[]" id="confirmation_email" class="display-none" checked="checked" value="">
+          <input type="checkbox" name="triggered_sends[]" id="ts-for-mailing-list-id[0]" class="triggered_sends display-none"  value="">
+          
+          <div class="input-group">
+            <div class="checkbox">
+              <label for="mailing-list-id[0]">
+              <input type="checkbox" class="mailing-list-id" id="mailing-list-id[0]" name="mailing-list-id[0]" value="a0S1p00000UlNguEAF" required>
+               <p>He leído y acepto las <a href="https://cdn-p.smehost.net/sites/fad8ecbd3ed848d4a8549fd29259550a/wp-content/uploads/ft-c10c971cec/bases-legales-pdf-Concurso-camiseta-Seleccion_15282689793245487482.pdf" rel="noopener noreferrer" target="_blank"><u>bases legales</u></a> y &nbsp;la <a data-outlook-id="14d0f2c4-0019-42a4-9016-c53d871a6215" href="https://www.sonymusic.es/politica-de-privacidad-y-cookies/" rel="noopener" target="_blank">&nbsp;<u>Política de Privacidad</u></a> y, en consecuencia, deseo recibir información sobre Pop a través de correo electrónico, SMS, Whatsapp u otros medios electrónicos.</p>
+               </label>
+            </div>
+          </div>
 
           <p class="form-footnote">* Campo requerido</p>
 
@@ -484,6 +496,12 @@ render_header('Concurso — Gana una camiseta');
     });
   });
 })();
+
+$( "body" ).on( "change", ".mailing-list-id", function ()
+{
+  var ml_id = $( this ).attr( "id" ).substring( 16, 17 );
+  $( "#ts-for-ml-" + ml_id ).prop( "checked", $( this ).is( ":checked" ) )
+});
 </script>
 
 <?php render_footer(); ?>
