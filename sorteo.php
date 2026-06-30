@@ -41,13 +41,15 @@ render_header('Concurso — Gana una camiseta');
     <?php if (!$logged_in): ?>
       <div class="login-prompt">
         <p>Necesitas iniciar sesión y votar para participar en el concurso.</p>
-        <a href="vote.php" class="btn btn-spotify">Ir a votar</a>
+        <a href="vote.php" class="btn btn-primary">Ir a votar</a>
+        <div class="login-prompt-flag">🇪🇸</div>
       </div>
 
     <?php elseif (!$has_voted): ?>
       <div class="login-prompt">
         <p>Debes votar primero para poder participar en el concurso.</p>
         <a href="vote.php" class="btn btn-primary">Ir a votar</a>
+        <div class="login-prompt-flag">🇪🇸</div>
       </div>
 
     <?php else: ?>
