@@ -218,7 +218,7 @@ h1, h2, h3 { font-family: 'Barlow Condensed', 'Impact', sans-serif; font-weight:
   align-items: center; gap: 0.2rem 0.5rem;
 }
 .footer-links a { color: #0a0a0a; text-decoration: underline; text-underline-offset: 2px; }
-.footer-sep { opacity: 0.4; }
+.footer-sep { color: #0a0a0a; }
 
 /* ---------- Hero Section ---------- */
 .hero {

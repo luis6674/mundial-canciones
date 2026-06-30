@@ -66,12 +66,12 @@ $close_month_name = $months_es[(int)date('n', VOTING_CLOSE)];
     <div class="mini-podium-widget" id="mini-podium">
       <div class="mpw-status-strip">
         <?php if ($voting_open): ?>
-          <span class="status-badge open" aria-label="Votación abierta"><span aria-hidden="true">&#9679;</span> Votación abierta</span>
+          <span class="status-badge open"><span aria-hidden="true">&#9679;</span> Votación abierta</span>
           <span class="mpw-closes">Cierra el <?= $close_day_num ?> de <?= $close_month_name ?></span>
         <?php elseif ($voting_closed): ?>
-          <span class="status-badge closed" aria-label="Votación cerrada"><span aria-hidden="true">&#9632;</span> Votación cerrada</span>
+          <span class="status-badge closed"><span aria-hidden="true">&#9632;</span> Votación cerrada</span>
         <?php else: ?>
-          <span class="status-badge upcoming" aria-label="Próximamente"><span aria-hidden="true">&#9650;</span> Próximamente</span>
+          <span class="status-badge upcoming"><span aria-hidden="true">&#9650;</span> Próximamente</span>
         <?php endif; ?>
       </div>
       <div class="mpw-header">
