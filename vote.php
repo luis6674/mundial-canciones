@@ -52,7 +52,7 @@ render_header('Vota tus favoritas');
     <?php if (!$logged_in): ?>
       <div class="vote-login-prompt">
         <h1 class="vote-title">Elige tus <span class="accent">3 Favoritas</span></h1>
-        <p class="vote-sub">ara animar a la Selección Española</p>
+        <p class="vote-sub">para animar a la Selección Española</p>
         <div class="login-box">
           <h2 class="login-box-title">Inicia sesión para votar</h2>
           <p class="login-box-sub">Necesitas entrar con Spotify para votar en el Mundial de Canciones 2026.</p>
@@ -78,7 +78,7 @@ render_header('Vota tus favoritas');
           <h1 class="vote-page-title">Elige tus <span class="accent">3 Favoritas</span></h1>
           <div class="vote-page-subtitle">
             <img src="images/adorno_titulo_izquierdo.png" alt="" aria-hidden="true">
-            para animar a la selección española.
+            para animar a la Selección Española
             <img src="images/adorno_titulo_derecho.png" alt="" aria-hidden="true">
           </div>
           <?php if ($voting_closed): ?>
